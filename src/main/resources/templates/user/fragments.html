@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="main_header(condition)" th:remove="${condition}">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Colo Shop Template">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" th:href="@{styles/bootstrap4/bootstrap.min.css}">
+
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+  <link rel="stylesheet" type="text/css"  th:href="@{plugins/OwlCarousel2-2.2.1/owl.carousel.css}">
+  <link rel="stylesheet" type="text/css"  th:href="@{plugins/OwlCarousel2-2.2.1/owl.theme.default.css}">
+  <link rel="stylesheet" type="text/css"  th:href="@{plugins/OwlCarousel2-2.2.1/animate.css}">
+  <link rel="stylesheet" type="text/css"  th:href="@{styles/main_styles.css}">
+  <link rel="stylesheet" type="text/css"  th:href="@{styles/responsive.css}">
+</head>
+<body>
+<th:block th:fragment="header_nav">
+  <header class="header trans_300">
+    <!-- Top Navigation -->
+    <div class="top_nav">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <img th:src="@{images/top_banner.png}" alt="err">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Navigation -->
+
+    <div class="main_nav_container">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-left">
+            <div class="logo_container">
+              <a href="#" class="logo_wrapper">
+                <img class="logo_img" src="images/logo.png" alt="logo">
+                <div class="logo_info">
+                  <div class="logo_name"> <span>Colo</span>Shop</div>
+                  <div class="logo_text">Shopping hihi</div>
+                </div>
+              </a>
+            </div>
+            <nav class="navbar">
+              <ul class="navbar_menu">
+                <li>
+                  <div class="search_form_wrapper">
+                    <form action="" class="search_form">
+                      <input type="text" name="" class="search_input" placeholder="Bạn muốn tìm gì ?">
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                    </form>
+                  </div>
+                </li>
+                <li>
+                  <a href="#" class="nav_item">
+                    <img src="images/history.png" alt="ic">
+                    <div class="hotline">
+                      <span>Lịch sử</span>
+                      <span>đơn hàng</span>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="nav_item">
+                    <img src="images/phone_32.png" alt="ic">
+                    <div class="hotline">
+                      <span>Hotline</span>
+                      <span class="phone_number">0123456789</span>
+                    </div>
+                  </a>
+                </li>
+                <!-- <li><a href="#">shop</a></li> -->
+                <!-- <li><a href="#">promotion</a></li>
+                <li><a href="#">pages</a></li>
+                <li><a href="#">blog</a></li> -->
+                <!-- <li><a href="contact.html">contact</a></li> -->
+              </ul>
+              <ul class="navbar_user">
+                <li class="account">
+                  <a href="#">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                  </a>
+                  <ul class="account_selection">
+                    <li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng nhập</a></li>
+                    <li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Đăng kí</a></li>
+                  </ul>
+                </li>
+                <li class="checkout">
+                  <a href="#">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <span id="checkout_items" class="checkout_items">2</span>
+                  </a>
+                </li>
+              </ul>
+
+            </nav>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="main-menu-header">
+              <div class="all_category">
+                <!-- <div>
+                    <img src="images/hamburger.png" alt="ic">
+                </div> -->
+                <div class="hamburger_container">
+                  <i class="fa fa-bars" aria-hidden="true"></i>
+                  <span>Tất cả danh mục</span>
+                </div>
+
+              </div>
+              <div class="category__slider-wrapper">
+                <ul class="owl-carousel owl-theme category__slider">
+                  <li><a href="#">Máy giặt</a></li>
+                  <li><a href="#">Máy hút bụi</a></li>
+                  <li><a href="#">Tủ lạnh</a></li>
+                  <li><a href="#">Máy giặt</a></li>
+                  <li><a href="#">Máy hút bụi</a></li>
+                  <li><a href="#">Tủ lạnh</a></li>
+                  <li><a href="#">Máy giặt</a></li>
+                  <li><a href="#">Máy hút bụi</a></li>
+                  <li><a href="#">Tủ lạnh</a></li>
+                  <li><a href="#">Máy hút bụi</a></li>
+                  <li><a href="#">Máy hút bụi</a></li>
+                  <li><a href="#">Máy hút bụi</a></li>
+                  <li><a href="#">Máy hút bụi</a></li>
+                </ul>
+                <!-- <div class="category_slider_nav_left">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                </div> -->
+                <div class="category_slider_nav_right">
+                  <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </header>
+
+  <div class="fs_menu_overlay"></div>
+  <div class="hamburger_menu">
+    <div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+    <div class="hamburger_menu_content text-left">
+      <ul class="menu_top_nav">
+        <li class="menu_item">
+          <a href="#">home</a>
+          <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        </li>
+        <li class="menu_item"><a href="#">shop</a></li>
+        <li class="menu_item"><a href="#">promotion</a></li>
+        <li class="menu_item"><a href="#">pages</a></li>
+        <li class="menu_item"><a href="#">blog</a></li>
+        <li class="menu_item"><a href="#">contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="sub_hamburger_menu">
+    <div class="sub_hamburger_close">
+      <i class="fa fa-chevron-left" aria-hidden="true"></i>
+    </div>
+    <div class="hamburger_menu_content text-left">
+      <ul class="menu_top_nav">
+        <li class="menu_item">
+          <a href="#">home</a>
+        </li>
+        <li class="menu_item"><a href="#">shop sub</a></li>
+        <li class="menu_item"><a href="#">promotion sunbb</a></li>
+        <li class="menu_item"><a href="#">pages</a></li>
+        <li class="menu_item"><a href="#">blog</a></li>
+        <li class="menu_item"><a href="#">contact</a></li>
+      </ul>
+    </div>
+  </div>
+</th:block>
+
+<div  th:fragment="footer" class="container">
+  <footer class="py-5">
+    <div class="row">
+      <div class="col-lg-2 col-md-6 col-sm-12">
+        <h5 class="footer_header">Section</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-6 col-sm-12">
+        <h5 class="footer_header">Section</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <h5 class="footer_header">Liên hệ</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link p-0 text-muted">
+              Đường số 7, Phường Linh Xuân, Quận Thủ Đức, Tp.HCM
+            </a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link p-0 text-muted">0123456789</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link p-0 text-muted">
+              yasuki.shop@gmail.com
+            </a>
+          </li>
+          <li class="nav-item mb-2">
+            <div class="social-group">
+              <a href="#" class="social-item"><i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-item"><i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="social-item"><i class="fab fa-pinterest-p"></i>
+              </a>
+              <a href="#" class="social-item"><i class="fab fa-invision"></i>
+              </a>
+              <a href="#" class="social-item"><i class="fab fa-youtube"></i>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <h5 class="footer_header">Đăng ký để nhận được được thông tin ưu đãi mới nhất từ chúng tôi.</h5>
+        <div class="d-flex w-100 gap-2">
+          <form action="post">
+            <div class="newsletter_form d-flex flex-row align-items-center  justify-content-center">
+              <input id="newsletter_email" type="email" placeholder="Nhập Email ..." required="required" data-error="Valid email is required.">
+              <button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">Đăng kí</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<th:block th:fragment="js_file">
+  <script th:src="@{js/jquery-3.2.1.min.js}"></script>
+  <script th:src="@{styles/bootstrap4/popper.js}"></script>
+  <script th:src="@{styles/bootstrap4/bootstrap.min.js}"></script>
+  <script th:src="@{plugins/Isotope/isotope.pkgd.min.js}"></script>
+  <script th:src="@{plugins/OwlCarousel2-2.2.1/owl.carousel.js}"></script>
+  <script th:src="@{plugins/easing/easing.js}"></script>
+  <script th:src="@{js/custom.js}"></script>
+</th:block>
+
+</body>
+</html>
