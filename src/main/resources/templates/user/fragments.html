@@ -6,16 +6,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Colo Shop Template">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" th:href="@{styles/bootstrap4/bootstrap.min.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/styles/bootstrap4/bootstrap.min.css}">
+
+  <!-- Font Quicksand -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
-  <link rel="stylesheet" type="text/css"  th:href="@{plugins/OwlCarousel2-2.2.1/owl.carousel.css}">
-  <link rel="stylesheet" type="text/css"  th:href="@{plugins/OwlCarousel2-2.2.1/owl.theme.default.css}">
-  <link rel="stylesheet" type="text/css"  th:href="@{plugins/OwlCarousel2-2.2.1/animate.css}">
-  <link rel="stylesheet" type="text/css"  th:href="@{styles/main_styles.css}">
-  <link rel="stylesheet" type="text/css"  th:href="@{styles/responsive.css}">
+  <link rel="stylesheet" type="text/css"  th:href="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.css}">
+  <link rel="stylesheet" type="text/css"  th:href="@{/plugins/OwlCarousel2-2.2.1/owl.theme.default.css}">
+  <link rel="stylesheet" type="text/css"  th:href="@{/plugins/OwlCarousel2-2.2.1/animate.css}">
+  <link rel="stylesheet" type="text/css"  th:href="@{/styles/common.css}">
+  <link rel="stylesheet" type="text/css"  th:href="@{/styles/common_responsive.css}">
+
 </head>
 <body>
 <th:block th:fragment="header_nav">
@@ -25,7 +31,7 @@
       <div class="container">
         <div class="row">
           <div class="col">
-            <img th:src="@{images/top_banner.png}" alt="err">
+            <img th:src="@{/images/top_banner.png}" alt="err">
           </div>
         </div>
       </div>
@@ -38,8 +44,8 @@
         <div class="row">
           <div class="col-lg-12 text-left">
             <div class="logo_container">
-              <a href="#" class="logo_wrapper">
-                <img class="logo_img" src="images/logo.png" alt="logo">
+              <a th:href="@{/}" class="logo_wrapper">
+                <img class="logo_img" th:src="@{/images/logo.png}" alt="logo">
                 <div class="logo_info">
                   <div class="logo_name"> <span>Colo</span>Shop</div>
                   <div class="logo_text">Shopping hihi</div>
@@ -58,7 +64,7 @@
                 </li>
                 <li>
                   <a href="#" class="nav_item">
-                    <img src="images/history.png" alt="ic">
+                    <img th:src="@{/images/history.png}" alt="ic">
                     <div class="hotline">
                       <span>Lịch sử</span>
                       <span>đơn hàng</span>
@@ -67,7 +73,7 @@
                 </li>
                 <li>
                   <a href="#" class="nav_item">
-                    <img src="images/phone_32.png" alt="ic">
+                    <img th:src="@{/images/phone_32.png}" alt="ic">
                     <div class="hotline">
                       <span>Hotline</span>
                       <span class="phone_number">0123456789</span>
@@ -116,19 +122,9 @@
               </div>
               <div class="category__slider-wrapper">
                 <ul class="owl-carousel owl-theme category__slider">
-                  <li><a href="#">Máy giặt</a></li>
-                  <li><a href="#">Máy hút bụi</a></li>
-                  <li><a href="#">Tủ lạnh</a></li>
-                  <li><a href="#">Máy giặt</a></li>
-                  <li><a href="#">Máy hút bụi</a></li>
-                  <li><a href="#">Tủ lạnh</a></li>
-                  <li><a href="#">Máy giặt</a></li>
-                  <li><a href="#">Máy hút bụi</a></li>
-                  <li><a href="#">Tủ lạnh</a></li>
-                  <li><a href="#">Máy hút bụi</a></li>
-                  <li><a href="#">Máy hút bụi</a></li>
-                  <li><a href="#">Máy hút bụi</a></li>
-                  <li><a href="#">Máy hút bụi</a></li>
+                  <li th:each="item : ${session.dataCategory}">
+                    <a th:href="@{'/list-product?category='+${item.slug}}" th:text="${item.name}"></a>
+                  </li>
                 </ul>
                 <!-- <div class="category_slider_nav_left">
                     <i class="fa fa-chevron-left" aria-hidden="true"></i>
@@ -150,15 +146,12 @@
     <div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
     <div class="hamburger_menu_content text-left">
       <ul class="menu_top_nav">
-        <li class="menu_item">
-          <a href="#">home</a>
+        <li th:each="item, iStar : ${session.dataCategory}" class="menu_item" th:data-id="${item.id}">
+          <a href="#" >
+            [[${item.name}]]
+          </a>
           <i class="fa fa-chevron-right" aria-hidden="true"></i>
         </li>
-        <li class="menu_item"><a href="#">shop</a></li>
-        <li class="menu_item"><a href="#">promotion</a></li>
-        <li class="menu_item"><a href="#">pages</a></li>
-        <li class="menu_item"><a href="#">blog</a></li>
-        <li class="menu_item"><a href="#">contact</a></li>
       </ul>
     </div>
   </div>
@@ -167,15 +160,8 @@
       <i class="fa fa-chevron-left" aria-hidden="true"></i>
     </div>
     <div class="hamburger_menu_content text-left">
-      <ul class="menu_top_nav">
-        <li class="menu_item">
-          <a href="#">home</a>
-        </li>
-        <li class="menu_item"><a href="#">shop sub</a></li>
-        <li class="menu_item"><a href="#">promotion sunbb</a></li>
-        <li class="menu_item"><a href="#">pages</a></li>
-        <li class="menu_item"><a href="#">blog</a></li>
-        <li class="menu_item"><a href="#">contact</a></li>
+      <ul class="menu_top_nav list_product_by_category">
+        <li><a href="#">shop sub</a></li>
       </ul>
     </div>
   </div>
@@ -185,24 +171,21 @@
   <footer class="py-5">
     <div class="row">
       <div class="col-lg-2 col-md-6 col-sm-12">
-        <h5 class="footer_header">Section</h5>
+        <h5 class="footer_header">Menu</h5>
         <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+          <li th:each="item, iStar : ${session.dataCategory}" class="nav-item mb-2">
+            <a th:if="${iStar.index <= 6}" th:href="@{'/list-product?category=' +${item.slug}}" class="nav-link p-0 text-muted">[[${item.name}]]</a>
+          </li>
         </ul>
       </div>
 
       <div class="col-lg-2 col-md-6 col-sm-12">
-        <h5 class="footer_header">Section</h5>
+        <h5 class="footer_header">Hỗ trợ khách hàng</h5>
         <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Hướng dẫn mua hàng</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Giải đáp thắc mắc</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Chính sách mua hàng</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Chính sách đổi trả</a></li>
         </ul>
       </div>
 
@@ -211,14 +194,18 @@
         <ul class="nav flex-column">
           <li class="nav-item mb-2">
             <a href="#" class="nav-link p-0 text-muted">
+              <i class="fas fa-map-marked-alt"></i>
               Đường số 7, Phường Linh Xuân, Quận Thủ Đức, Tp.HCM
             </a>
           </li>
           <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-muted">0123456789</a>
+            <a href="#" class="nav-link p-0 text-muted">
+              <i class="fas fa-phone"></i> 0123456789
+            </a>
           </li>
           <li class="nav-item mb-2">
             <a href="#" class="nav-link p-0 text-muted">
+              <i class="fas fa-envelope"></i>
               yasuki.shop@gmail.com
             </a>
           </li>
@@ -255,13 +242,13 @@
 </div>
 
 <th:block th:fragment="js_file">
-  <script th:src="@{js/jquery-3.2.1.min.js}"></script>
-  <script th:src="@{styles/bootstrap4/popper.js}"></script>
-  <script th:src="@{styles/bootstrap4/bootstrap.min.js}"></script>
-  <script th:src="@{plugins/Isotope/isotope.pkgd.min.js}"></script>
-  <script th:src="@{plugins/OwlCarousel2-2.2.1/owl.carousel.js}"></script>
-  <script th:src="@{plugins/easing/easing.js}"></script>
-  <script th:src="@{js/custom.js}"></script>
+  <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+  <script th:src="@{/styles/bootstrap4/popper.js}"></script>
+  <script th:src="@{/styles/bootstrap4/bootstrap.min.js}"></script>
+  <script th:src="@{/plugins/Isotope/isotope.pkgd.min.js}"></script>
+  <script th:src="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.js}"></script>
+  <script th:src="@{/plugins/easing/easing.js}"></script>
+  <script th:src="@{/js/custom.js}"></script>
 </th:block>
 
 </body>

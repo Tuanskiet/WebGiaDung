@@ -141,10 +141,6 @@
 	{
 		padding-right: 15px;
 	}
-	.benefit_col
-	{
-		margin-bottom: 30px;
-	}
 	.benefit_col:last-child
 	{
 		margin-bottom: 0px;
@@ -219,7 +215,7 @@
 	}
 	.tab_title
 	{
-		margin-bottom: 78px;
+		margin-bottom: 40px;
 	}
 	.tab_text_block
 	{
@@ -336,11 +332,6 @@
 	.add_review
 	{
 		margin-top: 44px;
-	}
-	.user_rating .star_rating
-	{
-		margin-left: 0px;
-		margin-top: 7px;
 	}
 	.cr
 	{

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <head th:replace="user/fragments :: main_header('tag')"></head>
+    <title>chi tiet</title>
+    <!-- product single -->
+    <link rel="stylesheet" type="text/css"  th:href="@{/styles/single_styles.css}">
+    <link rel="stylesheet" type="text/css"  th:href="@{/styles/single_responsive.css}">
+</head>
+<body>
+<div class="super_container">
+    <th:block th:replace="user/fragments :: header_nav"></th:block>
+    <div class="container single_product_container">
+        <div class="row">
+            <div class="col">
+
+                <!-- Breadcrumbs -->
+
+                <div class="breadcrumbs d-flex flex-row align-items-center">
+                    <ul>
+                        <li><a th:href="@{/}">Trang chủ</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>[[${productDetail.category.name}]]</a></li>
+                        <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>[[${productDetail.name}]]</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="single_product_pics">
+                    <div class="row">
+                        <div class="col-lg-3 thumbnails_col order-lg-1 order-2">
+                            <div class="single_product_thumbnails">
+                                <ul>
+                                    <li><img src="images/single_1_thumb.jpg" alt="" data-image="images/single_1.jpg"></li>
+                                    <li class="active"><img src="images/single_2_thumb.jpg" alt="" data-image="images/single_2.jpg"></li>
+                                    <li><img src="images/single_3_thumb.jpg" alt="" data-image="images/single_3.jpg"></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 image_col order-lg-2 order-1">
+                            <div class="single_product_image">
+                                <div class="single_product_image_background" style="background-image:url(images/single_2.jpg)"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="product_details">
+                    <div class="product_details_title">
+                        <h2>[[${productDetail.name}]]</h2>
+                        <p>[[${productDetail.description}]]</p>
+                    </div>
+                    <div class="inventory_quantity">
+                        <div class="product_detail_brand">
+                            Thương hiệu : <a href="#" class="">Panasonic</a>
+                        </div>
+                        <div class="product_detail_stock">
+                            Tình trạng : <a class="text-primary">Còn hàng</a>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="price-box">
+                        <div class="product_price-wrapper">
+                            <span>Giá : </span>
+                            <div class="product_price">
+                                [[${#numbers.formatDecimal(productDetail.priceDiscount, 3, 'POINT', 0, 'COMMA')}]]đ
+                            </div>
+                            <ul class="star_rating">
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                            </ul>
+                        </div>
+                        <div class="product_original_price-wrapper">
+                            <div class="old-price">
+                                <span>Giá thị trường : </span>
+                                <span class="original_price">[[${#numbers.formatDecimal(productDetail.price, 3, 'POINT', 0, 'COMMA')}]]đ</span>
+                            </div>
+                            <div class="save-price">
+                                <span>Tiết kiệm: </span>
+                                <span>900.000 </span>
+                                <span>so với giá thị trường.</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="benefit">
+                        <div class="container">
+                            <div class="row benefit_row">
+                                <div class="col-6 benefit_col">
+                                    <div class="benefit_item d-flex flex-row align-items-center">
+                                        <div class="benefit_icon">
+                                            <i class="fas fa-shipping-fast"></i>
+                                        </div>
+                                        <div class="benefit_content">
+                                            <h6>Giao hàng miễn phí</h6>
+                                            <p>Cho đơn hàng từ 300K</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 benefit_col">
+                                    <div class="benefit_item d-flex flex-row align-items-center">
+                                        <div class="benefit_icon"><i class="fas fa-award"></i></div>
+                                        <div class="benefit_content">
+                                            <h6>Hàng chính hãng</h6>
+                                            <p>Cam kết chất lượng</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 benefit_col">
+                                    <div class="benefit_item d-flex flex-row align-items-center">
+                                        <div class="benefit_icon"><i class="fas fa-history"></i></div>
+                                        <div class="benefit_content">
+                                            <h6>Đổi trả hàng</h6>
+                                            <p>Trong 3 ngày đầu tiên</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-6 benefit_col">
+                                    <div class="benefit_item d-flex flex-row align-items-center">
+                                        <div class="benefit_icon"><i class="fas fa-question-circle"></i></div>
+                                        <div class="benefit_content">
+                                            <h6>Tư vấn 24/24</h6>
+                                            <p>Giải đáp mọi thắc mắc</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
+                        <span>Số lượng:</span>
+                        <div class="quantity_selector">
+                            <span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                            <span id="quantity_value">1</span>
+                            <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="group_btn-cart">
+                        <div class="red_button add_to_cart_button"><a href="#">Thêm vào giỏ hàng</a></div>
+                        <div class="red_button add_to_cart_button"><a href="#">Mua ngay</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs_section_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="tabs_container">
+                        <ul class="tabs d-flex flex-sm-row flex-column align-items-left align-items-md-center justify-content-center">
+                            <li class="tab active" data-active-tab="tab_1"><span>Mô tả chi tiết</span></li>
+                            <li class="tab" data-active-tab="tab_2"><span>Thông số kĩ thuật</span></li>
+                            <li class="tab" data-active-tab="tab_3"><span>Đánh giá</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+
+                    <!-- Tab Description -->
+
+                    <div id="tab_1" class="tab_container active">
+                        <div class="row">
+                            <div class="col-lg-5 desc_col">
+                                <div class="tab_title">
+                                    <h4>Mô tả chi tiết</h4>
+                                </div>
+                                <div class="tab_text_block">
+                                    <h2>Pocket cotton sweatshirt</h2>
+                                    <p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Additional Info -->
+
+                    <div id="tab_2" class="tab_container">
+                        <div class="row">
+                            <div class="col additional_info_col">
+                                <div class="tab_title additional_info_title">
+                                    <h4>Thông số kĩ thuật</h4>
+                                </div>
+                                <p>COLOR:<span>Gold, Red</span></p>
+                                <p>SIZE:<span>L,M,XL</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Reviews -->
+
+                    <div id="tab_3" class="tab_container">
+                        <div class="row">
+
+                            <!-- User Reviews -->
+
+                            <div class="col-lg-6 reviews_col">
+                                <div class="tab_title reviews_title">
+                                    <h4>Đánh giá</h4>
+                                </div>
+
+                                <!-- User Review -->
+
+                                <div class="user_review_container d-flex flex-column flex-sm-row">
+                                    <div class="user">
+                                        <div class="user_pic"></div>
+                                    </div>
+                                    <div class="review">
+                                        <div class="review_date">27 Aug 2016</div>
+                                        <div class="user_rating_header">
+                                            <div class="user_name">Brandon William</div>
+                                            <div class="user_rating">
+                                                <ul class="star_rating">
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    </div>
+                                </div>
+
+                                <div class="user_review_container d-flex flex-column flex-sm-row">
+                                    <div class="user">
+                                        <div class="user_pic"></div>
+                                    </div>
+                                    <div class="review">
+                                        <div class="review_date">27 Aug 2016</div>
+                                        <div class="user_rating_header">
+                                            <div class="user_name">Brandon William</div>
+                                            <div class="user_rating">
+                                                <ul class="star_rating">
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    </div>
+                                </div>
+
+                                <div class="user_review_container d-flex flex-column flex-sm-row">
+                                    <div class="user">
+                                        <div class="user_pic"></div>
+                                    </div>
+                                    <div class="review">
+                                        <div class="review_date">27 Aug 2016</div>
+                                        <div class="user_rating_header">
+                                            <div class="user_name">Brandon William</div>
+                                            <div class="user_rating">
+                                                <ul class="star_rating">
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    </div>
+                                </div>
+
+                                <div class="user_review_container d-flex flex-column flex-sm-row">
+                                    <div class="user">
+                                        <div class="user_pic"></div>
+                                    </div>
+                                    <div class="review">
+                                        <div class="review_date">27 Aug 2016</div>
+                                        <div class="user_rating_header">
+                                            <div class="user_name">Brandon William</div>
+                                            <div class="user_rating">
+                                                <ul class="star_rating">
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Add Review -->
+
+                            <div class="col-lg-6 add_review_col">
+
+                                <div class="add_review">
+                                    <form id="review_form" action="post">
+                                        <div>
+                                            <div class="rate_title">
+                                                <h1>Đánh giá của bạn : </h1>
+                                                <ul class="user_star_rating">
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                                </ul>
+                                            </div>
+                                            <input id="review_name" class="form_input input_name" type="text" name="name" placeholder="Tên*" required="required" data-error="Tên không được bỏ trống.">
+                                            <input id="review_email" class="form_input input_email" type="email" name="email" placeholder="Email*" required="required" data-error="Email không đúng định dạng.">
+                                            <textarea id="review_message" class="input_review" name="message"  placeholder="Nhập đánh giá của bạn..." rows="4" required data-error="Please, leave us a review."></textarea>
+                                        </div>
+                                        <div class="text-left text-sm-right">
+                                            <button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">Gửi đánh giá</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="user/fragments :: footer"></footer>
+<th:block th:replace="user/fragments :: js_file"></th:block>
+<script th:src="@{js/single_custom.js}"></script>
+</body>
+</html>

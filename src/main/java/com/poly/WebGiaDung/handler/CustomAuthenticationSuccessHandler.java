@@ -1,7 +1,9 @@
 package com.poly.WebGiaDung.handler;
 
+import com.poly.WebGiaDung.entity.MyCategory;
 import com.poly.WebGiaDung.entity.UserApp;
 import com.poly.WebGiaDung.security.MyUserDetails;
+import com.poly.WebGiaDung.service.MyCategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,27 +23,27 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
-
+    private final MyCategoryService myCategoryService;
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-//        this.setGlobalData(request);
+        this.setGlobalData(request);
         //redirect page by role
         this.redirectAfterLogin(request,response,authentication);
     }
 
-//    private void setGlobalData(HttpServletRequest request) {
-//        // set cart in session
+    private void setGlobalData(HttpServletRequest request) {
+        // set cart in session
 //        List<CartDto> cartDtoList = cartItemService.getCartsByUser(getCurrentUser());
 //        request.getSession().setAttribute("listCart", cartDtoList);
-//
-//        // set global category in session
-//        List<GroupCategory> myCategoryList = groupCategoryService.getAllCategoryGroupIsActive();
-//        request.getSession().setAttribute("dataCategory", myCategoryList);
-//
-//        // set global category in session
+
+        // set global category in session
+        List<MyCategory> myCategoryList = myCategoryService.getAllCategoryActive();
+        request.getSession().setAttribute("dataCategory", myCategoryList);
+
+        // set global brand in session
 //        List<String> listBrand = productService.getAllBrand();
 //        request.getSession().setAttribute("dataBrand", listBrand);
-//    }
+    }
 
     public void redirectAfterLogin(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException{
         RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();

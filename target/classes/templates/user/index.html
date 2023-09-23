@@ -5,7 +5,8 @@
     <head th:replace="user/fragments :: main_header('tag')"></head>
     <title>index</title>
     <!-- index -->
-<!--    <link th:href="@{/assets/user/css/home.css}" rel="stylesheet" />-->
+    <link rel="stylesheet" type="text/css"  th:href="@{/styles/main_styles.css}">
+    <link rel="stylesheet" type="text/css"  th:href="@{/styles/responsive.css}">
 </head>
 <body>
     <div class="super_container">
@@ -30,53 +31,13 @@
         <div class="container">
             <div class="list__brand-wrapper mt-4">
                 <ul class="owl-carousel owl-theme list__brand-slider" >
-                    <li class="owl-item brand-item">
-                        <a href="/collections/all" class="brand-link" title="Daikin">
+                    <li th:each="item : ${dataBrands}" class="owl-item brand-item">
+                        <a th:href="@{'/list-product/brand?id='+${item.id}}" class="brand-link" title="brand">
                             <div class="item_cate">
                                 <div class="img_cate">
-                                    <img width="250" height="54" src="images/product_1.png">
+                                    <img width="250" height="54" th:src="${item.image}">
                                 </div>
-                                <span>Daikin</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="owl-item  brand-item">
-                        <a href="/collections/all" class="brand-link" title="Daikin">
-                            <div class="item_cate">
-                                <div class="img_cate">
-                                    <img width="250" height="54" src="images/product_2.png">
-                                </div>
-                                <span>Lectuer</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="owl-item  brand-item">
-                        <a href="/collections/all" class="brand-link" title="Daikin">
-                            <div class="item_cate">
-                                <div class="img_cate">
-                                    <img width="250" height="54" src="images/product_2.png">
-                                </div>
-                                <span>Lectuer</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="owl-item  brand-item">
-                        <a href="/collections/all" class="brand-link" title="Daikin">
-                            <div class="item_cate">
-                                <div class="img_cate">
-                                    <img width="250" height="54" src="images/product_2.png">
-                                </div>
-                                <span>Lectuer</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="owl-item  brand-item">
-                        <a href="/collections/all" class="brand-link" title="Daikin">
-                            <div class="item_cate">
-                                <div class="img_cate">
-                                    <img width="250" height="54" src="images/product_2.png">
-                                </div>
-                                <span>Lectuer</span>
+                                <span th:text="${item.name}"></span>
                             </div>
                         </a>
                     </li>
@@ -100,45 +61,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-2 col-md-3 col-sm-4">
-                        <a href="#" class="category_item">
-                            <div class="category_img">
-                                <img src="images/product_1.png" alt="img">
-                            </div>
-                            <div class="category_name">Điện thoại</div>
-                        </a>
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-sm-4">
-                        <a href="#" class="category_item">
-                            <div class="category_img">
-                                <img src="images/product_1.png" alt="img">
-                            </div>
-                            <div class="category_name">Điện thoại</div>
-                        </a>
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-sm-4">
-                        <a href="#" class="category_item">
-                            <div class="category_img">
-                                <img src="images/product_1.png" alt="img">
-                            </div>
-                            <div class="category_name">Điện thoại</div>
-                        </a>
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-sm-4">
-                        <a href="#" class="category_item">
-                            <div class="category_img">
-                                <img src="images/product_1.png" alt="img">
-                            </div>
-                            <div class="category_name">Điện thoại</div>
-                        </a>
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-sm-4">
-                        <a href="#" class="category_item">
-                            <div class="category_img">
-                                <img src="images/product_1.png" alt="img">
-                            </div>
-                            <div class="category_name">Điện thoại</div>
+                <div class="index-categories-list row">
+                    <div th:each="category : ${session.dataCategory}" class="index-category">
+                        <a th:href="@{'/list-product?category=' +${category.slug}}">
+                            <span class="index-category-img">
+                                <img class="img-fluid lazyloaded" alt="category" th:src="${category.image}">
+                            </span>
+                            <span class="index-category-title">[[${category.name}]]</span>
                         </a>
                     </div>
                 </div>
@@ -146,196 +75,47 @@
         </div>
 
 
-        <!-- New Arrivals -->
-
-        <div class="new_arrivals">
-            <div class="container list__product">
-                <div class="row mt-3">
-                    <div class="col text-left">
-                        <div class="link__more">
-                            <h4 class="category__name">
-                                <span> Sản phẩm mới</span> ( 10 sản phẩm)
-                            </h4>
-                            <a href="#">Xem thêm
-                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                            </a>
+        <!-- List product by category -->
+        <th:block th:each="category :  ${session.dataCategory}" th:if="${category.products.size() > 0 }" >
+            <div class="new_arrivals">
+                <div class="container list__product">
+                    <div class="row mt-3">
+                        <div class="col text-left">
+                            <div class="link__more">
+                                <h4 class="category__name">
+                                    <span>[[${category.name}]]</span> ( [[${category.products.size()}]] sản phẩm)
+                                </h4>
+                                <a href="#">Xem thêm
+                                    <i class="fas fa-long-arrow-alt-right"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
-
-                            <!-- Product 1 -->
-
-                            <div class="product-item">
-                                <div class="product discount product_filter">
-                                    <div class="product_image">
-                                        <img src="images/product_1.png" alt="">
+                    <div class="row">
+                        <div class="col">
+                            <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
+                                <!-- Product item-->
+                                <div th:if="${category.products.size() > 0 }" th:each="product : ${category.products}" class="product-item">
+                                    <div class="product discount product_filter">
+                                        <div class="product_image">
+                                            <img th:src="${product.image}" alt="img">
+                                        </div>
+                                        <div class="favorite favorite_left"></div>
+                                        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+                                        <div class="product_info">
+                                            <h6 class="product_name"><a th:href="@{'/product?id='+${product.id}}">[[${product.name}]]</a></h6>
+                                            <div class="product_price">[[${#numbers.formatDecimal(product.priceDiscount, 3,'POINT', 0,'COMMA')}]]đ
+                                                <span>[[${#numbers.formatDecimal(product.price, 3,'POINT', 0,'COMMA')}]]đ</span></div>
+                                        </div>
                                     </div>
-                                    <div class="favorite favorite_left"></div>
-                                    <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
-                                    <div class="product_info">
-                                        <h6 class="product_name"><a href="single.html">Fujifilm X100T 16 MP Digital Camera (Silver)</a></h6>
-                                        <div class="product_price">$520.00<span>$590.00</span></div>
-                                    </div>
+                                    <div class="red_button add_to_cart_button"><a href="#">Thêm vào giỏ</a></div>
                                 </div>
-                                <div class="red_button add_to_cart_button"><a href="#">Thêm vào giỏ</a></div>
-                            </div>
-
-                            <!-- Product 2 -->
-
-                            <div class="product-item">
-                                <div class="product product_filter">
-                                    <div class="product_image">
-                                        <img src="images/product_2.png" alt="">
-                                    </div>
-                                    <div class="favorite"></div>
-                                    <div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
-                                    <div class="product_info">
-                                        <h6 class="product_name"><a href="single.html">Samsung CF591 Series Curved 27-Inch FHD Monitor</a></h6>
-                                        <div class="product_price">$610.00</div>
-                                    </div>
-                                </div>
-                                <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-                            </div>
-
-                            <!-- Product 3 -->
-
-                            <div class="product-item">
-                                <div class="product product_filter">
-                                    <div class="product_image">
-                                        <img src="images/product_3.png" alt="">
-                                    </div>
-                                    <div class="favorite"></div>
-                                    <div class="product_info">
-                                        <h6 class="product_name"><a href="single.html">Blue Yeti USB Microphone Blackout Edition</a></h6>
-                                        <div class="product_price">$120.00</div>
-                                    </div>
-                                </div>
-                                <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-                            </div>
-
-                            <!-- Product 4 -->
-
-                            <div class="product-item">
-                                <div class="product product_filter">
-                                    <div class="product_image">
-                                        <img src="images/product_4.png" alt="">
-                                    </div>
-                                    <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
-                                    <div class="favorite favorite_left"></div>
-                                    <div class="product_info">
-                                        <h6 class="product_name"><a href="single.html">DYMO LabelWriter 450 Turbo Thermal Label Printer</a></h6>
-                                        <div class="product_price">$410.00</div>
-                                    </div>
-                                </div>
-                                <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-                            </div>
-
-                            <!-- Product 5 -->
-
-                            <div class="product-item women men">
-                                <div class="product product_filter">
-                                    <div class="product_image">
-                                        <img src="images/product_5.png" alt="">
-                                    </div>
-                                    <div class="favorite"></div>
-                                    <div class="product_info">
-                                        <h6 class="product_name"><a href="single.html">Pryma Headphones, Rose Gold & Grey</a></h6>
-                                        <div class="product_price">$180.00</div>
-                                    </div>
-                                </div>
-                                <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-                            </div>
-
-                            <!-- Product 6 -->
-
-                            <div class="product-item accessories">
-                                <div class="product discount product_filter">
-                                    <div class="product_image">
-                                        <img src="images/product_6.png" alt="">
-                                    </div>
-                                    <div class="favorite favorite_left"></div>
-                                    <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
-                                    <div class="product_info">
-                                        <h6 class="product_name"><a href="#single.html">Fujifilm X100T 16 MP Digital Camera (Silver)</a></h6>
-                                        <div class="product_price">$520.00<span>$590.00</span></div>
-                                    </div>
-                                </div>
-                                <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-                            </div>
-
-                            <!-- Product 7 -->
-
-                            <div class="product-item women">
-                                <div class="product product_filter">
-                                    <div class="product_image">
-                                        <img src="images/product_7.png" alt="">
-                                    </div>
-                                    <div class="favorite"></div>
-                                    <div class="product_info">
-                                        <h6 class="product_name"><a href="single.html">Samsung CF591 Series Curved 27-Inch FHD Monitor</a></h6>
-                                        <div class="product_price">$610.00</div>
-                                    </div>
-                                </div>
-                                <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-                            </div>
-
-                            <!-- Product 8 -->
-
-                            <div class="product-item accessories">
-                                <div class="product product_filter">
-                                    <div class="product_image">
-                                        <img src="images/product_8.png" alt="">
-                                    </div>
-                                    <div class="favorite"></div>
-                                    <div class="product_info">
-                                        <h6 class="product_name"><a href="single.html">Blue Yeti USB Microphone Blackout Edition</a></h6>
-                                        <div class="product_price">$120.00</div>
-                                    </div>
-                                </div>
-                                <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-                            </div>
-
-                            <!-- Product 9 -->
-
-                            <div class="product-item men">
-                                <div class="product product_filter">
-                                    <div class="product_image">
-                                        <img src="images/product_9.png" alt="">
-                                    </div>
-                                    <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
-                                    <div class="favorite favorite_left"></div>
-                                    <div class="product_info">
-                                        <h6 class="product_name"><a href="single.html">DYMO LabelWriter 450 Turbo Thermal Label Printer</a></h6>
-                                        <div class="product_price">$410.00</div>
-                                    </div>
-                                </div>
-                                <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-                            </div>
-
-                            <!-- Product 10 -->
-
-                            <div class="product-item men">
-                                <div class="product product_filter">
-                                    <div class="product_image">
-                                        <img src="images/product_10.png" alt="">
-                                    </div>
-                                    <div class="favorite"></div>
-                                    <div class="product_info">
-                                        <h6 class="product_name"><a href="single.html">Pryma Headphones, Rose Gold & Grey</a></h6>
-                                        <div class="product_price">$180.00</div>
-                                    </div>
-                                </div>
-                                <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
+        </th:block>
         <!-- Best Sellers -->
 
         <div class="best_sellers">
@@ -351,177 +131,19 @@
                     <div class="col">
                         <div class="product_slider_container">
                             <div class="owl-carousel owl-theme product_slider">
-
-                                <!-- Slide 1 -->
-
-                                <div class="owl-item product_slider_item">
+                                <div th:each="product : ${listTopDiscount}" class="owl-item product_slider_item">
                                     <div class="product-item">
                                         <div class="product discount">
                                             <div class="product_image">
-                                                <img src="images/product_1.png" alt="">
+                                                <img th:src="${product.image}" alt="img">
                                             </div>
                                             <div class="favorite favorite_left"></div>
-                                            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+                                            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-[[product.percentDiscount]]%</span></div>
                                             <div class="product_info">
-                                                <h6 class="product_name"><a href="single.html">Fujifilm X100T 16 MP Digital Camera (Silver)</a></h6>
-                                                <div class="product_price">$520.00<span>$590.00</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Slide 2 -->
-
-                                <div class="owl-item product_slider_item">
-                                    <div class="product-item women">
-                                        <div class="product">
-                                            <div class="product_image">
-                                                <img src="images/product_2.png" alt="">
-                                            </div>
-                                            <div class="favorite"></div>
-                                            <div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
-                                            <div class="product_info">
-                                                <h6 class="product_name"><a href="single.html">Samsung CF591 Series Curved 27-Inch FHD Monitor</a></h6>
-                                                <div class="product_price">$610.00</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Slide 3 -->
-
-                                <div class="owl-item product_slider_item">
-                                    <div class="product-item women">
-                                        <div class="product">
-                                            <div class="product_image">
-                                                <img src="images/product_3.png" alt="">
-                                            </div>
-                                            <div class="favorite"></div>
-                                            <div class="product_info">
-                                                <h6 class="product_name"><a href="single.html">Blue Yeti USB Microphone Blackout Edition</a></h6>
-                                                <div class="product_price">$120.00</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Slide 4 -->
-
-                                <div class="owl-item product_slider_item">
-                                    <div class="product-item accessories">
-                                        <div class="product">
-                                            <div class="product_image">
-                                                <img src="images/product_4.png" alt="">
-                                            </div>
-                                            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
-                                            <div class="favorite favorite_left"></div>
-                                            <div class="product_info">
-                                                <h6 class="product_name"><a href="single.html">DYMO LabelWriter 450 Turbo Thermal Label Printer</a></h6>
-                                                <div class="product_price">$410.00</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Slide 5 -->
-
-                                <div class="owl-item product_slider_item">
-                                    <div class="product-item women men">
-                                        <div class="product">
-                                            <div class="product_image">
-                                                <img src="images/product_5.png" alt="">
-                                            </div>
-                                            <div class="favorite"></div>
-                                            <div class="product_info">
-                                                <h6 class="product_name"><a href="single.html">Pryma Headphones, Rose Gold & Grey</a></h6>
-                                                <div class="product_price">$180.00</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Slide 6 -->
-
-                                <div class="owl-item product_slider_item">
-                                    <div class="product-item accessories">
-                                        <div class="product discount">
-                                            <div class="product_image">
-                                                <img src="images/product_6.png" alt="">
-                                            </div>
-                                            <div class="favorite favorite_left"></div>
-                                            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
-                                            <div class="product_info">
-                                                <h6 class="product_name"><a href="single.html">Fujifilm X100T 16 MP Digital Camera (Silver)</a></h6>
-                                                <div class="product_price">$520.00<span>$590.00</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Slide 7 -->
-
-                                <div class="owl-item product_slider_item">
-                                    <div class="product-item women">
-                                        <div class="product">
-                                            <div class="product_image">
-                                                <img src="images/product_7.png" alt="">
-                                            </div>
-                                            <div class="favorite"></div>
-                                            <div class="product_info">
-                                                <h6 class="product_name"><a href="single.html">Samsung CF591 Series Curved 27-Inch FHD Monitor</a></h6>
-                                                <div class="product_price">$610.00</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Slide 8 -->
-
-                                <div class="owl-item product_slider_item">
-                                    <div class="product-item accessories">
-                                        <div class="product">
-                                            <div class="product_image">
-                                                <img src="images/product_8.png" alt="">
-                                            </div>
-                                            <div class="favorite"></div>
-                                            <div class="product_info">
-                                                <h6 class="product_name"><a href="single.html">Blue Yeti USB Microphone Blackout Edition</a></h6>
-                                                <div class="product_price">$120.00</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Slide 9 -->
-
-                                <div class="owl-item product_slider_item">
-                                    <div class="product-item men">
-                                        <div class="product">
-                                            <div class="product_image">
-                                                <img src="images/product_9.png" alt="">
-                                            </div>
-                                            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
-                                            <div class="favorite favorite_left"></div>
-                                            <div class="product_info">
-                                                <h6 class="product_name"><a href="single.html">DYMO LabelWriter 450 Turbo Thermal Label Printer</a></h6>
-                                                <div class="product_price">$410.00</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Slide 10 -->
-
-                                <div class="owl-item product_slider_item">
-                                    <div class="product-item men">
-                                        <div class="product">
-                                            <div class="product_image">
-                                                <img src="images/product_10.png" alt="">
-                                            </div>
-                                            <div class="favorite"></div>
-                                            <div class="product_info">
-                                                <h6 class="product_name"><a href="single.html">Pryma Headphones, Rose Gold & Grey</a></h6>
-                                                <div class="product_price">$180.00</div>
+                                                <h6 class="product_name"><a th:href="@{'/product?id='+${product.id}}">[[${product.name}]]</a></h6>
+                                                <div class="product_price">[[${#numbers.formatDecimal(product.priceDiscount, 3,'POINT', 0,'COMMA')}]]đ
+                                                    <span>[[${#numbers.formatDecimal(product.price, 3,'POINT', 0,'COMMA')}]]đ</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -549,7 +171,9 @@
                 <div class="row benefit_row">
                     <div class="col-lg-3 benefit_col">
                         <div class="benefit_item d-flex flex-row align-items-center">
-                            <div class="benefit_icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
+                            <div class="benefit_icon">
+                                <i class="fas fa-shipping-fast"></i>
+                            </div>
                             <div class="benefit_content">
                                 <h6>Giao hàng miễn phí</h6>
                                 <p>Cho đơn hàng từ 300K</p>
@@ -558,7 +182,7 @@
                     </div>
                     <div class="col-lg-3 benefit_col">
                         <div class="benefit_item d-flex flex-row align-items-center">
-                            <div class="benefit_icon"><i class="fa fa-money" aria-hidden="true"></i></div>
+                            <div class="benefit_icon"><i class="fas fa-award"></i></div>
                             <div class="benefit_content">
                                 <h6>Hàng chính hãng</h6>
                                 <p>Cam kết chất lượng</p>
@@ -567,7 +191,7 @@
                     </div>
                     <div class="col-lg-3 benefit_col">
                         <div class="benefit_item d-flex flex-row align-items-center">
-                            <div class="benefit_icon"><i class="fa fa-undo" aria-hidden="true"></i></div>
+                            <div class="benefit_icon"><i class="fas fa-history"></i></div>
                             <div class="benefit_content">
                                 <h6>Đổi trả hàng</h6>
                                 <p>Trong 3 ngày đầu tiên</p>
@@ -577,7 +201,7 @@
                     </div>
                     <div class="col-lg-3 benefit_col">
                         <div class="benefit_item d-flex flex-row align-items-center">
-                            <div class="benefit_icon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
+                            <div class="benefit_icon"><i class="fas fa-question-circle"></i></div>
                             <div class="benefit_content">
                                 <h6>Tư vấn 24/24</h6>
                                 <p>Giải đáp mọi thắc mắc</p>

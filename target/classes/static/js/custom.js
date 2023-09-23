@@ -51,10 +51,12 @@ jQuery(document).ready(function($)
 	$('.menu_item').on('click', function()
 	{
 		subMenu.addClass('active');
+		fillListProductByCategory($(this).data('id'));
 	});
 	$('.sub_hamburger_close').on('click', function(){
 		subMenu.removeClass('active');
 	});
+
 	initMenu();
 	initTimer();
 	initFavorite();
@@ -63,6 +65,44 @@ jQuery(document).ready(function($)
 	initSlider();
 	initMenuCategory();
 	initListBrand();
+
+    async function fillListProductByCategory(id) {
+      let blockList = $('.list_product_by_category');
+      blockList.empty();
+      try {
+        let listProduct = await getListProductByCategoryId(id);
+        let html = '';
+
+        listProduct.forEach(item => {
+          html += `<li><a href="#">${item.name}</a></li>`;
+        });
+
+        blockList.html(html);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    function getListProductByCategoryId(id){
+        let urlGetByCategoryId = "/category";
+        return callAjaxPromise(urlGetByCategoryId, "GET", {id : id})
+    }
+    function callAjaxPromise(url, method, data) {
+        return new Promise((resolve, reject) => {
+          $.ajax({
+            url: url,
+            method: method,
+            data: data
+          }).then(function(response) {
+            resolve(response);
+          }).fail(function(error) {
+            console.log("error : " + error);
+            reject(error);
+          });
+        });
+    }
+
+
 
 	/* 
 
