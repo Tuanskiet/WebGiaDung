@@ -1,8 +1,11 @@
 package com.poly.WebGiaDung.handler;
 
+import com.poly.WebGiaDung.dto.CartDto;
+import com.poly.WebGiaDung.entity.CartItem;
 import com.poly.WebGiaDung.entity.MyCategory;
 import com.poly.WebGiaDung.entity.UserApp;
 import com.poly.WebGiaDung.security.MyUserDetails;
+import com.poly.WebGiaDung.service.CartItemService;
 import com.poly.WebGiaDung.service.MyCategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -24,6 +27,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     private final MyCategoryService myCategoryService;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         this.setGlobalData(request);
@@ -32,9 +36,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     }
 
     private void setGlobalData(HttpServletRequest request) {
-        // set cart in session
-//        List<CartDto> cartDtoList = cartItemService.getCartsByUser(getCurrentUser());
-//        request.getSession().setAttribute("listCart", cartDtoList);
 
         // set global category in session
         List<MyCategory> myCategoryList = myCategoryService.getAllCategoryActive();

@@ -22,6 +22,4 @@ public class ProductInfo {
 
     @Column(name = "[value]")
     private String value;
-
-
 }

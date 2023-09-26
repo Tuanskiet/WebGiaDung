@@ -72,7 +72,7 @@ public class Product implements Serializable {
     private List<Evaluate> evaluates = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     private List<ProductInfo> productInfo = new ArrayList<>();
 
 

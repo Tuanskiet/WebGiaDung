@@ -36,6 +36,14 @@ jQuery(document).ready(function($)
 	var hamburgerClose = $('.hamburger_close');
 	var fsOverlay = $('.fs_menu_overlay');
 
+    /*
+
+	Urls
+
+	*/
+
+
+
 	setHeader();
 
 	$(window).on('resize', function()
@@ -72,11 +80,9 @@ jQuery(document).ready(function($)
       try {
         let listProduct = await getListProductByCategoryId(id);
         let html = '';
-
         listProduct.forEach(item => {
           html += `<li><a href="#">${item.name}</a></li>`;
         });
-
         blockList.html(html);
       } catch (error) {
         console.error(error);
@@ -87,23 +93,19 @@ jQuery(document).ready(function($)
         let urlGetByCategoryId = "/category";
         return callAjaxPromise(urlGetByCategoryId, "GET", {id : id})
     }
-    function callAjaxPromise(url, method, data) {
-        return new Promise((resolve, reject) => {
-          $.ajax({
-            url: url,
-            method: method,
-            data: data
-          }).then(function(response) {
-            resolve(response);
-          }).fail(function(error) {
-            console.log("error : " + error);
-            reject(error);
-          });
+
+
+    function callAjax(method, url, data){
+        $.ajax({
+          url: url,
+          method: method,
+          data: data
+        }).then(function(response) {
+
+        }).fail(function(error) {
+          console.log("error : " + error);
         });
     }
-
-
-
 	/* 
 
 	2. Set Header
@@ -522,6 +524,22 @@ jQuery(document).ready(function($)
 		$('.list_brand_slider_right').on('click', function() {
 			owl.trigger('prev.owl.carousel');
 		})
-
 	}
+	/*
+	Call ajax
+	*/
+	function callAjaxPromise(url, method, data) {
+        return new Promise((resolve, reject) => {
+          $.ajax({
+            url: url,
+            method: method,
+            data: data
+          }).then(function(response) {
+            resolve(response);
+          }).fail(function(error) {
+            console.log("error : " + error);
+            reject(error);
+          });
+        });
+    }
 });

@@ -147,7 +147,9 @@
                     </div>
 
                     <div class="group_btn-cart">
-                        <div class="red_button add_to_cart_button"><a href="#">Thêm vào giỏ hàng</a></div>
+                        <div class="red_button add_to_cart_button">
+                            <a th:onclick="addToCartWithQuantity([[${productDetail.id}]])">Thêm vào giỏ hàng</a>
+                        </div>
                         <div class="red_button add_to_cart_button"><a href="#">Mua ngay</a></div>
                     </div>
                 </div>
@@ -197,8 +199,16 @@
                                 <div class="tab_title additional_info_title">
                                     <h4>Thông số kĩ thuật</h4>
                                 </div>
-                                <p>COLOR:<span>Gold, Red</span></p>
-                                <p>SIZE:<span>L,M,XL</span></p>
+                                <div th:if="${productDetail.productInfo.size() > 0}" class="product_detail_info">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr th:each="item : ${productDetail.productInfo}">
+                                                <td th:text="${item.key}"></td>
+                                                <td th:text="${item.value}"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -346,5 +356,12 @@
 <footer th:replace="user/fragments :: footer"></footer>
 <th:block th:replace="user/fragments :: js_file"></th:block>
 <script th:src="@{js/single_custom.js}"></script>
+<script th:src="@{/js/cart.js}"></script>
+<script >
+    function addToCartWithQuantity(productId){
+        let quantity = $('#quantity_value').html();
+        addToCart(productId, parseInt(quantity));
+    }
+</script>
 </body>
 </html>

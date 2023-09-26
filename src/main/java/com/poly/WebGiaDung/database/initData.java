@@ -1,5 +1,6 @@
 package com.poly.WebGiaDung.database;
 
+import com.poly.WebGiaDung.dto.CartDto;
 import com.poly.WebGiaDung.entity.*;
 import com.poly.WebGiaDung.enums.RoleName;
 import com.poly.WebGiaDung.service.*;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -19,6 +21,8 @@ public class initData implements CommandLineRunner {
     private final MyCategoryService categoryService;
     private final BrandService brandService;
     private final ProductService productService;
+    private final ProductInfoService productInfoService;
+    private final CartItemService cartItemService;
     public String imgTest = "//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260";
     @Override
     public void run(String... args) throws Exception {
@@ -88,6 +92,14 @@ public class initData implements CommandLineRunner {
         brandService.create(brandApp11);
         brandService.create(brandApp10);
 
+        //product info
+        ProductInfo productInfo1 = new ProductInfo(null, "Chat lieu", "Nhom");
+        ProductInfo productInfo2 = new ProductInfo(null, "Thong so 1 ", "Ths1");
+        ProductInfo productInfo3 = new ProductInfo(null, "Thong so 2 ", "Ths2");
+        productInfoService.insert(productInfo1);
+        productInfoService.insert(productInfo2);
+        productInfoService.insert(productInfo3);
+
         //product
         Product product1 = new Product("product1", BigDecimal.valueOf(999), 9d, imgTest, category1, brandApp1);
         Product product2 = new Product("product2", BigDecimal.valueOf(999), 9d, imgTest, category1, brandApp2);
@@ -99,6 +111,7 @@ public class initData implements CommandLineRunner {
         Product product8 = new Product("product8", BigDecimal.valueOf(999), 9d, imgTest, category2, brandApp3);
         Product product9 = new Product("product9", BigDecimal.valueOf(999), 9d, imgTest, category2, brandApp3);
         Product product10 = new Product("product10", BigDecimal.valueOf(999), 9d, imgTest, category3, brandApp3);
+        product1.setProductInfo(List.of(productInfo1,productInfo2,productInfo3));
         productService.create(product1);
         productService.create(product2);
         productService.create(product3);
@@ -109,5 +122,12 @@ public class initData implements CommandLineRunner {
         productService.create(product8);
         productService.create(product9);
         productService.create(product10);
+
+        CartDto cartDto1 = new CartDto(1, 1 );
+        CartDto cartDto2 = new CartDto(1, 2);
+        CartDto cartDto3 = new CartDto(1, 3);
+        cartItemService.addToCart(cartDto1, userApp1);
+        cartItemService.addToCart(cartDto2, userApp1);
+        cartItemService.addToCart(cartDto3, userApp1);
     }
 }

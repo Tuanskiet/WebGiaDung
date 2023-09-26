@@ -108,7 +108,7 @@
                                                 <span>[[${#numbers.formatDecimal(product.price, 3,'POINT', 0,'COMMA')}]]đ</span></div>
                                         </div>
                                     </div>
-                                    <div class="red_button add_to_cart_button"><a href="#">Thêm vào giỏ</a></div>
+                                    <div class="red_button add_to_cart_button"><a th:onclick="addToCart([[${product.id}]], 1)">Thêm vào giỏ</a></div>
                                 </div>
                             </div>
                         </div>
@@ -214,5 +214,6 @@
     </div>
     <footer th:replace="user/fragments :: footer"></footer>
     <th:block th:replace="user/fragments :: js_file"></th:block>
+    <script th:src="@{/js/cart.js}"></script>
 </body>
 </html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <head th:replace="user/fragments :: main_header('tag')"></head>
+  <title>cart</title>
+  <!-- index -->
+  <link rel="stylesheet" type="text/css"  th:href="@{/styles/cart_styles.css}">
+</head>
+
+<body>
+<div class="super_container">
+  <th:block th:replace="user/fragments :: header_nav"></th:block>
+  <div class=" cart_section_container">
+    <div class="grid wide">
+      <div class="row">
+        <div class=" l-8 m-12 s-12">
+          <div class="main__cart">
+            <div class="row title">
+              <div class=" l-1 col-m-1 s-0">Chọn</div>
+              <div class=" l-4 col-m-4 s-8">Sản phẩm</div>
+              <div class=" l-2 col-m-2 s-0">Giá</div>
+              <div class=" l-2 col-m-2 s-0">Số lượng</div>
+              <div class=" l-2 col-m-2 s-4">Tổng</div>
+              <div class=" l-1 col-m-1 s-0">Xóa</div>
+            </div>
+            <div th:each="cartItem, itrStat : ${listCart}" class="row cart-item" th:id="${'cartItem' + cartItem.product.id}">
+              <!--                            <input type="hidden" name="nameProd" th:value="${cartDto.nameProduct}">-->
+              <!--                            <input type="hidden" name="priceProd" th:value="${cartDto.priceProduct}">-->
+              <div class=" l-1 col-m-1 s-1">
+                <input name="chkCartItem" type="checkbox"
+                       th:value="${cartItem}">
+              </div>
+              <div class=" l-4 col-m-4 s-8">
+                <div class="main__cart-product">
+                  <img th:src="${cartItem.product.image}" alt="img">
+                  <div class="name">[[${cartItem.product.name}]]</div>
+                </div>
+              </div>
+              <div class=" l-2 col-m-2 s-0">
+                <div class="main__cart-price">[[${#numbers.formatDecimal(cartItem.product.price, 3,'POINT', 0,'COMMA')}]] đ</div>
+              </div>
+              <div class=" l-2 col-m-2 s-0">
+                <div class="buttons_added">
+                  <input class="minus is-form" type="button" value="-" th:onclick="updateCart('decrease',[[${cartItem.product.id}]])">
+                  <input
+                          th:value="${cartItem.quantity}"
+                          th:id="${'cart'+ cartItem.product.id}"
+                          aria-label="quantity" class="input-qty" name="quantity" type="number" >
+                  <input class="plus is-form" type="button" value="+" th:onclick="updateCart('increase', [[${cartItem.product.id}]])">
+                </div>
+              </div>
+              <div class=" l-2 col-m-2 s-3">
+                <div class="main__cart-price">
+                  [[${#numbers.formatDecimal((cartItem.product.price * cartItem.quantity), 3,'POINT', 0,'COMMA')}]] đ
+                </div>
+              </div>
+              <div th:onclick="deleteCart([[${cartItem.product.id}]])" class="col l-1 col-m-1 s-0">
+                                  <span class="main__cart-icon">
+                                  <i class="far fa-times-circle "></i>
+                              </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class=" l-4 col-m-12 s-12">
+          <div class="main__pay">
+            <div class="main__pay-title">Tổng số lượng</div>
+            <div class="pay-info">
+              <div class="main__pay-text">
+                Tổng phụ</div>
+              <div class="main__pay-price">
+                <span class="totalCart">0</span> ₫
+              </div>
+            </div>
+            <div class="pay-info">
+              <div class="main__pay-text">
+                Giao hàng
+              </div>
+              <div class="main__pay-text">
+                Giao hàng miễn phí
+              </div>
+
+            </div>
+            <div class="pay-info">
+              <div class="main__pay-text">
+                Tổng thành tiền</div>
+              <div class="main__pay-price">
+                <span class="totalCart">0</span> ₫
+              </div>
+            </div>
+            <div id="order" class="btn btn--purple">Tiến hành thanh toán</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer th:replace="user/fragments :: footer"></footer>
+<!-- Script common -->
+<th:block th:replace="user/fragments :: js_file"></th:block>
+<script th:src="@{/js/cart.js}"></script>
+</body>
+
+</html>
