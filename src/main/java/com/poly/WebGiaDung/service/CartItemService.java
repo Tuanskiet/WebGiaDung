@@ -14,4 +14,6 @@ public interface CartItemService {
     void deleteCartItem(Integer productId, UserApp currentUser);
 
     void updateCartItem(String action, Integer productId, UserApp currentUser);
+
+    int getSize(UserApp userApp);
 }

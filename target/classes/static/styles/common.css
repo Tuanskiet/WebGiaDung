@@ -1,5 +1,7 @@
 ******************************/
-
+:root {
+    --white-cl-1: #fff;
+}
 /***********
 1. Fonts
 ***********/
@@ -1155,4 +1157,148 @@ section
 .footer_header{
 	font-weight: 600;
 	margin-top: 12px;
+}
+/*modal*/
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.authen-modal {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    width: 400px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    padding: 30px 20px 50px 20px;
+    will-change: opacity;
+    animation: fadeInTop ease 0.4s;
+    border-radius: 1%;
+}
+
+.overlay-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    cursor: default;
+}
+
+#my-ForgotPass:target,
+#my-Login:target,
+#my-Register:target {
+    display: block;
+}
+
+.authen-modal.register .authen__btns {
+    justify-content: center;
+
+}
+
+.authen-modal__title {
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-label {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom : 0;
+}
+
+.form-control {
+    height: 35px;
+    font-size: 1.4rem;
+    width: 100%;
+    border: none;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    padding: 8px 12px;
+    margin-top: 8px;
+}
+.form-group{
+    margin-top : 10px;
+}
+
+textarea.form-control {
+    height: 105px;
+}
+
+.form-message {
+    display: flex;
+    height: 28px;
+    font-size: 14px;
+    color: red;
+    align-items: center;
+}
+
+.authen__btns {
+    display: flex;
+    align-items: baseline;
+    margin-top: 20px;
+    justify-content: space-between;
+}
+.authen__btns * {
+    width: 45%;
+}
+
+.authen-checkbox {
+    margin-left: 25px;
+    margin-right: 16px;
+}
+
+.authen__link {
+    display: block;
+    font-size: 16px;
+    margin-top: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.authen__link:hover {
+    color: var(--default-cl-2);
+    transition: all 0.3s;
+}
+/* -------forgot pass modal------- */
+#btn_forgotSubmit {
+    margin-top: 10px;
+}
+.code__forgot-group{
+    display : flex;
+    align-items: flex-end;
+}
+.btn__sendcode{
+        margin-left: 10px;
+        padding: 10px 0px;
+        color: #37332f;
+        font-size: 16px;
+        font-weight: 600;
+        min-width: 95px;
+        border-radius: 2px;
+        cursor: pointer;
+        text-align: center;
+        height: max-content;
+}
+/* ====List KeyFrames==== */
+
+@keyframes fadeInTop {
+    from {
+        top: 48%;
+        opacity: 0;
+    }
+    to {
+        top: 50%;
+        opacity: 1;
+    }
 }

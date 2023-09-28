@@ -27,23 +27,23 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     private final MyCategoryService myCategoryService;
+    private final CartItemService cartItemService;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        this.setGlobalData(request);
+        this.setGlobalData(request, authentication);
         //redirect page by role
         this.redirectAfterLogin(request,response,authentication);
     }
 
-    private void setGlobalData(HttpServletRequest request) {
+    private void setGlobalData(HttpServletRequest request, Authentication authentication) {
 
         // set global category in session
         List<MyCategory> myCategoryList = myCategoryService.getAllCategoryActive();
         request.getSession().setAttribute("dataCategory", myCategoryList);
 
         // set global brand in session
-//        List<String> listBrand = productService.getAllBrand();
-//        request.getSession().setAttribute("dataBrand", listBrand);
+
     }
 
     public void redirectAfterLogin(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException{

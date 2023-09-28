@@ -16,8 +16,6 @@ public class CartDto {
     private Integer quantity;
     private Integer productId;
 
-
-
 //    @Override
 //    public String toString() {
 //        try {

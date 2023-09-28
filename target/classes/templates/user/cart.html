@@ -29,7 +29,8 @@
               <!--                            <input type="hidden" name="priceProd" th:value="${cartDto.priceProduct}">-->
               <div class=" l-1 col-m-1 s-1">
                 <input name="chkCartItem" type="checkbox"
-                       th:value="${cartItem}">
+                       th:data-product-id="${cartItem.product.id}"
+                       th:data-product-price="${cartItem.product.price}">
               </div>
               <div class=" l-4 col-m-4 s-8">
                 <div class="main__cart-product">
@@ -89,7 +90,11 @@
                 <span class="totalCart">0</span> ₫
               </div>
             </div>
-            <div id="order" class="btn btn--purple">Tiến hành thanh toán</div>
+            <div id="order" class="btn btn--purple">
+              <a th:href="@{/order}">
+                Tiến hành thanh toán
+              </a>
+            </div>
           </div>
         </div>
       </div>

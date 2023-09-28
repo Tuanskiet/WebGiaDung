@@ -41,7 +41,13 @@ jQuery(document).ready(function($)
 	Urls
 
 	*/
-
+    var urlListProduct  =   '/list-product';
+    var urlLogin        =   '/login-with-ajax';
+    var urlSignup       =   '/signup-with-ajax';
+    var urlRare         =   '/rate';
+    var urlSendCode     =   '/forgot-password/send-code';
+    var urlForgotPass   =   '/forgot-password';
+    var urlFeedback   =   '/feedback';
 
 
 	setHeader();
@@ -106,6 +112,75 @@ jQuery(document).ready(function($)
           console.log("error : " + error);
         });
     }
+
+    //login
+    $('#submit_modal_login').on('click', ()=>{
+        let username = $('#email_modal_login').val();
+        let password = $('#pass_modal_login').val();
+
+        $(".account_not_found_message").hide();
+        $(".invalid_password_message").hide();
+        $.ajax({
+              url: urlLogin,
+              method: 'POST',
+              data: {username : username, password : password}
+            }).then(function(response) {
+                 if(response === 'OK'){
+                    window.location.href = "/"
+                 }else if(response === 'NOT_FOUND'){
+                    $(".account_not_found_message").show();
+                 }else if(response === 'INVALID'){
+                    $(".invalid_password_message").show();
+                 }
+            }).fail(function(error) {
+              console.log("error : " + error);
+            });
+
+    });
+
+    //sign up
+    $('#btn_signup').on('click', ()=>{
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        let fullName = $('#name_signup').val();
+        let email = $('#email_signup').val();
+        let password = $('#password_signup').val();
+        let re_password = $('#re_password_signup').val();
+
+        $(".error_email_signup").hide();
+        $(".msg_pass_not_match").hide();
+
+        if(!emailPattern.test(email)){
+            $(".error_email_signup").text('Định dạng email không hợp lệ!');
+            $(".error_email_signup").show();
+            return;
+        } else if(password !== re_password){
+            $(".msg_pass_not_match").show();
+            return;
+        }else{
+            let dataToSend =  {
+                                  email : email,
+                                  password : password,
+                                  fullName : fullName
+                              }
+             $.ajax({
+                  url: urlSignup,
+                  method: 'POST',
+                  contentType:"application/json; charset=utf-8",
+                  data : JSON.stringify(dataToSend),
+                  dataType: "text",
+            }).then(function(response) {
+                 if(response === 'OK'){
+                  /*  $("#my-Register").hide();*/
+                    window.location.hash = "my-Login";
+                 }else if(response === 'ALREADY_EXIST'){
+                    $(".error_email_signup").text('Tài khoản đã tồn tại!');
+                    $(".error_email_signup").show();
+                 }
+            }).fail(function(error) {
+              console.log("error : " + error);
+            });
+        }
+    });
 	/* 
 
 	2. Set Header

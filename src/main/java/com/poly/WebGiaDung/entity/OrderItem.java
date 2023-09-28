@@ -26,6 +26,7 @@ public class OrderItem {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     private Order order;
+
     private String productSlug;
     private String imageProduct;
 

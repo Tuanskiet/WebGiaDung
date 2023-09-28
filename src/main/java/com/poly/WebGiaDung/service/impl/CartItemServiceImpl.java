@@ -59,6 +59,12 @@ public class CartItemServiceImpl implements CartItemService {
         cartItemRepo.save(currentCart);
     }
 
+    @Override
+    public int getSize(UserApp userApp) {
+        List<CartItem>  cartItemList = getCartsByUser(userApp);
+        return cartItemList.size();
+    }
+
     private CartItem getExistCartItem(UserApp userApp, Product product) {
         CartItem cartItem = cartItemRepo.findByUserAppAndProduct(userApp, product);
         return cartItem;
