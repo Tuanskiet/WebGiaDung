@@ -33,11 +33,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product create(Product product) {
-//        String slug = SlugGenerator.generateSlug(product.getName());
-//        if(findBySlug(slug) != null){
-//            throw new RuntimeException("Product already exist!");
-//        }
-//        product.setSlug(slug);
+        String slug = SlugGenerator.generateSlug(product.getName());
+        if(findBySlug(slug) != null){
+            throw new RuntimeException("Product already exist!");
+        }
+        product.setSlug(slug);
         Product productSaved = productRepo.save(product);
 //        if(productSaved.getProductImages() != null){
 //            productSaved.getProductImages().forEach(productImage -> {

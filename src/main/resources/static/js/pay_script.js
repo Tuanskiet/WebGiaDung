@@ -1,5 +1,6 @@
 $(document).ready(function() {
-    var urlViewOrder = "/get-data-order";
+    var urlViewOrder    = "/get-data-order";
+    var urlListProduct  = "/list-product";
     <!--    show data order -->
     var dataOrder = JSON.parse(localStorage.getItem('listCartItemSelected')) || [];
     if(dataOrder.length !== 0){
@@ -14,7 +15,7 @@ $(document).ready(function() {
             console.log("error : " + error);
         });
     }else{
-//         SwalAlertWarning('Bạn chưa chọn sản phẩm nào!');
+         SwalAlertWarning('Bạn chưa chọn sản phẩm nào!');
     }
 //    if (dataOrder.length !== 0) {
 //
@@ -39,7 +40,7 @@ $(document).ready(function() {
 
 <!--    send order -->
     $('#sendOrder').on('click', function(){
-        var dataOrder = localStorage.getItem('dataOrder');
+        var dataOrder = localStorage.getItem('listCartItemSelected');
         var dataToSend = {
             name:       $('#name_order').val(),
             address:    $('#address_order').val(),
@@ -89,5 +90,26 @@ $(document).ready(function() {
 
     function formatDecimal(num){
         return numbro(num).format({thousandSeparated: true});
+    }
+
+    function SwalAlertOrderSuccess(message){
+        Swal.fire({
+            title: message,
+            icon: "success",
+            confirmButtonText: "Tiếp tục mua hàng!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                 window.location.href = urlListProduct;
+            }
+        });
+    }
+
+    function SwalAlertWarning(message){
+        Swal.fire({
+            title: message,
+            icon: 'warning',
+            confirmButtonText: 'Đóng',
+            timer: 2000,
+        });
     }
 });
