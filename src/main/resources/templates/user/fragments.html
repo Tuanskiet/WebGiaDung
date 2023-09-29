@@ -71,7 +71,7 @@
                   </div>
                 </li>
                 <li>
-                  <a href="#" class="nav_item">
+                  <a th:href="@{/order/history}" class="nav_item" id="orderHistory">
                     <img th:src="@{/images/history.png}" alt="ic">
                     <div class="hotline">
                       <span>Lịch sử</span>
@@ -168,21 +168,11 @@
     <div class="hamburger_menu_content text-left">
       <ul class="menu_top_nav">
         <li th:each="item, iStar : ${session.dataCategory}" class="menu_item" th:data-id="${item.id}">
-          <a href="#" >
+          <a th:href="@{'/list-product?category=' +${item.slug}}">
             [[${item.name}]]
           </a>
           <i class="fa fa-chevron-right" aria-hidden="true"></i>
         </li>
-      </ul>
-    </div>
-  </div>
-  <div class="sub_hamburger_menu">
-    <div class="sub_hamburger_close">
-      <i class="fa fa-chevron-left" aria-hidden="true"></i>
-    </div>
-    <div class="hamburger_menu_content text-left">
-      <ul class="menu_top_nav list_product_by_category">
-        <li><a href="#">shop sub</a></li>
       </ul>
     </div>
   </div>

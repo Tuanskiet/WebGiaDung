@@ -267,6 +267,11 @@ img.img-fluid.lazyloaded {
     border-radius: 5px;
 
 }
+.heading__list-item{
+    background: #64a5f1;
+    padding: 10px;
+    border-bottom: 1px solid gray;
+}
 .category__name{
 	font-size: 26px;
 	margin-bottom: 0;

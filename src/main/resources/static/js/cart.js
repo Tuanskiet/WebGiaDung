@@ -15,7 +15,7 @@ $(window).on('load', function() {
         });
     }
     let totalPay = parseInt(JSON.parse(localStorage.getItem('totalPay'))) || 0;
-    $('.totalCart').html(totalPay);
+    $('.totalCart').html(formatDecimal(totalPay));
 });
 
 
@@ -25,8 +25,13 @@ async function addToCart(productId, quantity){
         productId: productId,
         quantity: quantity
     }
-    let amountCart = await callAjaxPromise('POST', urlAddCart, data);
-    $('#checkout_items').text(amountCart);
+    try{
+        let response = await callAjaxPromise('POST', urlAddCart, data);
+        $('#checkout_items').text(response);
+    }catch(error){
+        window.location.hash = "my-Login";
+    }
+
 }
 
 async function updateCart(action ,productId){
@@ -78,7 +83,7 @@ $('input[name=chkCartItem]').on('click', function() {
     // Lưu danh sách cập nhật vào localStorage
     localStorage.setItem('listCartItemSelected', JSON.stringify(currentItemSelected));
     localStorage.setItem('totalPay', JSON.stringify(totalPay));
-    $('.totalCart').html(totalPay);
+    $('.totalCart').html(formatDecimal(totalPay));
 });
 
 function updateQuantityCartSelected(productId, quantity){
@@ -105,31 +110,38 @@ function updateTotalPay(action, productId) {
             } else {
                 totalPay += parseInt(priceProduct);
             }
-            $('.totalCart').html(totalPay);
+            $('.totalCart').html(formatDecimal(totalPay));
             localStorage.setItem('totalPay', JSON.stringify(totalPay));
         }
     });
 }
 
 // go pay
-//$('#order').on('click', function(){
-//    let currentItemSelected = JSON.parse(localStorage.getItem('listCartItemSelected')) || [];
-//    if(currentItemSelected.length !== 0){
-//        $.ajax({
-//            url: urlViewOrder,
-//            method: 'POST',
-//            contentType: "application/json",
-//            data: localStorage.getItem('listCartItemSelected')
-//        }).then(function(response) {
-//
-//        }).fail(function(error) {
-//            console.log("error : " + error);
-//        });
-//    }else{
-////         SwalAlertWarning('Bạn chưa chọn sản phẩm nào!');
-//    }
-//});
+$('#order').on('click', function(){
+    let currentItemSelected = JSON.parse(localStorage.getItem('listCartItemSelected')) || [];
 
+    if(currentItemSelected.length !== 0){
+        // hanh dong thuc hien
+    }else{
+        event.preventDefault();
+        SwalAlertWarning('Bạn chưa chọn sản phẩm nào!');
+    }
+});
+
+/*format number*/
+function formatDecimal(num){
+    return numbro(num).format({thousandSeparated: true});
+}
+
+/*alert*/
+function SwalAlertWarning(message){
+    Swal.fire({
+        title: message,
+        icon: 'warning',
+        confirmButtonText: 'Đóng',
+        timer: 2000,
+    });
+}
 
 //call ajax
 function callAjaxPromise(method, url, data) {

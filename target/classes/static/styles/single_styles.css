@@ -155,6 +155,7 @@
 }
 .star_rating{
     line-height: 0;
+    margin-left: 20px;
 }
 .star_rating li
 {
@@ -436,14 +437,15 @@
 {
 	font-size: 16px;
 	font-weight: 500;
-	margin-bottom: 18px;
 }
 .review p
 {
 	font-weight: 400;
 }
 .user_rating_header{
-    display : flex;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 /*********************************
@@ -496,7 +498,8 @@
 	padding-left: 20px;
 	padding-top: 13px;
 }
-.user_star_rating
+/*star rating*/
+/*.user_star_rating
 {
 	display: inline-block;
 	margin-left: 18px;
@@ -511,7 +514,54 @@
 {
 	color: #f5c136;
 	font-size: 18px;
+}*/
+
+#rating {
+    border: none;
+    float: left;
+    font-size: 18px;
+    margin-left: 10px
+/*    display: flex;
+    flex-direction: row-reverse;*/
 }
+
+
+#rating>label {
+    color: #ddd;
+    float: right;
+    margin-right: 6px;
+    cursor : pointer;
+}
+
+#rating>input {
+    display: none;
+}
+#rating>.half:before {
+    content: "\f089";
+    position: absolute;
+}
+#rating>input:checked~label,
+#rating:not(:checked)>label:hover,
+#rating:not(:checked)>label:hover~label {
+    color: #FFD700;
+    cursor: pointer;
+}
+
+
+/* Hover vào các sao phía trước ngôi sao đã chọn*/
+
+#rating>input:checked+label:hover,
+#rating>input:checked~label:hover,
+#rating>label:hover~input:checked~label,
+#rating>input:checked~label:hover~label {
+    color: #FFED85;
+}
+
+.group-star i {
+    color: #FFD700;
+    font-size: 20px;
+}
+
 .review_submit_btn
 {
 	width: 170px;
@@ -524,6 +574,11 @@
 }
 .rate_title{
    display: flex;
+}
+.msg__rare-warning {
+    font-size: 1.3em;
+    color: red;
+    display: none;
 }
 /*********************************
 9. Benefit

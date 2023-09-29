@@ -11,6 +11,9 @@
 <body>
 <div class="super_container">
     <th:block th:replace="user/fragments :: header_nav"></th:block>
+    <div th:unless="${#authorization.expression('isAnonymous()')}" >
+        <input id="nameUser" type="hidden" th:value="${#authentication.principal.fullName}">
+    </div>
     <div class="container single_product_container">
         <div class="row">
             <div class="col">
@@ -57,7 +60,7 @@
                     </div>
                     <div class="inventory_quantity">
                         <div class="product_detail_brand">
-                            Thương hiệu : <a href="#" class="">Panasonic</a>
+                            Thương hiệu : <a th:href="@{'/list-product/brand?id='+${productDetail.brandApp.id}}" class="">Panasonic</a>
                         </div>
                         <div class="product_detail_stock">
                             Tình trạng : <a class="text-primary">Còn hàng</a>
@@ -220,100 +223,32 @@
 
                             <!-- User Reviews -->
 
-                            <div class="col-lg-6 reviews_col">
+                            <div class="col-lg-6 reviews_col list_user_review">
                                 <div class="tab_title reviews_title">
                                     <h4>Đánh giá</h4>
                                 </div>
 
                                 <!-- User Review -->
 
-                                <div class="user_review_container d-flex flex-column flex-sm-row">
+                                <div th:each="rate_item : ${evaluateList}" class="user_review_container d-flex flex-column flex-sm-row">
                                     <div class="user">
                                         <div class="user_pic"></div>
                                     </div>
                                     <div class="review">
-                                        <div class="review_date">27 Aug 2016</div>
                                         <div class="user_rating_header">
-                                            <div class="user_name">Brandon William</div>
+                                            <div class="user_name" th:text="${rate_item.nameUser}"></div>
                                             <div class="user_rating">
                                                 <ul class="star_rating">
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                                    <li th:each="star_item : ${#numbers.sequence(1, rate_item.numStar)}">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p th:text="${rate_item.content}"></p>
                                     </div>
                                 </div>
 
-                                <div class="user_review_container d-flex flex-column flex-sm-row">
-                                    <div class="user">
-                                        <div class="user_pic"></div>
-                                    </div>
-                                    <div class="review">
-                                        <div class="review_date">27 Aug 2016</div>
-                                        <div class="user_rating_header">
-                                            <div class="user_name">Brandon William</div>
-                                            <div class="user_rating">
-                                                <ul class="star_rating">
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    </div>
-                                </div>
-
-                                <div class="user_review_container d-flex flex-column flex-sm-row">
-                                    <div class="user">
-                                        <div class="user_pic"></div>
-                                    </div>
-                                    <div class="review">
-                                        <div class="review_date">27 Aug 2016</div>
-                                        <div class="user_rating_header">
-                                            <div class="user_name">Brandon William</div>
-                                            <div class="user_rating">
-                                                <ul class="star_rating">
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    </div>
-                                </div>
-
-                                <div class="user_review_container d-flex flex-column flex-sm-row">
-                                    <div class="user">
-                                        <div class="user_pic"></div>
-                                    </div>
-                                    <div class="review">
-                                        <div class="review_date">27 Aug 2016</div>
-                                        <div class="user_rating_header">
-                                            <div class="user_name">Brandon William</div>
-                                            <div class="user_rating">
-                                                <ul class="star_rating">
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    </div>
-                                </div>
                             </div>
 
                             <!-- Add Review -->
@@ -321,26 +256,47 @@
                             <div class="col-lg-6 add_review_col">
 
                                 <div class="add_review">
-                                    <form id="review_form" action="post">
+                                    <div id="review_form">
                                         <div>
                                             <div class="rate_title">
                                                 <h1>Đánh giá của bạn : </h1>
-                                                <ul class="user_star_rating">
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                                </ul>
+                                                <input type="hidden" id="productId" th:value="${productDetail.id}">
+                                                <div id="rating">
+                                                    <input type="radio" id="star5" name="rating" value="5" checked/>
+                                                    <label class="full" for="star5" title="Awesome - 5 stars">
+                                                        <i class="fas fa-star"></i>
+                                                    </label>
+
+                                                    <input type="radio" id="star4" name="rating" value="4" />
+                                                    <label class="full" for="star4" title="Pretty good - 4 stars">
+                                                        <i class="fas fa-star"></i>
+                                                    </label>
+
+                                                    <input type="radio" id="star3" name="rating" value="3" />
+                                                    <label class="full" for="star3" title="Meh - 3 stars">
+                                                        <i class="fas fa-star"></i>
+                                                    </label>
+
+                                                    <input type="radio" id="star2" name="rating" value="2" />
+                                                    <label class="full" for="star2" title="Kinda bad - 2 stars">
+                                                        <i class="fas fa-star"></i>
+                                                    </label>
+
+                                                    <input type="radio" id="star1" name="rating" value="1" />
+                                                    <label class="full" for="star1" title="Sucks big time - 1 star">
+                                                        <i class="fas fa-star"></i>
+                                                    </label>
+                                                </div>
                                             </div>
-                                            <input id="review_name" class="form_input input_name" type="text" name="name" placeholder="Tên*" required="required" data-error="Tên không được bỏ trống.">
-                                            <input id="review_email" class="form_input input_email" type="email" name="email" placeholder="Email*" required="required" data-error="Email không đúng định dạng.">
-                                            <textarea id="review_message" class="input_review" name="message"  placeholder="Nhập đánh giá của bạn..." rows="4" required data-error="Please, leave us a review."></textarea>
+                                            <input id="review_name" class="form_input input_name" type="text" name="name" placeholder="Tên*" >
+                                            <input id="review_email" class="form_input input_email" type="email" name="email" placeholder="Email*" >
+                                            <textarea id="review_message" class="input_review" name="message"  placeholder="Nhập đánh giá của bạn..." rows="4"></textarea>
+                                            <div class="msg__rare-warning">* Vui lòng nhập mô tả!</div>
                                         </div>
                                         <div class="text-left text-sm-right">
-                                            <button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">Gửi đánh giá</button>
+                                            <button id="review_submit"  class="red_button review_submit_btn trans_300" >Gửi đánh giá</button>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
 
                             </div>
@@ -354,6 +310,7 @@
     </div>
 </div>
 <footer th:replace="user/fragments :: footer"></footer>
+<div th:replace="user/fragments :: modal_form"></div>
 <th:block th:replace="user/fragments :: js_file"></th:block>
 <script th:src="@{js/single_custom.js}"></script>
 <script th:src="@{/js/cart.js}"></script>

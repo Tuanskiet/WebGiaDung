@@ -4,6 +4,8 @@ import com.poly.WebGiaDung.entity.BrandApp;
 import com.poly.WebGiaDung.repo.BrandRepo;
 import com.poly.WebGiaDung.service.BrandService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,5 +28,10 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public Optional<BrandApp> findById(Integer brandId) {
         return brandRepo.findById(brandId);
+    }
+
+    @Override
+    public Page<BrandApp> getAllWithPagination(Pageable pageable) {
+        return brandRepo.findAll(pageable);
     }
 }

@@ -34,6 +34,7 @@ jQuery(document).ready(function($)
 	var menuActive = false;
 	var hamburgerClose = $('.hamburger_close');
 	var fsOverlay = $('.fs_menu_overlay');
+    var urlRare         =   '/rate';
 
 	setHeader();
 
@@ -316,4 +317,68 @@ jQuery(document).ready(function($)
 			});
 		}
 	}
+	/*send review*/
+    $('#review_submit').on('click', ()=>{
+        let rate_content = $('#review_message').val();
+        let productId = $('#productId').val();
+        let numStar = $("input[name='rating']:checked").val();
+
+        if(rate_content === ""){
+            $('#eview_message').focus();
+            $('.msg__rare-warning').show()
+            return false;
+        }else{
+            let data = {
+                 numStar : parseInt(numStar),
+                 content : rate_content,
+                 productId : parseInt(productId)
+             }
+            $.ajax({
+                  url: urlRare,
+                  method: 'POST',
+                  contentType:"application/json; charset=utf-8",
+                  data: JSON.stringify(data),
+            }).then(function(response) {
+                  if(response === 'OK'){
+                     $('.msg__rare-warning').hide();
+                     addRateHtml(rate_content, numStar);
+                     $('#review_message').val('');
+                  }else if(response === 'UN_AUTHORIZATION'){
+                      window.location.hash = "my-Login";
+                     return;
+                  }
+            }).fail(function(error) {
+                  alert("error : " + error);
+            });
+
+        }
+    });
+
+/*     update html Evaluate*/
+    function addRateHtml(content, numStar){
+        let nameUser = $('#nameUser').val();
+        var starHTML = '';
+        for (var i = 0; i < numStar; i++) {
+          starHTML += '<li><i class="fa fa-star" aria-hidden="true"></i></li>';
+        }
+        let html = `
+            <div class="user_review_container d-flex flex-column flex-sm-row">
+                <div class="user">
+                    <div class="user_pic"></div>
+                </div>
+                <div class="review">
+                    <div class="user_rating_header">
+                        <div class="user_name">${nameUser}</div>
+                        <div class="user_rating">
+                            <ul class="star_rating">
+                                ${starHTML}
+                            </ul>
+                        </div>
+                    </div>
+                    <p>${content}</p>
+                </div>
+            </div>
+        `;
+        $('.list_user_review').append(html);
+    }
 });

@@ -832,6 +832,9 @@ section
 .menu_top_nav{
     padding: 0;
 }
+.group-star__prod i{
+    color: #ffbf2e;
+}
 /*********************************
 3.6 Logo
 *********************************/

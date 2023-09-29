@@ -1,7 +1,12 @@
 $(document).ready(function() {
+/*Urls*/
     var urlViewOrder    = "/get-data-order";
     var urlListProduct  = "/list-product";
-    <!--    show data order -->
+/*total order*/
+let total = parseInt(JSON.parse(localStorage.getItem('totalPay'))) || 0;
+$('.totalOrder').html(formatDecimal(total));
+
+/*show data order*/
     var dataOrder = JSON.parse(localStorage.getItem('listCartItemSelected')) || [];
     if(dataOrder.length !== 0){
         $.ajax({
@@ -14,8 +19,6 @@ $(document).ready(function() {
         }).fail(function(error) {
             console.log("error : " + error);
         });
-    }else{
-         SwalAlertWarning('Bạn chưa chọn sản phẩm nào!');
     }
 //    if (dataOrder.length !== 0) {
 //
@@ -59,7 +62,8 @@ $(document).ready(function() {
                 data : JSON.stringify(dataToSend)
             }).then(function(data){
                 if(data == 'OK'){
-                    localStorage.removeItem('dataOrder');
+                    localStorage.removeItem('listCartItemSelected');
+                    localStorage.removeItem('totalPay');
                 }
             }).fail(function(error){
                 alert('error' + error)
@@ -85,9 +89,10 @@ $(document).ready(function() {
           }).join('');
           $('.display-data-order').html(html);
           let total = parseInt(JSON.parse(localStorage.getItem('totalPay'))) || 0;
-          $('.totalOrder').text(formatDecimal(total));
+          $('.totalOrder').html(formatDecimal(total));
         };
 
+    /*format number*/
     function formatDecimal(num){
         return numbro(num).format({thousandSeparated: true});
     }
@@ -101,15 +106,6 @@ $(document).ready(function() {
             if (result.isConfirmed) {
                  window.location.href = urlListProduct;
             }
-        });
-    }
-
-    function SwalAlertWarning(message){
-        Swal.fire({
-            title: message,
-            icon: 'warning',
-            confirmButtonText: 'Đóng',
-            timer: 2000,
         });
     }
 });

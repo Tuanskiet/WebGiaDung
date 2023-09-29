@@ -1,6 +1,8 @@
 package com.poly.WebGiaDung.controller;
 
 import com.poly.WebGiaDung.entity.Product;
+import com.poly.WebGiaDung.service.BrandService;
+import com.poly.WebGiaDung.service.EvaluateService;
 import com.poly.WebGiaDung.service.ProductService;
 import com.poly.WebGiaDung.utils.SlugGenerator;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +23,16 @@ import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 public class ProductController {
-    private static final int PRODUCT_PER_PAGE = 12;
+    private static final int PRODUCT_PER_PAGE = 2;
     private final ProductService productService;
+    private final EvaluateService evaluateService;
+    private final BrandService brandService;
+
     @GetMapping("/product")
     public String viewProductDetailPage(@RequestParam(name = "id") Integer id, Model model){
         Optional<Product> product = productService.findById(id);
         model.addAttribute("productDetail", product.get());
+        model.addAttribute("evaluateList", evaluateService.findByProduct(product.get()));
         return "user/product_detail";
     }
 
@@ -54,6 +60,7 @@ public class ProductController {
         model.addAttribute("listProducts", listProduct.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", listProduct.getTotalPages());
+        model.addAttribute("dataBrands", brandService.getAllWithPagination(PageRequest.of(page - 1, 3)));
         model.addAttribute("keyword", keyword);
         model.addAttribute("dataSort", sortBy + "-" + orderBy);
         return "user/list_product";
@@ -73,6 +80,7 @@ public class ProductController {
         model.addAttribute("listProducts", listProduct.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", listProduct.getTotalPages());
+        model.addAttribute("dataBrands", brandService.getAllWithPagination(PageRequest.of(page - 1, 3)));
         return "/user/list_product.html";
     }
 }

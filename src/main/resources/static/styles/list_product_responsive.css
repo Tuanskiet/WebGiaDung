@@ -76,7 +76,9 @@
 
 @media only screen and (max-width: 1024px)
 {
-	
+	.brand_filter{
+	    display : none;
+	}
 }
 
 /************
@@ -251,10 +253,17 @@
 	{
 		margin-bottom: 40px;
 	}
-	.newsletter_submit_btn
-	{
-		margin-top: 15px;
-	}
+	.pagination__item {
+        margin-right: 4px;
+    }
+    .pagination__link {
+        color: var(--black-cl-1);
+        padding: 8px 12px;
+        display: block;
+        border-radius: 2px;
+        font-size: 16px;
+        font-weight: 300;
+    }
 }
 
 /************
@@ -432,8 +441,8 @@
 	}
 	.newsletter_submit_btn
 	{
-		height: 36px;
-		width: 130px;
+        height: 40px;
+        width: 130px;
 	}
 	#newsletter_email::-webkit-input-placeholder
 	{

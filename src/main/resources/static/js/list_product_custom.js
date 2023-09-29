@@ -50,11 +50,11 @@ jQuery(document).ready(function($)
 	});
 
 	initMenu();
-	initFavorite();
+//	initFavorite();
 	initFixProductBorder();
 	initIsotopeFiltering();
-	initPriceSlider();
-	initCheckboxes();
+//	initPriceSlider();
+//	initCheckboxes();
 
 	/* 
 
@@ -449,4 +449,39 @@ jQuery(document).ready(function($)
     		}
     	};
     }
+    var page = 1;
+
+    /*load more brand*/
+    $(".show_more").on('click', function() {
+        page++; // Tăng số trang
+        var url = "/load-more-brand?page=" + page; // Đường dẫn tới endpoint xử lý lấy thêm sản phẩm
+
+        $.ajax({
+            type: "GET",
+            url: url, // Đường dẫn tới endpoint của bạn
+            dataType: "json", // Loại dữ liệu bạn mong đợi trả về
+            success: function(data) {
+                // Xử lý dữ liệu trả về
+                if (data.length > 0) {
+                    // Hiển thị các sản phẩm mới
+                    data.forEach(function(brand) {
+                        $(".sidebar_brands").append(`
+                            <li>
+                                <a href="/list-product/brand?id=${brand.id}">
+                                    ${brand.name}
+                                </a>
+                            </li>
+                        `);
+                    });
+                } else {
+                    // Ẩn nút "Xem thêm" nếu không còn sản phẩm
+                    $(".show_more").hide();
+                }
+            },
+            error: function() {
+                // Xử lý lỗi nếu có
+                console.error("Lỗi khi tải thêm sản phẩm.");
+            }
+        });
+    });
 });

@@ -18,6 +18,8 @@ public class Evaluate implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+
+
     private Integer numStar;
 
     @Column(length = 1024)

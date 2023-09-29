@@ -115,9 +115,8 @@ public class OrderServiceImpl implements OrderService {
         cartDtoList.stream().forEach(item -> {
             // update quantity product after order
             Product product = productService.findById(item.getProductId()).get();
-
             // remove cart item  after order
-//            cartItemService.deleteCartItem(item.get, currentUser);
+            cartItemService.deleteCartItem(item.getProductId(), currentUser);
         });
     }
 }

@@ -28,8 +28,12 @@ public class CartApi {
             @RequestParam(name = "productId") Integer productId,
             @RequestParam(name = "quantity") Integer quantity,
             @AuthenticationPrincipal MyUserDetails myUserDetails){
-        cartItemService.addToCart(new CartDto(quantity, productId), myUserDetails.getUserApp());
-        return ResponseEntity.status(HttpStatus.OK).body(getSizeCart(myUserDetails.getUserApp()));
+        if(myUserDetails != null){
+            cartItemService.addToCart(new CartDto(quantity, productId), myUserDetails.getUserApp());
+            return ResponseEntity.status(HttpStatus.OK).body(getSizeCart(myUserDetails.getUserApp()));
+        }else{
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("UNAUTHORIZED");
+        }
     }
 
     @PostMapping("/cart/update")

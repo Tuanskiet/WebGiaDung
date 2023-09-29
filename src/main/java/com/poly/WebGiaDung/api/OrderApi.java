@@ -49,15 +49,23 @@ public class OrderApi {
     }
 
     @PostMapping("/order")
-    @ResponseBody
     public String doOrder(@RequestBody OrderDto orderDtoList,
-                          @AuthenticationPrincipal MyUserDetails myUserDetails
+                          @AuthenticationPrincipal MyUserDetails myUserDetails,
+                          HttpSession session
                           ){
         orderService.create(orderDtoList, myUserDetails.getUserApp());
         //            sendEmail.sendMailWithInline(
 //                    myUserDetails.getUserApp().getEmail(),orderDtoList);
 //            sendEmail.sendMailHtml(cureUserApp.getEmail(), SendEmailService.BODY_HTML);
+
         log.info("sent email for : {}", myUserDetails.getUserApp().getEmail());
+        session.setAttribute("sizeCart", updateSizeCart(myUserDetails));
         return "OK";
+    }
+
+    public int updateSizeCart(MyUserDetails myUserDetails){
+        int sizeCart = 0;
+        if(myUserDetails != null) sizeCart = cartItemService.getSize(myUserDetails.getUserApp());
+        return sizeCart;
     }
 }

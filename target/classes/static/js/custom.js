@@ -31,7 +31,6 @@ jQuery(document).ready(function($)
 	var mainSlider = $('.main_slider');
 	var hamburger = $('.hamburger_container');
 	var menu = $('.hamburger_menu');
-	var subMenu = $('.sub_hamburger_menu');
 	var menuActive = false;
 	var hamburgerClose = $('.hamburger_close');
 	var fsOverlay = $('.fs_menu_overlay');
@@ -62,14 +61,14 @@ jQuery(document).ready(function($)
 	{
 		setHeader();
 	});
-	$('.menu_item').on('click', function()
-	{
-		subMenu.addClass('active');
-		fillListProductByCategory($(this).data('id'));
-	});
-	$('.sub_hamburger_close').on('click', function(){
-		subMenu.removeClass('active');
-	});
+//	$('.menu_item').on('click', function()
+//	{
+//		subMenu.addClass('active');
+//		fillListProductByCategory($(this).data('id'));
+//	});
+//	$('.sub_hamburger_close').on('click', function(){
+//		subMenu.removeClass('active');
+//	});
 
 	initMenu();
 	initTimer();
@@ -80,25 +79,25 @@ jQuery(document).ready(function($)
 	initMenuCategory();
 	initListBrand();
 
-    async function fillListProductByCategory(id) {
-      let blockList = $('.list_product_by_category');
-      blockList.empty();
-      try {
-        let listProduct = await getListProductByCategoryId(id);
-        let html = '';
-        listProduct.forEach(item => {
-          html += `<li><a href="#">${item.name}</a></li>`;
-        });
-        blockList.html(html);
-      } catch (error) {
-        console.error(error);
-      }
-    }
+//    async function fillListProductByCategory(id) {
+//      let blockList = $('.list_product_by_category');
+//      blockList.empty();
+//      try {
+//        let listProduct = await getListProductByCategoryId(id);
+//        let html = '';
+//        listProduct.forEach(item => {
+//          html += `<li><a href="#">${item.name}</a></li>`;
+//        });
+//        blockList.html(html);
+//      } catch (error) {
+//        console.error(error);
+//      }
+//    }
 
-    function getListProductByCategoryId(id){
-        let urlGetByCategoryId = "/category";
-        return callAjaxPromise(urlGetByCategoryId, "GET", {id : id})
-    }
+//    function getListProductByCategoryId(id){
+//        let urlGetByCategoryId = "/category";
+//        return callAjaxPromise(urlGetByCategoryId, "GET", {id : id})
+//    }
 
 
     function callAjax(method, url, data){
@@ -181,10 +180,10 @@ jQuery(document).ready(function($)
             });
         }
     });
-	/* 
 
+
+	/*
 	2. Set Header
-
 	*/
 
 	function setHeader()
@@ -617,4 +616,5 @@ jQuery(document).ready(function($)
           });
         });
     }
+
 });
