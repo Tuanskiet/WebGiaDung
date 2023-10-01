@@ -310,10 +310,7 @@ jQuery(document).ready(function($)
 
     function initIsotopeFiltering()
     {
-    	var sortTypes = $('.type_sorting_btn');
-    	var sortNums = $('.num_sorting_btn');
     	var sortTypesSelected = $('.sorting_type .item_sorting_btn is-checked span');
-    	var filterButton = $('.filter_button');
 
     	if($('.product-grid').length)
     	{
@@ -333,135 +330,21 @@ jQuery(document).ready(function($)
 	                queue: false
 	            }
 	        });
-
-    		// Short based on the value from the sorting_type dropdown
-	        sortTypes.each(function()
-	        {
-	        	$(this).on('click', function()
-	        	{
-	        		$('.type_sorting_text').text($(this).text());
-	        		var option = $(this).attr('data-isotope-option');
-	        		option = JSON.parse( option );
-    				$('.product-grid').isotope( option );
-	        	});
-	        });
-
-	        // Show only a selected number of items
-	        sortNums.each(function()
-	        {
-	        	$(this).on('click', function()
-	        	{
-	        		var numSortingText = $(this).text();
-					var numFilter = ':nth-child(-n+' + numSortingText + ')';
-	        		$('.num_sorting_text').text($(this).text());
-    				$('.product-grid').isotope({filter: numFilter });
-	        	});
-	        });	
-
-	        // Filter based on the price range slider
-	        filterButton.on('click', function()
-	        {
-	        	$('.product-grid').isotope({
-		            filter: function()
-		            {
-		            	var priceRange = $('#amount').val();
-			        	var priceMin = parseFloat(priceRange.split('-')[0].replace('$', ''));
-			        	var priceMax = parseFloat(priceRange.split('-')[1].replace('$', ''));
-			        	var itemPrice = $(this).find('.product_price').clone().children().remove().end().text().replace( '$', '' );
-
-			        	return (itemPrice > priceMin) && (itemPrice < priceMax);
-		            },
-		            animationOptions: {
-		                duration: 750,
-		                easing: 'linear',
-		                queue: false
-		            }
-		        });
-	        });
     	}
     }
 
-    /* 
-
-	7. Init Price Slider
-
-	*/
-
-    function initPriceSlider()
-    {
-		$( "#slider-range" ).slider(
-		{
-			range: true,
-			min: 0,
-			max: 1000,
-			values: [ 0, 580 ],
-			slide: function( event, ui )
-			{
-				$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-			}
-		});
-			
-		$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
-    }
-
-    /* 
-
-	8. Init Checkboxes
-
-	*/
-
-    function initCheckboxes()
-    {
-    	if($('.checkboxes li').length)
-    	{
-    		var boxes = $('.checkboxes li');
-
-    		boxes.each(function()
-    		{
-    			var box = $(this);
-
-    			box.on('click', function()
-    			{
-    				if(box.hasClass('active'))
-    				{
-    					box.find('i').removeClass('fa-square');
-    					box.find('i').addClass('fa-square-o');
-    					box.toggleClass('active');
-    				}
-    				else
-    				{
-    					box.find('i').removeClass('fa-square-o');
-    					box.find('i').addClass('fa-square');
-    					box.toggleClass('active');
-    				}
-    				// box.toggleClass('active');
-    			});
-    		});
-
-    		if($('.show_more').length)
-    		{
-    			var checkboxes = $('.checkboxes');
-
-    			$('.show_more').on('click', function()
-    			{
-    				checkboxes.toggleClass('active');
-    			});
-    		}
-    	};
-    }
-    var page = 1;
 
     /*load more brand*/
+    var page = 1;
     $(".show_more").on('click', function() {
         page++; // Tăng số trang
-        var url = "/load-more-brand?page=" + page; // Đường dẫn tới endpoint xử lý lấy thêm sản phẩm
+        var url = "/load-more-brand?page=" + page;
 
         $.ajax({
             type: "GET",
-            url: url, // Đường dẫn tới endpoint của bạn
-            dataType: "json", // Loại dữ liệu bạn mong đợi trả về
+            url: url,
+            dataType: "json",
             success: function(data) {
-                // Xử lý dữ liệu trả về
                 if (data.length > 0) {
                     // Hiển thị các sản phẩm mới
                     data.forEach(function(brand) {
@@ -474,12 +357,10 @@ jQuery(document).ready(function($)
                         `);
                     });
                 } else {
-                    // Ẩn nút "Xem thêm" nếu không còn sản phẩm
                     $(".show_more").hide();
                 }
             },
             error: function() {
-                // Xử lý lỗi nếu có
                 console.error("Lỗi khi tải thêm sản phẩm.");
             }
         });

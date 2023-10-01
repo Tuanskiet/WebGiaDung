@@ -49,6 +49,7 @@ jQuery(document).ready(function($)
     var urlFeedback   =   '/feedback';
 
 
+
 	setHeader();
 
 	$(window).on('resize', function()
@@ -100,17 +101,7 @@ jQuery(document).ready(function($)
 //    }
 
 
-    function callAjax(method, url, data){
-        $.ajax({
-          url: url,
-          method: method,
-          data: data
-        }).then(function(response) {
 
-        }).fail(function(error) {
-          console.log("error : " + error);
-        });
-    }
 
     //login
     $('#submit_modal_login').on('click', ()=>{
@@ -181,6 +172,47 @@ jQuery(document).ready(function($)
         }
     });
 
+    /* forgot password*/
+    $('#btnSendCode').on('click', async ()=>{
+        let email = $('#email_forgot').val();
+
+        let response = await callAjaxPromise(urlSendCode,'POST', {email : email});
+        if(response === 'OK'){
+            $('.msg_not_exist').hide();
+            $('.msg_sent_code').show();
+        }else if(response === 'NOT FOUND'){
+            $('.msg_sent_code').hide();
+            $('.msg_not_exist').show();
+        }
+    });
+
+    $('#btn_forgotSubmit').on('click', async ()=>{
+        let email                = $('#email_forgot').val();
+        let code_confirm         = $('#code_confirm').val();
+        let new_password         = $('#new_password').val();
+        let re_password_forgot   = $('#re_password_forgot').val();
+
+        if(new_password !== re_password_forgot){
+            $('.msg_pass_not_match').show();
+        }else{
+            $('.msg_pass_not_match').hide();
+        }
+        let data = {
+            email   : email,
+            code    : code_confirm,
+            newPass : new_password
+        }
+        let response = await callAjaxPromise(urlForgotPass,'POST', data);
+
+        if(response === 'OK'){
+            window.location.hash = "my-Login";
+        }else if(response === 'NOT MATCH'){
+            $('.msg_sent_code').text('Mã xác nhận không khớp!');
+            $('.msg_sent_code').show();
+        }
+    })
+    /* end forgot password*/
+
 
 	/*
 	2. Set Header
@@ -203,7 +235,7 @@ jQuery(document).ready(function($)
 		{
 			if($(window).scrollTop() > 100)
 			{
-				header.css({'top':"-50px"});
+				/*header.css({'top':"-50px"});*/
 			}
 			else
 			{
@@ -532,9 +564,12 @@ jQuery(document).ready(function($)
     			loop:false,
     			dots:false,
     			nav:false,
+    			autoplaySpeed:1000,
+                items:2,
+                autoplay:true,
     			responsive:
 				{
-					0:{items:1},
+					0:{items:2},
 					480:{items:2},
 					768:{items:3},
 					991:{items:4},
@@ -587,21 +622,37 @@ jQuery(document).ready(function($)
 			loop:false,
 			dots:false,
 			rewindNav : true,
-			autoWidth:true
+			margin: 6,
+			autoWidth:true,
+			loop:true,
+            autoplaySpeed: 1000,
+            items:3,
+            autoplay:true
 		});
 
 		// Go to the next item
 		$('.list_brand_slider_left').on('click', function() {
-			owl.trigger('next.owl.carousel');
+			owl.trigger('prev.owl.carousel');
 		})
 		// Go to the previous item
 		$('.list_brand_slider_right').on('click', function() {
-			owl.trigger('prev.owl.carousel');
+			owl.trigger('next.owl.carousel');
 		})
 	}
 	/*
 	Call ajax
 	*/
+	function callAjax(method, url, data){
+            $.ajax({
+              url: url,
+              method: method,
+              data: data
+            }).then(function(response) {
+
+            }).fail(function(error) {
+              console.log("error : " + error);
+            });
+        }
 	function callAjaxPromise(url, method, data) {
         return new Promise((resolve, reject) => {
           $.ajax({

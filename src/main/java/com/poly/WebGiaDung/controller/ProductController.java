@@ -3,6 +3,7 @@ package com.poly.WebGiaDung.controller;
 import com.poly.WebGiaDung.entity.Product;
 import com.poly.WebGiaDung.service.BrandService;
 import com.poly.WebGiaDung.service.EvaluateService;
+import com.poly.WebGiaDung.service.MyCategoryService;
 import com.poly.WebGiaDung.service.ProductService;
 import com.poly.WebGiaDung.utils.SlugGenerator;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ public class ProductController {
     private final ProductService productService;
     private final EvaluateService evaluateService;
     private final BrandService brandService;
+    private final MyCategoryService categoryService;
 
     @GetMapping("/product")
     public String viewProductDetailPage(@RequestParam(name = "id") Integer id, Model model){
@@ -48,21 +50,26 @@ public class ProductController {
                 .withSort(Sort.by(Sort.Direction.fromString(orderBy), sortBy));
 
         Page<Product> listProduct ;
-
+        String breadcrumb = "";
         if(!categoryShow.equals("")){
             String slug = SlugGenerator.generateSlug(categoryShow);
             listProduct = productService.getListProductsByCategory(slug, pageable);
+
+            String categoryName = categoryService.findBySlug(slug).get().getName();
+            breadcrumb = categoryName;
         }else if(!keyword.equals("")){
             listProduct = productService.findByKeywordAndActive(keyword, pageable);
+            breadcrumb = keyword;
         }else{
             listProduct = productService.getAllAndActiveTrue(pageable);
         }
         model.addAttribute("listProducts", listProduct.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", listProduct.getTotalPages());
-        model.addAttribute("dataBrands", brandService.getAllWithPagination(PageRequest.of(page - 1, 3)));
+        model.addAttribute("dataBrands", brandService.getAll());
         model.addAttribute("keyword", keyword);
         model.addAttribute("dataSort", sortBy + "-" + orderBy);
+        model.addAttribute("breadcrumb", breadcrumb);
         return "user/list_product";
     }
 
@@ -79,8 +86,11 @@ public class ProductController {
         Page<Product> listProduct = productService.getByBrandIdAndActive(brandId, pageable);
         model.addAttribute("listProducts", listProduct.getContent());
         model.addAttribute("currentPage", page);
+        model.addAttribute("brandId", brandId);
         model.addAttribute("totalPages", listProduct.getTotalPages());
-        model.addAttribute("dataBrands", brandService.getAllWithPagination(PageRequest.of(page - 1, 3)));
+        model.addAttribute("dataBrands", brandService.getAll());
+        model.addAttribute("dataSort", sortBy + "-" + orderBy);
+        model.addAttribute("breadcrumb", brandService.findById(brandId).get().getName());
         return "/user/list_product.html";
     }
 }

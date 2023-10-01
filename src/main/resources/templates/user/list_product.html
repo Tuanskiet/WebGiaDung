@@ -19,8 +19,8 @@
 
                 <div class="breadcrumbs d-flex flex-row align-items-center">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li class="active"><a href="index.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
+                        <li><a th:href="@{/}">Trang chủ</a></li>
+                        <li class="active"><a th:href="@{/}"><i class="fa fa-angle-right" aria-hidden="true"></i>[[${breadcrumb}]]</a></li>
                     </ul>
                 </div>
 
@@ -55,9 +55,9 @@
                             <h5>Thương hiệu</h5>
                         </div>
                         <ul class="sidebar_brands">
-                            <li th:each="item, iStar : ${dataBrands}" class="active">
+                            <li th:each="item, iStar : ${dataBrands}" th:classappend="${item.id == brandId ?'active': ''}">
                                 <a th:href="@{'/list-product/brand?id='+${item.id}}">
-                                    <span>
+                                    <span th:if="${item.id == brandId}">
                                         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                                     </span>
                                     [[${item.name}]]
@@ -65,9 +65,9 @@
                             </li>
                         </ul>
                         <input type="hidden" name="pageBrand" value="1">
-                        <div class="show_more">
+                        <!--<div class="show_more">
                             <span><span>+</span>Hiển thị thêm</span>
-                        </div>
+                        </div>-->
                     </div>
 
                     <!-- category -->
@@ -101,11 +101,7 @@
 
                                 <div class="product_sorting_container product_sorting_container_top">
                                     <ul class="product_sorting">
-                                        <!--<li>
-                                            <i class="fas fa-sort-amount-down-alt"></i>
-                                            <span>Sắp xếp theo : </span>
-                                        </li>-->
-                                        <li>
+                                      <!--  <li>
                                             <span class="type_sorting_text">Mặc định</span>
                                             <i class="fa fa-angle-down"></i>
                                             <ul class="sorting_type">
@@ -113,26 +109,34 @@
                                                 <li class="type_sorting_btn" ><span>Price</span></li>
                                                 <li class="type_sorting_btn" ><span>Product Name</span></li>
                                             </ul>
+                                        </li>-->
+
+                                        <li>
+                                            <select th:onchange="$(this).submitSort(this.value)" class="sorting_type" aria-label="label for the select" >
+                                                <option value="id-asc" th:selected="${dataSort == 'id-asc'}">Thứ tự mặc định</option>
+                                                <option value="dateRelease-asc" th:selected="${dataSort == 'dateRelease-asc'}">Mới cập nhật</option>
+                                                <option value="price-desc" th:selected="${dataSort == 'price-desc'}">Giá : Cao đến thấp</option>
+                                                <option value="price-asc" th:selected="${dataSort == 'price-asc'}">Giá : Thấp đến cao</option>
+                                            </select>
                                         </li>
 
                                     </ul>
                                     <div class="pages d-flex flex-row align-items-center">
                                         <div class="page_current">
-                                            <span>1</span>
-                                            <ul class="page_selection">
-                                                <li><a href="#">1</a></li>
-                                                <li><a href="#">2</a></li>
-                                                <li><a href="#">3</a></li>
-                                            </ul>
+                                            <span>[[${currentPage}]]</span>
                                         </div>
-                                        <div class="page_total"><span>of</span> 3</div>
-                                        <div id="next_page" class="page_next"><a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                        <div class="page_total"><span>of</span>[[${totalPages}]]</div>
+                                        <div id="next_page" class="page_next">
+                                            <a href="#" th:onclick="$(this).changePage('[[${currentPage + 1}]]', 'next')"
+                                               th:classappend="${currentPage >= totalPages ? 'disable' : ''}">
+                                                <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
                                     </div>
 
                                 </div>
 
                                 <!-- Product Grid -->
-
                                 <div class="product-grid">
                                     <div th:each="product : ${listProducts}" class="product-item men">
                                         <div class="product discount product_filter">
@@ -142,12 +146,17 @@
                                             <div class="favorite favorite_left"></div>
                                             <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
                                             <div class="product_info">
-                                                <h6 class="product_name"><a th:href="@{'/list-product?id='+${product.id}}">[[${product.name}]]</a></h6>
+                                                <h6 class="product_name"><a th:href="@{'/product?id='+${product.id}}">[[${product.name}]]</a></h6>
                                                 <div class="product_price">[[${#numbers.formatDecimal(product.priceDiscount, 3,'POINT', 0,'COMMA')}]]đ
                                                     <span>[[${#numbers.formatDecimal(product.price, 3,'POINT', 0,'COMMA')}]]đ</span></div>
                                             </div>
                                         </div>
-                                        <div class="red_button add_to_cart_button"><a href="#">Thêm vào giỏ</a></div>
+                                        <div class="main_button add_to_cart_button">
+                                            <a th:onclick="addToCart([[${product.id}]], 1)">
+                                                <i class="fas fa-cart-plus"></i>
+                                                Thêm vào giỏ
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -161,7 +170,7 @@
                                             </a>
                                         </li>
                                         <th:block th:each="item : ${#numbers.sequence(1, totalPages)}">
-                                            <li th:if="${(item > totalPages - 2 && totalPages > 0) || (item >= currentPage - 2 && item <= currentPage && totalPages > 0) }" class="pagination__item"
+                                            <li th:if="${(item > totalPages - 2 && totalPages > 0) || (item >= currentPage - 2 && item <= currentPage && totalPages > 0) }" class="pagination__item num"
                                                 th:classappend="${item == currentPage ? 'active' : ''}">
                                                 <a href="#" th:onclick="$(this).changePage('[[${item}]]')" class="pagination__link">[[${item}]]</a>
                                             </li>
@@ -192,6 +201,8 @@
 <div th:replace="user/fragments :: modal_form"></div>
 <th:block th:replace="user/fragments :: js_file"></th:block>
 <script th:src="@{/js/list_product_custom.js}"></script>
+<script th:src="@{/js/cart.js}"></script>
+
 
 <script>
         $(document).ready(function(){

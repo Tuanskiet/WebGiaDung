@@ -21,7 +21,7 @@
 ******************************/
 @media only screen and (max-width: 1024px)
 {
-.top_nav
+    .top_nav
 	{
 		display: none;
 	}
@@ -50,13 +50,22 @@
     .category__slider {
  		max-width: 700px;
  	}
+ 	.navbar_menu li a {
+ 	    padding: 20px 10px;
+ 	}
+ 	.search_form {
+        width: 300px;
+    }
 }
 @media only screen and (max-width: 767px){
 	.search_form{
-		width: 200px;
+		width: 280px;
 	}
 	.category__name{
 		font-size: 18px;
+	}
+	.logo_info{
+        display: none;
 	}
 }
 @media only screen and (max-width: 575px){
@@ -69,7 +78,11 @@
 	.main-menu-header li{
 		padding: 0 4px;
 	}
+	#newsletter_email {
+	    width: 250px;
+	}
 }
+
 
 /************
 11. 539px
@@ -77,17 +90,72 @@
 
 @media only screen and (max-width: 539px)
 {
-	img.img-fluid.lazyloaded {
-        max-width: 70px;
-        max-height: 70px;
-    }
+
 }
 /************
 13. 479px
 ************/
 
 @media only screen and (max-width: 479px){
-	.logo_info{
+	.logo_container{
 		display: none;
 	}
+	.navbar{
+	    height: 70px;
+        margin-right: 26px;
+	    float: none;
+	}
+	.search_form {
+        width: 260px;
+    }
+    .logo_container a
+    	{
+    		font-size: 12px;
+    	}
+    	.hamburger_close
+    	{
+    		top: 14px;
+    		right: 4px;
+    	}
+    	.hamburger_close i
+    	{
+    		font-size: 20px;
+    	}
+    	.hamburger_menu_content
+    	{
+    		padding-right: 15px;
+    		padding-top: 70px;
+    	}
+    	.menu_item
+    	{
+    		border-bottom-color: rgba(181, 174, 196, 0.5);
+    	}
+    	.menu_item > a
+    	{
+            font-size: 15px;
+            line-height: 40px;
+            height: 40px;
+    	}
+    	.menu_selection li a
+    	{
+    		font-size: 12px;
+    		line-height: 35px;
+    		height: 35px;
+    	}
+    	.navbar_user li a
+    	{
+            width: 34px;
+            height: 34px;
+    		font-size: 12px;
+    	}
+    	.checkout_items
+    	{
+            width: 20px;
+            height: 20px;
+            font-size: 10px;
+            left: 25px;
+    	}
+    	#newsletter_email {
+            width: 220px;
+        }
 }

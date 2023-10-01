@@ -2,14 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <head th:replace="user/fragments :: main_header('tag')"></head>
-  <title>lich su don hang</title>
+  <title>Lịch sử đơn hàng</title>
   <link rel="stylesheet" type="text/css"  th:href="@{/styles/order_history.css}">
 </head>
 
 <body>
 <div class="super_container">
   <th:block th:replace="user/fragments :: header_nav"></th:block>
-  <div class="main__order-history">
+  <div class="order_history-wrapper">
     <div th:unless="${#authorization.expression('isAnonymous()')}" class="grid wide">
       <div class="tab-pane active">
         <div class="tab__filter-order">
@@ -89,7 +89,7 @@
               <i class="fas fa-cart-plus icon__empty-cart"></i>
             </div>
             <div class="info">Bạn chưa có đơn đặt hàng nào !</div>
-            <a th:href="@{/list-product}" class="btn btn--purple">
+            <a th:href="@{/list-product}" class="btn blue_button">
               Tiếp tục mua sắm
               <i class="fas fa-angle-double-right"></i>
             </a>
@@ -97,8 +97,9 @@
         </div>
       </div>
     </div>
-    <div th:if="${#authorization.expression('isAnonymous()')}">
-      Ban chua dang nhap
+    <div th:if="${#authorization.expression('isAnonymous()')}" class="not_authen-wrapper">
+      <h3>Vui lòng đăng nhập!</h3>
+      <a class="main_button" href="#my-Login">Đăng nhập</a>
     </div>
   </div>
 </div>

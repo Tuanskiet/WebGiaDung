@@ -189,7 +189,7 @@ img.img-fluid.lazyloaded {
     max-width: 100px;
     max-height: 100px;
     border-radius: 50%;
-    box-shadow: 0px 0px 6px 1px rgb(37 37 37 / 42%);
+    box-shadow: 0px 0px 6px 1px rgb(37 37 37 / 23%);
 }
 .index-category-title {
     font-size: 16px;
@@ -258,48 +258,68 @@ img.img-fluid.lazyloaded {
 /*********************************
 5. List product by category
 *********************************/
-
+.list__product-wrapper{
+    background: #ffffff;
+}
 .list__product
 {
     width: 100%;
     margin-top: 50px;
-    border: 1px solid gray;
     border-radius: 5px;
-
+    box-shadow: 0px 0px 4px 0px gray;
 }
 .heading__list-item{
-    background: #64a5f1;
-    padding: 10px;
+	background-color: var(--main-cl);
+    padding: 16px;
     border-bottom: 1px solid gray;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
-.category__name{
-	font-size: 26px;
+.heading_list{
+	font-size: 20px;
 	margin-bottom: 0;
+	color: var(--sub-color-1);
+    display: flex;
+    flex-direction: column;
 }
-.category__name span{
-	color : rgb(2, 39, 204);
+.heading_list .name_category{
+    color: rgb(255 255 255);
+    text-transform: uppercase;
+    font-weight: 700;
+}
+.heading_list .amount_product{
+    color: var(--sub-color-1);
+    font-weight: 600;
+    font-size: 18px;
 }
 .link__more {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
 }
 .link__more a {
+    font-weight: 600;
     position: relative;
     display: block;
-    color: black;
-	margin-right: 10px;
-	font-size: 18px;
+    color: #000000;
+    margin-right: 0px;
+    font-size: 16px;
+    background: #ffe200;
+    padding: 6px 8px;
+    border-radius: 3px;
 }
-.link__more a::before {
+.link__more a:hover{
+    opacity: .9;
+}
+/*.link__more a::before {
     content: "";
     position: absolute;
     top: calc(100% + 4px);
     height: 1px;
-    width: 95px;
-    background-color: red;
-}
-.link__more a::after {
+    width: 105px;
+    background-color: black;
+}*/
+/*.link__more a::after {
     content: "";
     position: absolute;
     top: calc(100% + 10px);
@@ -307,7 +327,7 @@ img.img-fluid.lazyloaded {
     height: 1px;
     width: 48px;
     background-color: red;
-}
+}*/
 /*********************************
 5.1 New Arrivals Sorting
 *********************************/
@@ -419,8 +439,15 @@ img.img-fluid.lazyloaded {
 }
 .product_name a
 {
+    font-size: 16px;
 	color: #1e1e27;
 	line-height: 20px;
+    font-weight: 700;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
 }
 .product_name:hover a
 {
@@ -518,8 +545,9 @@ img.img-fluid.lazyloaded {
 }
 .add_to_cart_button a
 {
-	font-size: 12px;
+	font-size: 15px;
 	font-weight: 600;
+	color: white;
 }
 .product-item:hover .add_to_cart_button
 {
@@ -792,7 +820,7 @@ img.img-fluid.lazyloaded {
 {
 	text-transform: uppercase;
 	line-height: 18px;
-	font-weight: 500;
+	font-weight: 700;
 	margin-bottom: 0px;
 }
 .benefit_content p

@@ -12,6 +12,7 @@ import com.poly.WebGiaDung.service.ProductService;
 import com.poly.WebGiaDung.service.SendEmailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -49,18 +50,22 @@ public class OrderApi {
     }
 
     @PostMapping("/order")
-    public String doOrder(@RequestBody OrderDto orderDtoList,
-                          @AuthenticationPrincipal MyUserDetails myUserDetails,
-                          HttpSession session
+    public ResponseEntity<?> doOrder(@RequestBody OrderDto orderDtoList,
+                                  @AuthenticationPrincipal MyUserDetails myUserDetails,
+                                  HttpSession session
                           ){
-        orderService.create(orderDtoList, myUserDetails.getUserApp());
-        //            sendEmail.sendMailWithInline(
-//                    myUserDetails.getUserApp().getEmail(),orderDtoList);
-//            sendEmail.sendMailHtml(cureUserApp.getEmail(), SendEmailService.BODY_HTML);
-
-        log.info("sent email for : {}", myUserDetails.getUserApp().getEmail());
-        session.setAttribute("sizeCart", updateSizeCart(myUserDetails));
-        return "OK";
+        if(myUserDetails != null){
+            orderService.create(orderDtoList, myUserDetails.getUserApp());
+            try {
+                sendEmail.sendMailOrder(
+                        myUserDetails.getUserApp().getEmail(),orderDtoList);
+                log.info("sent email for : {}", myUserDetails.getUserApp().getEmail());
+                session.setAttribute("sizeCart", updateSizeCart(myUserDetails));
+            } catch (MessagingException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return ResponseEntity.status(200).body("OK");
     }
 
     public int updateSizeCart(MyUserDetails myUserDetails){

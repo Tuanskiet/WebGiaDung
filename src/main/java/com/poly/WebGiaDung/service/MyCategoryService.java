@@ -22,4 +22,6 @@ public interface MyCategoryService {
     void updateStatus(Integer id, Boolean statusChanged);
 
     List<MyCategory> getAllCategoryActive();
+
+    Optional<MyCategory> findBySlug(String slug);
 }

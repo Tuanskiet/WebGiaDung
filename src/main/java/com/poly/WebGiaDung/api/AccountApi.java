@@ -4,6 +4,8 @@ package com.poly.WebGiaDung.api;
 import com.poly.WebGiaDung.entity.UserApp;
 import com.poly.WebGiaDung.service.CartItemService;
 import com.poly.WebGiaDung.service.MyUserService;
+import com.poly.WebGiaDung.service.SendEmailService;
+import com.poly.WebGiaDung.utils.MessageUtils;
 import com.poly.WebGiaDung.utils.RandomStringGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +24,7 @@ public class AccountApi {
     private final CartItemService cartItemService;
     private final AuthenticationManager authenticationManager;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final SendEmailService sendEmail;
 
     @PostMapping("/login-with-ajax")
     public String loginWithModal(
@@ -64,7 +67,7 @@ public class AccountApi {
         if(ObjectUtils.isEmpty(userApp)) return "NOT FOUND";
         myUserService.updatePassword(userApp, codeGenerate);
         try{
-//            sendEmail.sendMail(MessageUtils.SUBJECT_MAIL_FORGOT_PASSWORD,email, bodySend);
+            sendEmail.sendMail(MessageUtils.SUBJECT_MAIL_FORGOT_PASSWORD,email, bodySend);
         }catch(Exception e) {
             return "ERROR";
         }

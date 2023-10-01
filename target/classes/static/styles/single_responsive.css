@@ -91,17 +91,13 @@
 	{
 		display: none;
 	}
-	.navbar_menu
-	{
-		display: none;
-	}
 	.hamburger_container
 	{
 		display: block;
 	}
 	.single_product_container
 	{
-		margin-top: 100px;
+        margin-top: 142px;
 	}
 	.main_content
 	{
@@ -282,7 +278,7 @@
 	}
 	.breadcrumbs ul li a
 	{
-		font-size: 13px;
+		font-size: 15px;
 	}
 	.breadcrumbs ul li i
 	{
@@ -291,11 +287,11 @@
 	.quantity
 	{
 		height: auto;
+		margin: 0;
 	}
 	.quantity_selector
 	{
 		height: 40px;
-		margin-left: 0px;
 		margin-top: 15px;
 	}
 	.add_to_cart_button
@@ -353,6 +349,17 @@
 	{
 		font-size: 13px;
 	}
+	.product_original_price-wrapper{
+	    flex-direction: column;
+	}
+	.breadcrumbs{
+        margin-bottom: 36px;
+        margin-top: 10px;
+	}
+    .single_product_container
+    {
+        margin-top: 120px;
+    }
 }
 
 /************
@@ -383,14 +390,6 @@
 	{
 		font-size: 12px;
 	}
-	.hamburger_container
-	{
-		margin-left: 25px;
-	}
-	.hamburger_container i
-	{
-		font-size: 16px;
-	}
 	.hamburger_close
 	{
 		top: 14px;
@@ -411,7 +410,7 @@
 	}
 	.menu_item > a
 	{
-		font-size: 12px;
+		font-size: 14px;
 		line-height: 35px;
 		height: 35px;
 	}

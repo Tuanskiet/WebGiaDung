@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <head th:replace="user/fragments :: main_header('tag')"></head>
-    <title>index</title>
+    <title>Trang chủ</title>
     <!-- index -->
     <link rel="stylesheet" type="text/css"  th:href="@{/styles/main_styles.css}">
     <link rel="stylesheet" type="text/css"  th:href="@{/styles/responsive.css}">
@@ -82,9 +82,10 @@
                     <div class="row">
                         <div class="col heading__list-item text-left">
                             <div class="link__more">
-                                <h4 class="category__name">
-                                    <span>[[${category.name}]]</span> ( [[${category.products.size()}]] sản phẩm)
-                                </h4>
+                                <div class="heading_list">
+                                    <span class="name_category"> [[${category.name}]]</span>
+                                    <span class="amount_product">( [[${category.products.size()}]] sản phẩm)</span>
+                                </div>
                                 <a href="#">Xem thêm
                                     <i class="fas fa-long-arrow-alt-right"></i>
                                 </a>
@@ -92,7 +93,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">
+                        <div class="col list__product-wrapper">
                             <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
                                 <!-- Product item-->
                                 <div th:if="${category.products.size() > 0 }" th:each="product : ${category.products}" class="product-item">
@@ -100,8 +101,7 @@
                                         <div class="product_image">
                                             <img th:src="${product.image}" alt="img">
                                         </div>
-                                        <div class="favorite favorite_left"></div>
-                                        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+                                        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-[[${product.percentDiscount}]]%</span></div>
                                         <div class="product_info">
                                             <h6 class="product_name"><a th:href="@{'/product?id='+${product.id}}">[[${product.name}]]</a></h6>
                                             <div class="product_price">[[${#numbers.formatDecimal(product.priceDiscount, 3,'POINT', 0,'COMMA')}]]đ
@@ -115,7 +115,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="red_button add_to_cart_button"><a th:onclick="addToCart([[${product.id}]], 1)">Thêm vào giỏ</a></div>
+                                    <div class="main_button add_to_cart_button">
+                                        <a th:onclick="addToCart([[${product.id}]], 1)">
+                                            <i class="fas fa-cart-plus"></i>
+                                            Thêm vào giỏ
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -129,7 +134,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col text-center">
-                        <div class="section_title new_arrivals_title">
+                        <div class="section_title new_arrivals_title top_product">
                             <h2>Sản phẩm nổi bật</h2>
                         </div>
                     </div>
@@ -144,8 +149,7 @@
                                             <div class="product_image">
                                                 <img th:src="${product.image}" alt="img">
                                             </div>
-                                            <div class="favorite favorite_left"></div>
-                                            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-[[product.percentDiscount]]%</span></div>
+                                            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-[[${product.percentDiscount}]]%</span></div>
                                             <div class="product_info">
                                                 <h6 class="product_name"><a th:href="@{'/product?id='+${product.id}}">[[${product.name}]]</a></h6>
                                                 <div class="product_price">[[${#numbers.formatDecimal(product.priceDiscount, 3,'POINT', 0,'COMMA')}]]đ

@@ -30,8 +30,10 @@ async function addToCart(productId, quantity){
         $('#checkout_items').text(response);
     }catch(error){
         window.location.hash = "my-Login";
+        return false;
     }
-
+    SwalAlertSuccess("Thêm thành công!");
+    return true;
 }
 
 async function updateCart(action ,productId){
@@ -142,7 +144,15 @@ function SwalAlertWarning(message){
         timer: 2000,
     });
 }
+function SwalAlertSuccess(message){
+    Swal.fire({
+        title: message,
+        icon: "success",
+        showConfirmButton: false,
+        timer : 2000
+    });
 
+}
 //call ajax
 function callAjaxPromise(method, url, data) {
     return new Promise((resolve, reject) => {

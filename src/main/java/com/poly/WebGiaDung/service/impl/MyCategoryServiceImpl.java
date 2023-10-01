@@ -67,6 +67,11 @@ public class MyCategoryServiceImpl implements MyCategoryService {
         return categoryRepo.findByIsActiveTrue();
     }
 
+    @Override
+    public Optional<MyCategory> findBySlug(String slug) {
+        return categoryRepo.findBySlug(slug);
+    }
+
 
     private MyCategory findCategoryBySlug(String slug){
         return categoryRepo.findMyCategoryBySlug(slug);

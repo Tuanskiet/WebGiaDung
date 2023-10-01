@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <head th:replace="user/fragments :: main_header('tag')"></head>
-    <title>chi tiet</title>
+    <title>Chi tiết sản phẩm</title>
     <!-- product single -->
     <link rel="stylesheet" type="text/css"  th:href="@{/styles/single_styles.css}">
     <link rel="stylesheet" type="text/css"  th:href="@{/styles/single_responsive.css}">
@@ -88,7 +88,7 @@
                             </div>
                             <div class="save-price">
                                 <span>Tiết kiệm: </span>
-                                <span>900.000 </span>
+                                <span>[[${#numbers.formatDecimal(productDetail.price - productDetail.priceDiscount , 3, 'POINT', 0, 'COMMA')}]]đ</span>
                                 <span>so với giá thị trường.</span>
                             </div>
 
@@ -140,7 +140,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
+                    <div class="quantity">
                         <span>Số lượng:</span>
                         <div class="quantity_selector">
                             <span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
@@ -150,10 +150,18 @@
                     </div>
 
                     <div class="group_btn-cart">
-                        <div class="red_button add_to_cart_button">
-                            <a th:onclick="addToCartWithQuantity([[${productDetail.id}]])">Thêm vào giỏ hàng</a>
+                        <div class="main_button add_to_cart_button">
+                            <a th:onclick="addToCartWithQuantity([[${productDetail.id}]])">
+                                <i class="fas fa-cart-plus"></i>
+                                Thêm vào giỏ hàng
+                            </a>
                         </div>
-                        <div class="red_button add_to_cart_button"><a href="#">Mua ngay</a></div>
+                        <div class="main_button add_to_cart_button">
+                            <a th:onclick="buyNow([[${productDetail.id}]])">
+                                <i class="far fa-money-bill-alt"></i>
+                                Mua ngay
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -187,8 +195,7 @@
                                     <h4>Mô tả chi tiết</h4>
                                 </div>
                                 <div class="tab_text_block">
-                                    <h2>Pocket cotton sweatshirt</h2>
-                                    <p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
+                                    <p>[[${productDetail.description}]]</p>
                                 </div>
                             </div>
                         </div>
@@ -294,7 +301,7 @@
                                             <div class="msg__rare-warning">* Vui lòng nhập mô tả!</div>
                                         </div>
                                         <div class="text-left text-sm-right">
-                                            <button id="review_submit"  class="red_button review_submit_btn trans_300" >Gửi đánh giá</button>
+                                            <button id="review_submit"  class="main_button review_submit_btn trans_300" >Gửi đánh giá</button>
                                         </div>
                                     </div>
                                 </div>
@@ -318,6 +325,13 @@
     function addToCartWithQuantity(productId){
         let quantity = $('#quantity_value').html();
         addToCart(productId, parseInt(quantity));
+    }
+    async function buyNow(productId){
+        let quantity = $('#quantity_value').html();
+        let isSuccess = await addToCart(productId, parseInt(quantity));
+        if(isSuccess){
+            window.location.href = '/cart'
+        }
     }
 </script>
 </body>

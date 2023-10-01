@@ -55,8 +55,8 @@
               <a th:href="@{/}" class="logo_wrapper">
                 <img class="logo_img" th:src="@{/images/logo.png}" alt="logo">
                 <div class="logo_info">
-                  <div class="logo_name"> <span>Colo</span>Shop</div>
-                  <div class="logo_text">Shopping hihi</div>
+                  <div class="logo_name"> <span>Yasuki</span></div>
+                  <div class="logo_text">Gia dụng giá rẻ</div>
                 </div>
               </a>
             </div>
@@ -64,9 +64,12 @@
               <ul class="navbar_menu">
                 <li>
                   <div class="search_form_wrapper">
-                    <form action="" class="search_form">
-                      <input type="text" name="" class="search_input" placeholder="Bạn muốn tìm gì ?">
-                      <i class="fa fa-search" aria-hidden="true"></i>
+                    <form th:action="@{/list-product}" method="get"  class="search_form">
+                      <input type="text" name="keyword" th:value="${keyword}" class="search_input" placeholder="Bạn muốn tìm gì ?">
+                      <button type="submit" class="header__search-icon" >
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                      </button>
+
                     </form>
                   </div>
                 </li>
@@ -109,6 +112,12 @@
                     </li>
                   </ul>
                   <ul th:unless="${#authorization.expression('isAnonymous()')}" class="account_selection">
+                    <li>
+                      <a th:href="@{/order/history}">
+                        <i class="fas fa-history"></i>
+                        Đơn hàng đã đặt
+                      </a>
+                    </li>
                     <li>
                       <a th:href="@{/logout}">
                         <i class="fa fa-sign-in" aria-hidden="true"></i>
@@ -181,7 +190,7 @@
 <div  th:fragment="footer" class="container">
   <footer class="py-5">
     <div class="row">
-      <div class="col-lg-2 col-md-6 col-sm-12">
+      <div class="col-lg-2 col-md-6 col-sm-12 footer-item">
         <h5 class="footer_header">Menu</h5>
         <ul class="nav flex-column">
           <li th:each="item, iStar : ${session.dataCategory}" class="nav-item mb-2">
@@ -190,7 +199,7 @@
         </ul>
       </div>
 
-      <div class="col-lg-2 col-md-6 col-sm-12">
+      <div class="col-lg-2 col-md-6 col-sm-12 footer-item">
         <h5 class="footer_header">Hỗ trợ khách hàng</h5>
         <ul class="nav flex-column">
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Hướng dẫn mua hàng</a></li>
@@ -200,7 +209,7 @@
         </ul>
       </div>
 
-      <div class="col-lg-3 col-md-6 col-sm-12">
+      <div class="col-lg-3 col-md-6 col-sm-12 footer-item">
         <h5 class="footer_header">Liên hệ</h5>
         <ul class="nav flex-column">
           <li class="nav-item mb-2">
@@ -237,15 +246,15 @@
         </ul>
       </div>
 
-      <div class="col-lg-4 col-md-6 col-sm-12">
+      <div class="col-lg-4 col-md-6 col-sm-12 footer-item">
         <h5 class="footer_header">Đăng ký để nhận được được thông tin ưu đãi mới nhất từ chúng tôi.</h5>
         <div class="d-flex w-100 gap-2">
-          <form action="post">
+          <div >
             <div class="newsletter_form d-flex flex-row align-items-center  justify-content-center">
               <input id="newsletter_email" type="email" placeholder="Nhập Email ..." required="required" data-error="Valid email is required.">
               <button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">Đăng kí</button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
@@ -277,7 +286,7 @@
         <span class="form-message  msg_pass_not_match" style="display : none;">Mật khẩu không khớp!</span>
       </div>
       <div id="btn_signup" class="authen__btns">
-        <div class="btn btn--purple  w-100">Đăng Kí</div>
+        <div class="btn blue_button  w-100">Đăng Kí</div>
       </div>
     </div>
   </div>
@@ -296,8 +305,8 @@
         <span class="form-message invalid_password_message"  style="display : none;">Sai mật khẩu</span>
       </div>
       <div class="authen__btns">
-        <div id="submit_modal_login" class="btn btn--purple">Đăng Nhập</div>
-        <a href="#my-Register" class=" btn btn--default">Đăng Kí</a>
+        <div id="submit_modal_login" class="btn blue_button">Đăng Nhập</div>
+        <a href="#my-Register" class=" btn sub_button">Đăng Kí</a>
         <!--                <input  id="remember_me" type="checkbox" class="authen-checkbox">-->
         <!--                <label  for="remember_me" class="form-label">Ghi nhớ mật khẩu</label>-->
       </div>
@@ -332,14 +341,14 @@
         <span class="form-message  msg_pass_not_match" style="display : none;">Mật khẩu không khớp!</span>
       </div>
       <div id="btn_forgotSubmit" class="authen__btns">
-        <div class="btn btn--purple w-100">Đổi mật khẩu</div>
+        <div class="btn blue_button w-100">Đổi mật khẩu</div>
       </div>
     </div>
   </div>
 
-  <div class="up-top" id="upTop" onclick="goToTop()">
+<!--  <div class="up-top" id="upTop" onclick="goToTop()">
     <i class="fas fa-chevron-up"></i>
-  </div>
+  </div>-->
 
 </div>
 

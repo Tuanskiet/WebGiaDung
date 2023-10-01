@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MyCategoryRepo extends JpaRepository<MyCategory, Integer> {
@@ -16,4 +17,6 @@ public interface MyCategoryRepo extends JpaRepository<MyCategory, Integer> {
     Page<MyCategory> findByKeyword(String keyword, Pageable pageable);
 
     List<MyCategory> findByIsActiveTrue();
+
+    Optional<MyCategory> findBySlug(String slug);
 }

@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <head th:replace="user/fragments :: main_header('tag')"></head>
-  <title>cart</title>
+  <title>Giỏ hàng</title>
   <!-- index -->
   <link rel="stylesheet" type="text/css"  th:href="@{/styles/cart_styles.css}">
 </head>
@@ -13,7 +13,7 @@
   <th:block th:replace="user/fragments :: header_nav"></th:block>
   <div class=" cart_section_container">
     <div class="grid wide">
-      <div class="row">
+      <div class="row list_cart-row">
         <div class=" l-8 m-12 s-12">
           <div class="main__cart">
             <div class="row title">
@@ -90,7 +90,7 @@
                 <span class="totalCart">0</span> ₫
               </div>
             </div>
-            <div id="order" class="btn btn--purple">
+            <div id="order" class="btn main_button">
               <a th:href="@{/order}">
                 Tiến hành thanh toán
               </a>
