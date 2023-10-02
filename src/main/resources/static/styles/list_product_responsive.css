@@ -99,7 +99,7 @@
 	}
 	.product_section_container
 	{
-		margin-top: 110px;
+        margin-top: 160px;
 	}
 	.sidebar
 	{
@@ -304,6 +304,9 @@
 	.breadcrumbs{
         margin-bottom: 30px;
 	}
+    .product_section_container{
+        margin-top: 110px;
+    }
 }
 
 /************

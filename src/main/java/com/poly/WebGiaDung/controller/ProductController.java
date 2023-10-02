@@ -1,16 +1,15 @@
 package com.poly.WebGiaDung.controller;
 
 import com.poly.WebGiaDung.entity.Product;
-import com.poly.WebGiaDung.service.BrandService;
-import com.poly.WebGiaDung.service.EvaluateService;
-import com.poly.WebGiaDung.service.MyCategoryService;
-import com.poly.WebGiaDung.service.ProductService;
+import com.poly.WebGiaDung.security.MyUserDetails;
+import com.poly.WebGiaDung.service.*;
 import com.poly.WebGiaDung.utils.SlugGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -29,6 +29,7 @@ public class ProductController {
     private final EvaluateService evaluateService;
     private final BrandService brandService;
     private final MyCategoryService categoryService;
+    private final CartItemService cartItemService;
 
     @GetMapping("/product")
     public String viewProductDetailPage(@RequestParam(name = "id") Integer id, Model model){
@@ -45,7 +46,8 @@ public class ProductController {
             @RequestParam(name="orderBy", defaultValue = "asc",  required = false) String orderBy,
             @RequestParam(name="category", defaultValue = "",  required = false) String categoryShow,
             @RequestParam(name="keyword", defaultValue = "",  required = false) String keyword,
-            Model model, HttpServletRequest request){
+            Model model, HttpSession session,
+            @AuthenticationPrincipal MyUserDetails myUserDetails){
         Pageable pageable = PageRequest.of(page - 1, PRODUCT_PER_PAGE)
                 .withSort(Sort.by(Sort.Direction.fromString(orderBy), sortBy));
 
@@ -70,6 +72,10 @@ public class ProductController {
         model.addAttribute("keyword", keyword);
         model.addAttribute("dataSort", sortBy + "-" + orderBy);
         model.addAttribute("breadcrumb", breadcrumb);
+
+        int sizeCart = 0;
+        if(myUserDetails != null) sizeCart = cartItemService.getSize(myUserDetails.getUserApp());
+        session.setAttribute("sizeCart", sizeCart);
         return "user/list_product";
     }
 

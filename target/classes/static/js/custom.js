@@ -125,7 +125,8 @@ jQuery(document).ready(function($)
             }).fail(function(error) {
               console.log("error : " + error);
             });
-
+            localStorage.removeItem('listCartItemSelected');
+            localStorage.removeItem('totalPay');
     });
 
     //sign up
@@ -210,6 +211,11 @@ jQuery(document).ready(function($)
             $('.msg_sent_code').text('Mã xác nhận không khớp!');
             $('.msg_sent_code').show();
         }
+    });
+
+    $('#logout').on('click', function(){
+        localStorage.removeItem('listCartItemSelected');
+        localStorage.removeItem('totalPay');
     })
     /* end forgot password*/
 

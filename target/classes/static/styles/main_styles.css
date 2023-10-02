@@ -147,6 +147,9 @@ COLOR PALETTE
 	z-index: 2;
 	cursor: pointer;
 }
+.list__brand-slider .owl-item{
+max-width: 120px;
+}
 /*********************************
 
  -- List category
@@ -187,7 +190,7 @@ COLOR PALETTE
 }
 img.img-fluid.lazyloaded {
     max-width: 100px;
-    max-height: 100px;
+    height: 100px;
     border-radius: 50%;
     box-shadow: 0px 0px 6px 1px rgb(37 37 37 / 23%);
 }

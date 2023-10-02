@@ -86,7 +86,7 @@
                                     <span class="name_category"> [[${category.name}]]</span>
                                     <span class="amount_product">( [[${category.products.size()}]] sản phẩm)</span>
                                 </div>
-                                <a href="#">Xem thêm
+                                <a th:href="@{'/list-product?category='+${category.slug}}">Xem thêm
                                     <i class="fas fa-long-arrow-alt-right"></i>
                                 </a>
                             </div>

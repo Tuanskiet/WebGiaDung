@@ -85,11 +85,12 @@
 }
 
 @media (max-width: 1023px) {
-    .main .grid>.row {
+    /*.main .grid>.row {
         flex-direction: column-reverse;
-    }
+    }*/
     .pay-information {
         padding-right: 0;
+        padding-bottom: 30px;
     }
     .pay-order {
         padding-left: 0;

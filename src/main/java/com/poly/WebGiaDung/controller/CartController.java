@@ -18,9 +18,12 @@ public class CartController {
 
     @GetMapping("/cart")
     public String mainPage(Model model, @AuthenticationPrincipal MyUserDetails userDetails) {
-        List<CartItem> cartItemList = cartItemService.getCartsByUser(userDetails.getUserApp());
-        model.addAttribute("listCart", cartItemList);
-        return "user/cart";
+        if(userDetails != null){
+            List<CartItem> cartItemList = cartItemService.getCartsByUser(userDetails.getUserApp());
+            model.addAttribute("listCart", cartItemList);
+            return "user/cart";
+        }
+        return "login";
     }
 
 }

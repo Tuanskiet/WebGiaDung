@@ -233,10 +233,6 @@
 	{
 		margin-bottom: 40px;
 	}
-	.newsletter_submit_btn
-	{
-		margin-top: 15px;
-	}
 	.desc_last
 	{
 		margin-bottom: 0px;
@@ -470,7 +466,7 @@
 	}
 	.newsletter_submit_btn
 	{
-		height: 36px;
+		height: 40px;
 		width: 130px;
 	}
 	#newsletter_email::-webkit-input-placeholder

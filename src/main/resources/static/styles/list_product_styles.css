@@ -659,7 +659,9 @@
 {
 	color: #fe4c50;
 }
-
+.rate__star{
+    margin-bottom: 10px;
+}
 /* ===Pagination=== */
 
 .pagination {

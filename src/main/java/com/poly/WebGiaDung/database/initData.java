@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-//@Component
+@Component
 @RequiredArgsConstructor
 public class initData implements CommandLineRunner {
     private final RoleService roleService;
@@ -23,7 +23,7 @@ public class initData implements CommandLineRunner {
     private final ProductService productService;
     private final ProductInfoService productInfoService;
     private final CartItemService cartItemService;
-    public String imgTest = "//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260";
+    public String imgTest = "https://bizweb.dktcdn.net/thumb/large/100/488/001/products/smarttivisamsung43inch1-0fc67214-4b9e-4d9e-9a9d-c9e8e984503a.jpg?v=1686045374560";
     @Override
     public void run(String... args) throws Exception {
         //        init role
@@ -45,15 +45,15 @@ public class initData implements CommandLineRunner {
         userService.create(userApp2);
 
 
-        MyCategory category1 = new MyCategory(  "Chăm Sóc Da Mặt Cao Cấp", "//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260" );
-        MyCategory category2 = new MyCategory(  "Trang Điểm Cao Cấp", "//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260");
-        MyCategory category3 = new MyCategory(  "Tẩy Trang","//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260" );
-        MyCategory category4 = new MyCategory("Sửa Rửa Mặt", "//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260");
-        MyCategory category5 = new MyCategory( "Tẩy Tế Bào Chết", "//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260");
-        MyCategory category6 = new MyCategory(  "Khẩu trang","//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260" );
-        MyCategory category7 = new MyCategory("Mặt Nạ Xông Hơi", "//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260");
-        MyCategory category8 = new MyCategory( "Chống Muỗi", "//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260");
-        MyCategory category9 = new MyCategory( "Bàn Chải Đánh Răng", "//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260");
+        MyCategory category1 = new MyCategory(  "Tivi", "https://cdn.tgdd.vn/Products/Images/1942/309559/android-tivi-aqua-32-inch-le32aqt6600g-8-550x340.jpg" );
+        MyCategory category2 = new MyCategory(  "Tủ lạnh", "https://cdn.tgdd.vn/Products/Images/1943/220325/samsung-rt22m4032by-sv-300x300.jpg");
+        MyCategory category3 = new MyCategory(  "Máy giặt","https://cdn.tgdd.vn/Products/Images/1944/242732/aqua-88-kg-aqw-fr88gtbk-300x300.jpg" );
+        MyCategory category4 = new MyCategory("Máy sấy", "https://cdn.tgdd.vn/Products/Images/2202/272143/may-say-thong-hoi-electrolux-75-kg-edv754h3wb-170223-031343-600x600.jpg");
+        MyCategory category5 = new MyCategory( "Lọc nước", "https://cdn.tgdd.vn/Products/Images/3385/309367/may-loc-nuoc-ro-hoa-phat-hws1b-1022-10-loi-230623-025945-600x600.jpg");
+        MyCategory category6 = new MyCategory(  "Bếp điện","https://cdn.tgdd.vn/Products/Images/1982/236629/bep-tu-doi-hafele-hc-i2712a-10-600x600.jpg" );
+        MyCategory category7 = new MyCategory("Hút bụi", "https://cdn.tgdd.vn/Products/Images/10139/264374/samsung-vr05r5050wk-sv-100423-014048-600x600.jpg");
+        MyCategory category8 = new MyCategory( "Loa", "https://cdn.tgdd.vn/Products/Images/2162/306932/loa-keo-karaoke-dalton-ts-12g350n-100523-094658-600x600.jpg");
+        MyCategory category9 = new MyCategory( "Máy", "https://cdn.tgdd.vn/Products/Images/2162/306932/loa-keo-karaoke-dalton-ts-12g350n-100523-094658-600x600.jpg");
 
         categoryService.create(category1);
         categoryService.create(category2);
@@ -66,18 +66,16 @@ public class initData implements CommandLineRunner {
         categoryService.create(category9);
 
         //init brand
-        BrandApp brandApp1 = new BrandApp(null, "Panasonic4", "//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260");
-        BrandApp brandApp2 = new BrandApp(null, "Panasonic1", "//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260");
-        BrandApp brandApp3 = new BrandApp(null, "Panasonic2", "//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260");
-        BrandApp brandApp4 = new BrandApp(null, "Panasonic3", "//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260");
-        BrandApp brandApp5 = new BrandApp(null, "Panasonic6", "//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260");
-        BrandApp brandApp6 = new BrandApp(null, "Panasonic14", "//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260");
-        BrandApp brandApp7 = new BrandApp(null, "Panasonic22", "//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260");
-        BrandApp brandApp8 = new BrandApp(null, "Panasonic53", "//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260");
-        BrandApp brandApp9 = new BrandApp(null, "Panasonic44", "//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260");
-        BrandApp brandApp10 = new BrandApp(null, "Panasonic12", "//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260");
-        BrandApp brandApp11 = new BrandApp(null, "Panasonic24", "//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260");
-        BrandApp brandApp12 = new BrandApp(null, "Panasonic35", "//theme.hstatic.net/1000006063/1000748098/14/home_category_3_medium.png?v=13260");
+        BrandApp brandApp1 = new BrandApp(null, "Panasonic", "https://bizweb.dktcdn.net/100/488/001/themes/910675/assets/thuonghieu_2.jpg?1696088382489");
+        BrandApp brandApp2 = new BrandApp(null, "Hitachi", "https://bizweb.dktcdn.net/100/488/001/themes/910675/assets/thuonghieu_10.jpg?1696088382489");
+        BrandApp brandApp3 = new BrandApp(null, "Aqua", "https://bizweb.dktcdn.net/100/488/001/themes/910675/assets/thuonghieu_4.jpg?1696088382489");
+        BrandApp brandApp4 = new BrandApp(null, "Casper", "https://bizweb.dktcdn.net/100/488/001/themes/910675/assets/thuonghieu_6.jpg?1696088382489");
+        BrandApp brandApp5 = new BrandApp(null, "Funiki", "https://bizweb.dktcdn.net/100/488/001/themes/910675/assets/thuonghieu_16.jpg?1696088382489");
+        BrandApp brandApp6 = new BrandApp(null, "LG", "https://bizweb.dktcdn.net/100/488/001/themes/910675/assets/thuonghieu_8.jpg?1696088382489");
+        BrandApp brandApp7 = new BrandApp(null, "Electrolux", "https://bizweb.dktcdn.net/100/488/001/themes/910675/assets/thuonghieu_15.jpg?1696088382489");
+        BrandApp brandApp8 = new BrandApp(null, "Midea", "https://bizweb.dktcdn.net/100/488/001/themes/910675/assets/thuonghieu_13.jpg?1696088382489");
+        BrandApp brandApp9 = new BrandApp(null, "Retech", "https://bizweb.dktcdn.net/100/488/001/themes/910675/assets/thuonghieu_9.jpg?1696088382489");
+        BrandApp brandApp10 = new BrandApp(null, "Sharp", "https://bizweb.dktcdn.net/100/488/001/themes/910675/assets/thuonghieu_11.jpg?1696088382489");
 
         brandService.create(brandApp1);
         brandService.create(brandApp2);
@@ -88,22 +86,20 @@ public class initData implements CommandLineRunner {
         brandService.create(brandApp7);
         brandService.create(brandApp8);
         brandService.create(brandApp9);
-        brandService.create(brandApp12);
-        brandService.create(brandApp11);
         brandService.create(brandApp10);
 
         //product info
-        ProductInfo productInfo1 = new ProductInfo(null, "Chat lieu", "Nhom");
-        ProductInfo productInfo2 = new ProductInfo(null, "Thong so 1 ", "Ths1");
-        ProductInfo productInfo3 = new ProductInfo(null, "Thong so 2 ", "Ths2");
+        ProductInfo productInfo1 = new ProductInfo(null, "Xuất xứ", "Thương hiệu: Nhật - Sản xuất tại: Việt Nam");
+        ProductInfo productInfo2 = new ProductInfo(null, "Loại Gas lạnh ", "R32");
+        ProductInfo productInfo3 = new ProductInfo(null, "Loại máy ", "Inverter - loại 1 chiều (chỉ làm lạnh)");
         productInfoService.insert(productInfo1);
         productInfoService.insert(productInfo2);
         productInfoService.insert(productInfo3);
 
         //product
-        Product product1 = new Product("product1", BigDecimal.valueOf(999), 9d, imgTest, category1, brandApp1);
-        Product product2 = new Product("product2", BigDecimal.valueOf(999), 9d, imgTest, category1, brandApp2);
-        Product product3 = new Product("product3", BigDecimal.valueOf(999), 9d, imgTest, category1, brandApp2);
+        Product product1 = new Product("Máy lạnh Daikin Inverter", BigDecimal.valueOf(999), 9d, "https://bizweb.dktcdn.net/100/488/001/products/maylanhdaikininverter25hp.jpg?v=1686045426487", category1, brandApp1);
+        Product product2 = new Product("Máy xay đa năng Panasonic ", BigDecimal.valueOf(999), 9d, "https://bizweb.dktcdn.net/100/488/001/products/may-xay-sinh-to-multi-0-77-1.jpg?v=1686119933390", category1, brandApp2);
+        Product product3 = new Product("Máy lạnh tủ đứng ", BigDecimal.valueOf(999), 9d, "https://bizweb.dktcdn.net/thumb/large/100/488/001/products/may-lanh-tu-dung-funiki-fc50-5-1.jpg?v=1686062079340", category1, brandApp2);
         Product product4 = new Product("product4", BigDecimal.valueOf(999), 9d, imgTest, category1, brandApp3);
         Product product5 = new Product("product5", BigDecimal.valueOf(999), 9d, imgTest, category1, brandApp3);
         Product product6 = new Product("product6", BigDecimal.valueOf(999), 9d, imgTest, category1, brandApp3);

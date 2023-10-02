@@ -143,12 +143,18 @@
                                             <div class="product_image">
                                                 <img th:src="${product.image}" alt="img">
                                             </div>
-                                            <div class="favorite favorite_left"></div>
-                                            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+                                            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-[[${product.percentDiscount}]]%</span></div>
                                             <div class="product_info">
                                                 <h6 class="product_name"><a th:href="@{'/product?id='+${product.id}}">[[${product.name}]]</a></h6>
                                                 <div class="product_price">[[${#numbers.formatDecimal(product.priceDiscount, 3,'POINT', 0,'COMMA')}]]đ
-                                                    <span>[[${#numbers.formatDecimal(product.price, 3,'POINT', 0,'COMMA')}]]đ</span></div>
+                                                    <span>[[${#numbers.formatDecimal(product.price, 3,'POINT', 0,'COMMA')}]]đ</span>
+                                                </div>
+                                                <div class="rate__star">
+                                                    <div class="group-star__prod">
+                                                        <i th:each="star_item : ${#numbers.sequence(1, product.avgStar)}" class="fas fa-star"></i>
+                                                        <span>([[${product.evaluates.size()}]] đánh giá)</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="main_button add_to_cart_button">

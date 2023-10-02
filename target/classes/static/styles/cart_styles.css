@@ -173,7 +173,7 @@
         padding-left: 0;
     }
     .cart_section_container {
-        margin-top: 92px;
+        margin-top: 142px;
     }
 }
 
@@ -191,5 +191,8 @@
     .main__cart .title,
     .row .cart-item{
         margin: 0;
+    }
+    .cart_section_container {
+        margin-top: 92px;
     }
 }

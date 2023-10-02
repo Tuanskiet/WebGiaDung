@@ -16,6 +16,9 @@ $(window).on('load', function() {
     }
     let totalPay = parseInt(JSON.parse(localStorage.getItem('totalPay'))) || 0;
     $('.totalCart').html(formatDecimal(totalPay));
+    /*localStorage.removeItem('listCartItemSelected');
+    localStorage.removeItem('totalPay');*/
+
 });
 
 
@@ -52,6 +55,7 @@ async function updateCart(action ,productId){
     $('#checkout_items').text(amountCart);
     updateQuantityCartSelected(productId, cartItem.val());
     updateTotalPay(action ,productId);
+    window.location.reload();
 }
 async function deleteCart(productId){
     let data  = { productId: productId}
