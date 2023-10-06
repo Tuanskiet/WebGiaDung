@@ -16,4 +16,12 @@ public interface BrandService {
     Optional<BrandApp> findById(Integer brandId);
 
     Page<BrandApp> getAllWithPagination(Pageable pageable);
+
+//    void updateStatus(Integer id, Boolean statusChanged);
+
+    void deleteById(Integer id);
+
+    Page<BrandApp> findByKeyword(String keyword, Pageable pageable);
+
+    Page<BrandApp> getWithSortAndPagination(Pageable pageable);
 }

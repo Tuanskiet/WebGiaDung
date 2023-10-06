@@ -56,7 +56,7 @@
                     <div class="wrapper__info-product">
                       <img th:src="${orderItem.imageProduct}" alt="error">
                       <div class="info_product">
-                        <a th:href="@{'/detail-product/'+${orderItem.productSlug}}" class="main__product-name">[[${orderItem.name}]]</a>
+                        <a href="#" class="main__product-name">[[${orderItem.name}]]</a>
                         <div class="main__product-amount">
                           <div class="main__product-price">
                             [[${#numbers.formatDecimal(orderItem.price, 3,'POINT', 0,'COMMA')}]] đ

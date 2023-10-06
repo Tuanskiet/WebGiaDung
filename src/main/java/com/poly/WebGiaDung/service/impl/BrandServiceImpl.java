@@ -34,4 +34,20 @@ public class BrandServiceImpl implements BrandService {
     public Page<BrandApp> getAllWithPagination(Pageable pageable) {
         return brandRepo.findAll(pageable);
     }
+
+
+    @Override
+    public void deleteById(Integer id) {
+        brandRepo.deleteById(id);
+    }
+
+    @Override
+    public Page<BrandApp> findByKeyword(String keyword, Pageable pageable) {
+        return brandRepo.findByKeyword(keyword, pageable);
+    }
+
+    @Override
+    public Page<BrandApp> getWithSortAndPagination(Pageable pageable) {
+        return brandRepo.findAll(pageable);
+    }
 }

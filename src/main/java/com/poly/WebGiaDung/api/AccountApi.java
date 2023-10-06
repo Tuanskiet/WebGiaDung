@@ -67,7 +67,7 @@ public class AccountApi {
         if(ObjectUtils.isEmpty(userApp)) return "NOT FOUND";
         myUserService.updatePassword(userApp, codeGenerate);
         try{
-            sendEmail.sendMail(MessageUtils.SUBJECT_MAIL_FORGOT_PASSWORD,email, bodySend);
+            sendEmail.sendMail(MessageUtils.Account.SUBJECT_MAIL_FORGOT_PASSWORD.getVal(),email, bodySend);
         }catch(Exception e) {
             return "ERROR";
         }

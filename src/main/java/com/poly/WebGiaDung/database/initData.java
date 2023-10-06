@@ -89,9 +89,9 @@ public class initData implements CommandLineRunner {
         brandService.create(brandApp10);
 
         //product info
-        ProductInfo productInfo1 = new ProductInfo(null, "Xuất xứ", "Thương hiệu: Nhật - Sản xuất tại: Việt Nam");
-        ProductInfo productInfo2 = new ProductInfo(null, "Loại Gas lạnh ", "R32");
-        ProductInfo productInfo3 = new ProductInfo(null, "Loại máy ", "Inverter - loại 1 chiều (chỉ làm lạnh)");
+        ProductInfo productInfo1 = new ProductInfo("Xuất xứ", "Thương hiệu: Nhật - Sản xuất tại: Việt Nam");
+        ProductInfo productInfo2 = new ProductInfo("Loại Gas lạnh ", "R32");
+        ProductInfo productInfo3 = new ProductInfo("Loại máy ", "Inverter - loại 1 chiều (chỉ làm lạnh)");
         productInfoService.insert(productInfo1);
         productInfoService.insert(productInfo2);
         productInfoService.insert(productInfo3);
@@ -107,7 +107,7 @@ public class initData implements CommandLineRunner {
         Product product8 = new Product("product8", BigDecimal.valueOf(999), 9d, imgTest, category2, brandApp3);
         Product product9 = new Product("product9", BigDecimal.valueOf(999), 9d, imgTest, category2, brandApp3);
         Product product10 = new Product("product10", BigDecimal.valueOf(999), 9d, imgTest, category3, brandApp3);
-        product1.setProductInfo(List.of(productInfo1,productInfo2,productInfo3));
+//        product1.setProductInfo(List.of(productInfo1,productInfo2,productInfo3));
         productService.create(product1);
         productService.create(product2);
         productService.create(product3);

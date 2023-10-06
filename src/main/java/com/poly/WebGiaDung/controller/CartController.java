@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -17,10 +18,11 @@ public class CartController {
     private final CartItemService cartItemService;
 
     @GetMapping("/cart")
-    public String mainPage(Model model, @AuthenticationPrincipal MyUserDetails userDetails) {
+    public String mainPage(Model model, @AuthenticationPrincipal MyUserDetails userDetails, HttpSession session) {
         if(userDetails != null){
             List<CartItem> cartItemList = cartItemService.getCartsByUser(userDetails.getUserApp());
             model.addAttribute("listCart", cartItemList);
+            session.setAttribute("sizeCart", cartItemService.getSize(userDetails.getUserApp()));
             return "user/cart";
         }
         return "login";

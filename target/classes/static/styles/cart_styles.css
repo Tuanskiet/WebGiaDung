@@ -162,6 +162,10 @@
     border-radius: 0 4px 4px 0;
 }
 
+input[name="chkCartItem"] {
+    scale: 1.6;
+    cursor: pointer;
+}
 /* ===Reponsive=== */
 
 @media (max-width: 1023px) {

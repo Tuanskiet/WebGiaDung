@@ -1,5 +1,6 @@
 package com.poly.WebGiaDung.service;
 
+import com.poly.WebGiaDung.dto.ProductRequest;
 import com.poly.WebGiaDung.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,7 +11,7 @@ import java.util.Optional;
 public interface ProductService {
     List<Product> getTopDiscount();
 
-    Product create(Product product1);
+    Product create(ProductRequest productRequest);
     Product findBySlug(String slug);
 
     List<Product> findByCategoryId(Integer id);
@@ -20,4 +21,15 @@ public interface ProductService {
     Page<Product> getAllAndActiveTrue(Pageable pageable);
 
     Page<Product> getByBrandIdAndActive(Integer brandId, Pageable pageable);
+
+    Page<Product> findByKeyword(String keyword, Pageable pageable);
+
+    Page<Product> getProductsWithSortAndPagination(Pageable pageable);
+
+    Product create(Product product);
+
+    void update(Product product);
+    void updateStatus(Integer id, Boolean statusChanged);
+
+    void deleteById(Integer id);
 }

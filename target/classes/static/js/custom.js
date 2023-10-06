@@ -162,6 +162,10 @@ jQuery(document).ready(function($)
             }).then(function(response) {
                  if(response === 'OK'){
                   /*  $("#my-Register").hide();*/
+                    $(".account_not_found_message").hide();
+                    $(".invalid_password_message").hide();
+                    $('#email_modal_login').val("");
+                    $('#pass_modal_login').val("");
                     window.location.hash = "my-Login";
                  }else if(response === 'ALREADY_EXIST'){
                     $(".error_email_signup").text('Tài khoản đã tồn tại!');
@@ -214,8 +218,7 @@ jQuery(document).ready(function($)
     });
 
     $('#logout').on('click', function(){
-        localStorage.removeItem('listCartItemSelected');
-        localStorage.removeItem('totalPay');
+         localStorage.clear();
     })
     /* end forgot password*/
 

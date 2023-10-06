@@ -66,10 +66,10 @@ $('.totalOrder').html(formatDecimal(total));
                     localStorage.removeItem('totalPay');
                 }
             }).fail(function(error){
-                alert('error' + error)
+                console.error(error);
             })
         }else{
-            alert('null')
+            alert("Please select product!")
         }
 
     });

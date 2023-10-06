@@ -62,7 +62,7 @@ public class OrderApi {
                 log.info("sent email for : {}", myUserDetails.getUserApp().getEmail());
                 session.setAttribute("sizeCart", updateSizeCart(myUserDetails));
             } catch (MessagingException e) {
-                throw new RuntimeException(e);
+                log.info("Email have problem! - {}", e.getMessage());
             }
         }
         return ResponseEntity.status(200).body("OK");

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--Pagination-->
+<div th:fragment="pagination(href)" class="row justify-content-between">
+    <div class="col-sm-12 col-md-5">
+        <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">
+            Showing [[${currentPage}]] to [[${totalPages}]] of [[${totalElements}]] entries
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-7">
+        <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+            <ul class="pagination">
+                <li class="paginate_button page-item previous " th:classappend="${currentPage <= 1 ? 'disabled' : ''}">
+                    <a  class="page-link" th:href="@{'/admin/'+${href}+'?page='+${currentPage -1}}">Previous</a>
+                </li>
+                <th:block th:each="item : ${#numbers.sequence(1, totalPages)}">
+                    <li th:if="${(item > totalPages - 2 && totalPages > 0)
+                                || (item >= currentPage - 2 && item <= currentPage && totalPages > 0) }" class="paginate_button page-item"
+                        th:classappend="${item == currentPage ? 'active' : ''}">
+                        <a th:href="@{'/admin/'+${href}+'?page='+${item}}" class="page-link">[[${item}]]</a>
+                    </li>
+                    <li th:if="${(item == currentPage+1 && currentPage < totalPages-1
+                    && totalPages &gt; 5) || (item == currentPage - 3 && currentPage >= totalPages-1 )}" class="paginate_button page-item">
+                        <a href="#" class="page-link">...</a>
+                    </li>
+                </th:block>
+                <li class="paginate_button page-item next" th:classappend="${currentPage >= totalPages ? 'disabled' : ''}">
+                    <a  th:href="@{'/admin/'+${href}+'?page='+${currentPage + 1}}"class="page-link">Next</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--pagination-->
+</body>
+</html>

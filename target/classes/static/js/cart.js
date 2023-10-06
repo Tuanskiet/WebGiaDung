@@ -5,7 +5,6 @@ var urlDeleteCart = "/cart/delete";
 
 $(window).on('load', function() {
     let currentItemSelected = JSON.parse(localStorage.getItem('listCartItemSelected')) || [];
-
     if (currentItemSelected.length > 0) {
         $('input[name=chkCartItem]').each(function(index, item) {
             let checkExist = currentItemSelected.findIndex(cartItem => cartItem.productId === $(item).data('product-id'));
@@ -18,9 +17,7 @@ $(window).on('load', function() {
     $('.totalCart').html(formatDecimal(totalPay));
     /*localStorage.removeItem('listCartItemSelected');
     localStorage.removeItem('totalPay');*/
-
 });
-
 
 /* add cart */
 async function addToCart(productId, quantity){
@@ -53,22 +50,28 @@ async function updateCart(action ,productId){
     }
     let amountCart = await callAjaxPromise('POST', urlUpdateCart, data);
     $('#checkout_items').text(amountCart);
-    updateQuantityCartSelected(productId, cartItem.val());
-    updateTotalPay(action ,productId);
+    localStorage.removeItem('listCartItemSelected');
+    localStorage.removeItem('totalPay');
     window.location.reload();
+/*    updateQuantityCartSelected(productId, cartItem.val());
+    updateTotalPay(action ,productId);
+    window.location.reload();*/
 }
 async function deleteCart(productId){
+    //update total cart
+    updateTotalPay('decrease' ,productId);
+
     let data  = { productId: productId}
     let amountCart = await callAjaxPromise('DELETE', urlDeleteCart, data);
     $('#cartItem'+ productId).remove();
     $('#checkout_items').text(amountCart);
+
 }
 // choose product to -> pay
 $('input[name=chkCartItem]').on('click', function() {
     let productId = $(this).data('product-id');
     let productPrice = $(this).data('product-price');
     let quantity = $('#cart'+productId).val();
-
 
     // Lấy danh sách mặt hàng đã chọn từ localStorage
     let currentItemSelected = JSON.parse(localStorage.getItem('listCartItemSelected')) || [];
@@ -107,13 +110,13 @@ function updateTotalPay(action, productId) {
     let listInput = $('input[name=chkCartItem]');
     let priceProduct = 0;
     listInput.each(function(index, item) {
-        if ($(item).data('product-id') === productId && $(item).prop('checked')) { // Sử dụng $(item) để truy cập jQuery object
+        if ($(item).data('product-id') === productId && $(item).prop('checked')) {
             priceProduct = $(item).data('product-price');
             let totalPay = parseInt(localStorage.getItem('totalPay')) || 0;
 
             if (action === 'decrease') {
                 totalPay -= parseInt(priceProduct);
-            } else {
+            }else {
                 totalPay += parseInt(priceProduct);
             }
             $('.totalCart').html(formatDecimal(totalPay));
@@ -122,9 +125,17 @@ function updateTotalPay(action, productId) {
     });
 }
 
+
 // go pay
 $('#order').on('click', function(){
     let currentItemSelected = JSON.parse(localStorage.getItem('listCartItemSelected')) || [];
+    let totalPay = parseInt(localStorage.getItem('totalPay')) || 0;
+    try{
+        parseInt(totalPay);
+    }catch(error){
+         event.preventDefault();
+    }
+
 
     if(currentItemSelected.length !== 0){
         // hanh dong thuc hien

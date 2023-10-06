@@ -1,5 +1,6 @@
 package com.poly.WebGiaDung.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,4 +23,15 @@ public class ProductInfo {
 
     @Column(name = "[value]")
     private String value;
+
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    public ProductInfo(String key, String value) {
+        this.key = key;
+        this.value = value;
+    }
 }

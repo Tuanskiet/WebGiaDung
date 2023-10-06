@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="admin/_layout :: view(~{:: .content-wrapper}, 'Cập nhật sản phẩm')">
+<body>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Dashboard</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <div class="card card-primary card-outline">
+                <div class="alert alert-danger add_product-error" style="display : none;">
+                    Lỗi
+                </div>
+                <form th:action="@{/admin/manager-product/update}" th:object="${productEdit}" method="post" id="formEditProduct" class="card-body">
+                    <input type="hidden" th:field="*{id}" th:value="${productEdit.id}">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Thông tin SP</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Hình ảnh</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Thông số chi tiết</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="name">Tên sản phẩm </label>
+                                        <input  th:field="*{name}" type="text" class="form-control" id="name" required placeholder="Enter name product ...">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="price">Giá sản phẩm</label>
+                                        <input th:field="*{price}"   type="number" min="0" max="2147483646" id="price" required class="form-control" placeholder="Price product ...">
+                                    </div>
+                                    <div class="col">
+                                        <label for="percent_discount">Giảm giá (%)</label>
+                                        <input th:field="*{percentDiscount}"  type="number" min="0" max="100" class="form-control" id="percent_discount" placeholder="Percent discount ...">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <div class="form-group" >
+                                            <label for="category">Tên danh mục : </label>
+                                            <select  th:field="*{category}"  id="category" required class="form-control select2 select2-hidden-accessible" style="width: 100%;" >
+                                                <option th:each="item : ${listCategories}"
+                                                        th:selected="${item.id == productEdit.category.id}"
+                                                        th:value="${item.id}"
+                                                        th:text="${item.name}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group" >
+                                            <label for="brand">Hãng : </label>
+                                            <select th:field="*{brandApp}"  id="brand" required class="form-control select2 select2-hidden-accessible" style="width: 100%;">
+                                                <option th:each="item, iStar : ${listBrands}"
+                                                        th:selected="${item.id == productEdit.brandApp.id}"
+                                                        th:value="${item.id}"
+                                                        th:text="${item.name}"
+                                                ></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="description">Mô tả : </label>
+                                        <textarea id="description"
+                                                  th:field="*{description}"
+                                                  th:uvalue="${productEdit.description}"
+                                                  th:utext="${productEdit.description}"></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                            <div class="row mb-3 mt-2">
+                                <div class="col">
+                                    <label for="main_img">Ảnh chính : </label>
+                                    <input th:field="*{image}" type="text" class="form-control" id="main_img" placeholder="Main image product ...">
+                                </div>
+                            </div>
+                            <th:block th:if="${productEdit.productImages.size() > 0}">
+                                <div th:each="img, itemStat : *{productImages}" class="row mb-3">
+                                    <div class="col">
+                                        <label >Ảnh [[${itemStat.index + 1}]] : </label>
+                                        <input th:field="*{productImages[__${itemStat.index}__].url}" type="text" name="subImage" class="form-control"  placeholder="Image ..."/>
+                                    </div>
+                                </div>
+                            </th:block>
+
+                            <th:block th:if="${productEdit.productImages.size() == 0}">
+                                <div th:each="img, itemStat : ${#numbers.sequence(1, 3)}" class="row mb-3">
+                                    <div class="col">
+                                        <label >Ảnh [[${itemStat.index  + 1}]]: </label>
+                                        <input th:field="*{productImages[__${itemStat.index}__].url}" type="text" name="subImage" class="form-control"  placeholder="Image ..."/>
+                                    </div>
+                                </div>
+                            </th:block>
+
+                        </div>
+                        <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+                            <div id="info_product-list">
+                                <div th:each="item, itemStat : *{productInfo}" class="row align-items-end mb-3 mt-2 info_product-item" th:data-index="${itemStat.index}">
+                                    <div class="col">
+                                        <label>Thông số</label>
+                                        <input th:field="*{productInfo[__${itemStat.index}__].key}" type="text" name="keyInfo"  class="form-control" placeholder="Nhập thông số ...">
+                                    </div>
+                                    <div class="col">
+                                        <label >Giá trị</label>
+                                        <input th:field="*{productInfo[__${itemStat.index}__].value}" type="text" name="valueInfo" class="form-control" placeholder="Nhập giá trị ...">
+                                    </div>
+                                    <div class="col">
+                                        <button type="button" th:onclick="deleteInfoItem([[${itemStat.index}]])" class="btn btn-danger delete_product_info">
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-warning addInfo mt-2">Thêm thông số</button>
+                        </div>
+                     </div>
+
+                    <div class="tab-custom-content">
+                        <button type="submit"  class="btn btn-success">Cập nhật sản phẩm</button>
+                        <button type="reset" class="btn btn-secondary">Nhập lại</button>
+                    </div>
+                </form>
+                <!-- /.card -->
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+    <script  th:inline="javascript">
+        $(document).ready(function() {
+          $('#description').summernote({
+            placeholder: 'Write some sort description here',
+            tabsize: 2,
+            height: 80,
+            toolbar: [
+              ['style', ['style']],
+              ['font', ['bold', 'underline', 'clear']],
+              ['color', ['color']],
+              ['para', ['ul', 'ol', 'paragraph']],
+              ['table', ['table']],
+              ['insert', ['link', 'picture', 'video']],
+              ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+          });
+
+       });
+    </script>
+    <script th:src="@{/admin/dist/js/add_product.js}"></script>
+</div>
+<!-- /.content-wrapper -->
+</body>
+</html>

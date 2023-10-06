@@ -16,8 +16,6 @@ import java.util.List;
 @Repository
 public interface ProductRepo extends JpaRepository<Product, Integer> {
     Product findBySlug(String slug);
-    @Query(value = "SELECT * FROM products p WHERE is_active = true ORDER BY quantity_sold DESC", nativeQuery = true )
-    Page<Product> getTopSelling(Pageable pageable);
 
     @Query(value = "SELECT * FROM products p WHERE is_active = true ORDER BY percent_discount DESC", nativeQuery = true )
     Page<Product> getTopDiscount(Pageable pageable);
@@ -28,7 +26,7 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
     @Query(value = "SELECT p FROM Product p WHERE p.category.slug = :categorySlug AND isActive = true" )
     Page<Product> getProductActiveByCategory(String categorySlug, Pageable pageable);
 
-    @Query(value = "SELECT * FROM products  name LIKE %:keyword%", nativeQuery = true)
+    @Query(value = "SELECT * FROM products WHERE name LIKE %:keyword%", nativeQuery = true)
     Page<Product> findByKeyword(String keyword, Pageable pageable);
     @Query(value = "SELECT * FROM products  WHERE name LIKE %:keyword%", nativeQuery = true)
     List<Product> findByKeyword(String keyword);
