@@ -59,7 +59,7 @@ async function updateCart(action ,productId){
 }
 async function deleteCart(productId){
     //update total cart
-    updateTotalPay('decrease' ,productId);
+    updateTotalPay('delete' ,productId);
 
     let data  = { productId: productId}
     let amountCart = await callAjaxPromise('DELETE', urlDeleteCart, data);
@@ -116,6 +116,12 @@ function updateTotalPay(action, productId) {
 
             if (action === 'decrease') {
                 totalPay -= parseInt(priceProduct);
+            }else if (action === 'delete') {
+                let quantity = $('#cart'+productId).val();
+                totalPay -= (parseInt(priceProduct)*quantity);
+                let currentItemSelected = JSON.parse(localStorage.getItem('listCartItemSelected')) || [];
+                currentItemSelected = currentItemSelected.filter(item => item.productId !== productId);
+                localStorage.setItem('listCartItemSelected', JSON.stringify(currentItemSelected));
             }else {
                 totalPay += parseInt(priceProduct);
             }
@@ -135,8 +141,6 @@ $('#order').on('click', function(){
     }catch(error){
          event.preventDefault();
     }
-
-
     if(currentItemSelected.length !== 0){
         // hanh dong thuc hien
     }else{
