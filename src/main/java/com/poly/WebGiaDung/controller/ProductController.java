@@ -97,6 +97,6 @@ public class ProductController {
         model.addAttribute("dataBrands", brandService.getAll());
         model.addAttribute("dataSort", sortBy + "-" + orderBy);
         model.addAttribute("breadcrumb", brandService.findById(brandId).get().getName());
-        return "/user/list_product";
+        return "user/list_product.html";
     }
 }
