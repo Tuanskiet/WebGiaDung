@@ -4,7 +4,7 @@ var urlDeleteCart = "/cart/delete";
 
 
 $(window).on('load', function() {
-    let currentItemSelected = JSON.parse(localStorage.getItem('listCartItemSelected')) || [];
+   /* let currentItemSelected = JSON.parse(localStorage.getItem('listCartItemSelected')) || [];
     if (currentItemSelected.length > 0) {
         $('input[name=chkCartItem]').each(function(index, item) {
             let checkExist = currentItemSelected.findIndex(cartItem => cartItem.productId === $(item).data('product-id'));
@@ -14,9 +14,9 @@ $(window).on('load', function() {
         });
     }
     let totalPay = parseInt(JSON.parse(localStorage.getItem('totalPay'))) || 0;
-    $('.totalCart').html(formatDecimal(totalPay));
-    /*localStorage.removeItem('listCartItemSelected');
-    localStorage.removeItem('totalPay');*/
+    $('.totalCart').html(formatDecimal(totalPay));*/
+    localStorage.removeItem('listCartItemSelected');
+    localStorage.removeItem('totalPay');
 });
 
 

@@ -199,4 +199,7 @@ input[name="chkCartItem"] {
     .cart_section_container {
         margin-top: 92px;
     }
+    .main_nav_container {
+        width: 88%;
+    }
 }
