@@ -39,8 +39,10 @@ $('input[name=chkCartItem]').on('click', function() {
         // update total pay
         totalPay += (productPrice*quantity);
     }else{
-        currentItemSelected = currentItemSelected.filter(item => item.productId !== productId);
-        totalPay -= (productPrice*quantity);
+        if(totalPay != 0){
+            currentItemSelected = currentItemSelected.filter(item => item.productId !== productId);
+            totalPay -= (productPrice*quantity);
+        }
     }
     // Lưu danh sách cập nhật vào localStorage
     localStorage.setItem('listCartItemSelected', JSON.stringify(currentItemSelected));
