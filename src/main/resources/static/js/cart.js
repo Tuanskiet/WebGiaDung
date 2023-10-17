@@ -19,6 +19,39 @@ $(window).on('load', function() {
     localStorage.removeItem('totalPay');*/
 });
 
+
+$(document).ready(function() {
+$('input[name=chkCartItem]').on('click', function() {
+    let productId = $(this).data('product-id');
+    let productPrice = $(this).data('product-price');
+    let quantity = $('#cart'+productId).val();
+
+    // Lấy danh sách mặt hàng đã chọn từ localStorage
+    let currentItemSelected = JSON.parse(localStorage.getItem('listCartItemSelected')) || [];
+    let totalPay = parseInt(JSON.parse(localStorage.getItem('totalPay'))) || 0;
+    if ($(this).prop('checked')) {
+        // push cart item into localStorage
+        let cartDtoItem = {
+            productId: productId,
+            quantity: quantity
+        };
+        currentItemSelected.push(cartDtoItem);
+        // update total pay
+        totalPay += (productPrice*quantity);
+    }else{
+        currentItemSelected = currentItemSelected.filter(item => item.productId !== productId);
+        totalPay -= (productPrice*quantity);
+    }
+    // Lưu danh sách cập nhật vào localStorage
+    localStorage.setItem('listCartItemSelected', JSON.stringify(currentItemSelected));
+    localStorage.setItem('totalPay', JSON.stringify(totalPay));
+    $('.totalCart').html(formatDecimal(totalPay));
+});
+
+});
+
+
+
 /* add cart */
 async function addToCart(productId, quantity){
     let data  = {
@@ -68,32 +101,7 @@ async function deleteCart(productId){
 
 }
 // choose product to -> pay
-$('input[name=chkCartItem]').on('click', function() {
-    let productId = $(this).data('product-id');
-    let productPrice = $(this).data('product-price');
-    let quantity = $('#cart'+productId).val();
 
-    // Lấy danh sách mặt hàng đã chọn từ localStorage
-    let currentItemSelected = JSON.parse(localStorage.getItem('listCartItemSelected')) || [];
-    let totalPay = parseInt(JSON.parse(localStorage.getItem('totalPay'))) || 0;
-    if ($(this).prop('checked')) {
-        // push cart item into localStorage
-        let cartDtoItem = {
-            productId: productId,
-            quantity: quantity
-        };
-        currentItemSelected.push(cartDtoItem);
-        // update total pay
-        totalPay += (productPrice*quantity);
-    }else{
-        currentItemSelected = currentItemSelected.filter(item => item.productId !== productId);
-        totalPay -= (productPrice*quantity);
-    }
-    // Lưu danh sách cập nhật vào localStorage
-    localStorage.setItem('listCartItemSelected', JSON.stringify(currentItemSelected));
-    localStorage.setItem('totalPay', JSON.stringify(totalPay));
-    $('.totalCart').html(formatDecimal(totalPay));
-});
 
 function updateQuantityCartSelected(productId, quantity){
     let currentItemSelected = JSON.parse(localStorage.getItem('listCartItemSelected')) || [];
