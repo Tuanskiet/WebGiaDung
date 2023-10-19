@@ -52,20 +52,20 @@
                     <!-- Brand -->
                     <div class="sidebar_section brand_filter">
                         <div class="sidebar_title">
-                            <h5>Thương hiệu</h5>
+                            <h5>Các danh mục khác</h5>
                         </div>
                         <ul class="sidebar_brands">
-                            <li th:each="item, iStar : ${dataBrands}" th:classappend="${item.id == brandId ?'active': ''}">
-                                <a th:href="@{'/list-product/brand?id='+${item.id}}">
-                                    <span th:if="${item.id == brandId}">
+                            <li th:each="item, iStar : ${session.dataCategory}" th:classappend="${item.slug == slugCategory ?'active': ''}">
+                                <a th:href="@{'/list-product?category='+${item.slug}}">
+                                    <span th:if="${item.slug == slugCategory}">
                                         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                                     </span>
                                     [[${item.name}]]
                                 </a>
                             </li>
                         </ul>
-                        <input type="hidden" name="pageBrand" value="1">
-                        <!--<div class="show_more">
+                        <!--<input type="hidden" name="pageBrand" value="1">
+                        <div class="show_more">
                             <span><span>+</span>Hiển thị thêm</span>
                         </div>-->
                     </div>

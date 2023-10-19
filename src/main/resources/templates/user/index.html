@@ -28,7 +28,7 @@
         </div>
 
         <!-- List brand -->
-        <div class="container">
+        <!--<div class="container">
             <div class="list__brand-wrapper mt-4">
                 <ul class="owl-carousel owl-theme list__brand-slider" >
                     <li th:each="item : ${dataBrands}" class="owl-item brand-item">
@@ -49,7 +49,7 @@
                     <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </div>
             </div>
-        </div>
+        </div>-->
 
         <!-- List category -->
         <div class="category_list">
@@ -57,7 +57,7 @@
                 <div class="row">
                     <div class="col text-center">
                         <div class="section_title new_arrivals_title">
-                            <h2>DANH MỤC HOT</h2>
+                            <h2>DỊCH VỤ và ƯU ĐÃI</h2>
                         </div>
                     </div>
                 </div>
@@ -77,56 +77,52 @@
 
         <!-- List product by category -->
         <th:block th:each="category :  ${session.dataCategory}" th:if="${category.products.size() > 0 }" >
-            <div class="new_arrivals">
-                <div class="container list__product">
-                    <div class="row">
-                        <div class="col heading__list-item text-left">
-                            <div class="link__more">
-                                <div class="heading_list">
-                                    <span class="name_category"> [[${category.name}]]</span>
-                                    <span class="amount_product">( [[${category.products.size()}]] sản phẩm)</span>
-                                </div>
-                                <a th:href="@{'/list-product?category='+${category.slug}}">Xem thêm
-                                    <i class="fas fa-long-arrow-alt-right"></i>
-                                </a>
+            <div class="list__product">
+                <div class="row">
+                    <div class="col heading__list-item text-left">
+                        <div class="link__more">
+                            <div class="heading_list">
+                                <span class="name_category"> [[${category.name}]]</span>
+                                <span class="amount_product">( [[${category.products.size()}]] sản phẩm)</span>
                             </div>
                         </div>
+                        <a th:href="@{'/list-product?category='+${category.slug}}" class="view__all">Xem thêm
+                            <i class="fas fa-angle-double-right"></i>
+                        </a>
                     </div>
-                    <div class="row">
-                        <div class="col list__product-wrapper">
-                            <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
-                                <!-- Product item-->
-                                <th:block th:if="${category.products.size() > 0 }">
-                                    <div  th:each="product : ${category.products}" class="product-item" th:if="${product.isActive}">
-                                        <div class="product discount product_filter">
-                                            <div class="product_image">
-                                                <img th:src="${product.image}" alt="img">
-                                            </div>
-                                            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-[[${product.percentDiscount}]]%</span></div>
-                                            <div class="product_info">
-                                                <h6 class="product_name"><a th:href="@{'/product?id='+${product.id}}">[[${product.name}]]</a></h6>
-                                                <div class="product_price">[[${#numbers.formatDecimal(product.priceDiscount, 3,'POINT', 0,'COMMA')}]]đ
-                                                    <span>[[${#numbers.formatDecimal(product.price, 3,'POINT', 0,'COMMA')}]]đ</span>
-                                                </div>
-                                                <div class="rate__star">
-                                                    <div class="group-star__prod">
-                                                        <i th:each="star_item : ${#numbers.sequence(1, product.avgStar)}" class="fas fa-star"></i>
-                                                        <span>([[${product.evaluates.size()}]] đánh giá)</span>
-                                                    </div>
-                                                </div>
-                                            </div>
+                </div>
+                <div class="row">
+                    <!-- Product item-->
+                    <th:block th:if="${category.products.size() > 0 }">
+                        <div  th:each="product : ${category.products}" th:if="${product.isActive}" class="col-lg-2 col-md-3 col-sm-6 col-6 product-item-wrapper">
+                            <div class="product-item" >
+                                <div class="discount product_filter">
+                                    <div class="product_image">
+                                        <img th:src="${product.image}" alt="img">
+                                    </div>
+                                    <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-[[${product.percentDiscount}]]%</span></div>
+                                    <div class="product_info">
+                                        <h6 class="product_name"><a th:href="@{'/product?id='+${product.id}}">[[${product.name}]]</a></h6>
+                                        <div class="product_price">[[${#numbers.formatDecimal(product.priceDiscount, 3,'POINT', 0,'COMMA')}]]đ
+                                            <span>[[${#numbers.formatDecimal(product.price, 3,'POINT', 0,'COMMA')}]]đ</span>
                                         </div>
-                                        <div class="main_button add_to_cart_button">
-                                            <a th:onclick="addToCart([[${product.id}]], 1)">
-                                                <i class="fas fa-cart-plus"></i>
-                                                Thêm vào giỏ
-                                            </a>
+                                        <div class="rate__star">
+                                            <div class="group-star__prod">
+                                                <i th:each="star_item : ${#numbers.sequence(1, product.avgStar)}" class="fas fa-star"></i>
+                                                <span>([[${product.evaluates.size()}]] đánh giá)</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </th:block>
+                                </div>
+                                <div class="main_button add_to_cart_button">
+                                    <a th:onclick="addToCart([[${product.id}]], 1)">
+                                        <i class="fas fa-cart-plus"></i>
+                                        Thêm vào giỏ
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </th:block>
                 </div>
             </div>
         </th:block>

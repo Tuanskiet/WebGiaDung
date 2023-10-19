@@ -35,7 +35,7 @@
 <th:block th:fragment="header_nav">
   <header class="header trans_300">
     <!-- Top Navigation -->
-    <div class="top_nav">
+    <!--<div class="top_nav">
       <div class="container">
         <div class="row">
           <div class="col">
@@ -43,20 +43,20 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
 
     <!-- Main Navigation -->
 
     <div class="main_nav_container">
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 text-left">
+          <div class="col-lg-12 text-left nav-fix">
             <div class="logo_container">
               <a th:href="@{/}" class="logo_wrapper">
-                <img class="logo_img" th:src="@{/images/logo.png}" alt="logo">
+                <img class="logo_img" th:src="@{/images/gia_dung_logo.jpg}" alt="logo">
                 <div class="logo_info">
-                  <div class="logo_name"> <span>Yasuki</span></div>
-                  <div class="logo_text">Gia dụng giá rẻ</div>
+                  <div class="logo_name"> <span>Kết Nối</span></div>
+                  <div class="logo_text">Tiêu Dùng Việt</div>
                 </div>
               </a>
             </div>
@@ -75,7 +75,8 @@
                 </li>
                 <li>
                   <a th:href="@{/order/history}" class="nav_item" id="orderHistory">
-                    <img th:src="@{/images/history.png}" alt="ic">
+<!--                    <img th:src="@{/images/history.png}" alt="ic">-->
+                    <i class="fas fa-history"></i>
                     <div class="hotline">
                       <span>Lịch sử</span>
                       <span>đơn hàng</span>
@@ -84,7 +85,8 @@
                 </li>
                 <li>
                   <a href="#" class="nav_item">
-                    <img th:src="@{/images/phone_32.png}" alt="ic">
+<!--                    <img th:src="@{/images/phone_32.png}" alt="ic">-->
+                    <i class="fas fa-phone-alt" ></i>
                     <div class="hotline">
                       <span>Hotline</span>
                       <span class="phone_number">0123456789</span>
@@ -146,7 +148,7 @@
                 </div> -->
                 <div class="hamburger_container">
                   <i class="fa fa-bars" aria-hidden="true"></i>
-                  <span>Tất cả danh mục</span>
+                  <span>Sản Phẩm, Dịch vụ & Ưu Đãi</span>
                 </div>
 
               </div>
@@ -173,7 +175,12 @@
 
   <div class="fs_menu_overlay"></div>
   <div class="hamburger_menu">
-    <div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+    <div class="head__menu">
+      <div class="brand__name">
+        <h4>KẾT NỐI TIÊU DÙNG VIỆT</h4>
+      </div>
+      <div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+    </div>
     <div class="hamburger_menu_content text-left">
       <ul class="menu_top_nav">
         <li th:each="item, iStar : ${session.dataCategory}" class="menu_item" th:data-id="${item.id}">
@@ -187,49 +194,56 @@
   </div>
 </th:block>
 
-<div  th:fragment="footer" class="container">
+<div  th:fragment="footer" class="container-fluid">
   <footer class="py-5">
     <div class="row">
-      <div class="col-lg-2 col-md-6 col-sm-12 footer-item">
-        <h5 class="footer_header">Menu</h5>
-        <ul class="nav flex-column">
-          <li th:each="item, iStar : ${session.dataCategory}" class="nav-item mb-2">
-            <a th:if="${iStar.index <= 6}" th:href="@{'/list-product?category=' +${item.slug}}" class="nav-link p-0 text-muted">[[${item.name}]]</a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="col-lg-2 col-md-6 col-sm-12 footer-item">
-        <h5 class="footer_header">Hỗ trợ khách hàng</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Hướng dẫn mua hàng</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Giải đáp thắc mắc</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Chính sách mua hàng</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Chính sách đổi trả</a></li>
-        </ul>
-      </div>
-
-      <div class="col-lg-3 col-md-6 col-sm-12 footer-item">
-        <h5 class="footer_header">Liên hệ</h5>
+      <div class="col-lg-4 col-md-6 col-sm-12 footer-item">
+        <h5 class="footer_header">Liên Hệ</h5>
         <ul class="nav flex-column">
           <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-muted">
+            <a href="#" class="nav-link p-0 text-footer">
+              <i class="fas fa-building"></i> Công Ty TMDV Kết Nối Tiêu Dùng Việt
+            </a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link p-0 text-footer">
               <i class="fas fa-map-marked-alt"></i>
-              Đường số 7, Phường Linh Xuân, Quận Thủ Đức, Tp.HCM
+              Địa chỉ 1: 27 Châu Văn Liêm, phường Xuân Thanh, TP Long Khánh, tỉnh Đồng Nai
             </a>
           </li>
           <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-muted">
-              <i class="fas fa-phone"></i> 0123456789
+            <a href="#" class="nav-link p-0 text-footer">
+              <i class="fas fa-map-marked-alt"></i>
+              Địa chỉ 2: Đường số 7, phường Linh Xuân, quận Thủ Đức, TP Thủ Đức
             </a>
           </li>
           <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-muted">
+            <a href="#" class="nav-link p-0 text-footer">
+              <i class="fas fa-phone"></i> 096 5030 581 (Mr. Đông)
+            </a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link p-0 text-footer">
+              <i class="fas fa-phone"></i> 094 6324 094 (Ms. Thảo)
+            </a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link p-0 text-footer">
               <i class="fas fa-envelope"></i>
               yasuki.shop@gmail.com
             </a>
           </li>
           <li class="nav-item mb-2">
+            <a href="#" class="nav-link p-0 text-footer d-flex align-items-center fw-700">
+
+              WEBSITE CÙNG CÔNG TY
+              <div class="brand__group">
+                <img th:src="@{/images/yasuki_logo.jpg}" alt="img">
+                <span class="brand__name__hyper">Yasuki</span>
+              </div>
+            </a>
+          </li>
+          <!--<li class="nav-item mb-2">
             <div class="social-group">
               <a href="#" class="social-item"><i class="fab fa-facebook-f"></i>
               </a>
@@ -242,9 +256,50 @@
               <a href="#" class="social-item"><i class="fab fa-youtube"></i>
               </a>
             </div>
+          </li>-->
+        </ul>
+      </div>
+      <div class="col-lg-2 col-md-6 col-sm-12 footer-item">
+        <h5 class="footer_header">Sản Phẩm, Dịch vụ & Ưu Đãi</h5>
+        <h6 class="sub_text-footer">* Sản Phẩm</h6>
+        <ul class="nav flex-column">
+          <li th:each="item, iStar : ${session.dataCategory}" class="nav-item mb-2" th:if="${iStar.index < 4}">
+            <a  th:href="@{'/list-product?category=' +${item.slug}}"
+               class="nav-link p-0 text-footer">[[${item.name}]]</a>
+          </li>
+        </ul>
+        <h6 class="sub_text-footer">* Dịch Vụ</h6>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link p-0 text-footer">Thi công công trình</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link p-0 text-footer">Sửa chữa - lắp đặt</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link p-0 text-footer">Vệ sinh - bảo dưỡng</a>
+          </li>
+        </ul>
+        <h6 class="sub_text-footer">* Ưu Đãi</h6>
+        <ul class="nav flex-column">
+          <li  class="nav-item mb-2">
+            <a href="#" class="nav-link p-0 text-footer">Khách hàng thân thiết</a>
           </li>
         </ul>
       </div>
+
+      <div class="col-lg-2 col-md-6 col-sm-12 footer-item">
+        <h5 class="footer_header">Hỗ Trợ Khách Hàng</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-footer">Hướng dẫn mua hàng</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-footer">Giải đáp thắc mắc</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-footer">Chính sách mua hàng</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-footer">Chính sách đổi trả</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-footer">Chính sách bảo hành</a></li>
+        </ul>
+      </div>
+
+
 
       <div class="col-lg-4 col-md-6 col-sm-12 footer-item">
         <h5 class="footer_header">Đăng ký để nhận được được thông tin ưu đãi mới nhất từ chúng tôi.</h5>

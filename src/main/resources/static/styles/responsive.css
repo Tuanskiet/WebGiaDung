@@ -73,10 +73,10 @@
 	{
 		height: 220px;
 	}
-	.product-item
+	/*.product-item
 	{
 		height: 360px;
-	}
+	}*/
 	.product
 	{
 		height: 320px;
@@ -156,10 +156,10 @@
 		font-size: 16px;
 		line-height: 40px;
 	}
-	.product-item
+	/*.product-item
 	{
 		width: 25%;
-	}
+	}*/
 	.deal_ofthe_week_col
 	{
 		display: -webkit-box;
@@ -310,11 +310,11 @@
 	{
 		margin-top: 30px;
 	}
-	.product-item
+	/*.product-item
 	{
 		width: 33.333333333333%;
 		height: 345px;
-	}
+	}*/
 	.product
 	{
 		height: 305px;
@@ -330,10 +330,10 @@
 	{
 		height: auto;
 	}
-	.product_slider_item .product-item
+	/*.product_slider_item .product-item
 	{
 		height: 380px;
-	}
+	}*/
 	.benefit_col
 	{
 		margin-bottom: 15px;
@@ -359,11 +359,11 @@
 {
 
 
-	.product-item
+	/*.product-item
 	{
 		width: 50%;
 		height: 420px;
-	}
+	}*/
 	.product
 	{
 		height: 380px;
@@ -459,10 +459,10 @@
 		min-width: 60px;
 		height: 35px;
 	}
-	.product-item
+	/*.product-item
 	{
 		height: auto;
-	}
+	}*/
 	.product
 	{
 		height: auto;
@@ -470,10 +470,6 @@
 	.product_name a
 	{
 		font-size: 16px;
-	}
-	.add_to_cart_button
-	{
-		margin-top: 20px;
 	}
 	.deal_ofthe_week_img
 	{
@@ -510,23 +506,23 @@
 		margin-top: 36px;
 	}
 
-	.product_slider_item .product-item
+	/*.product_slider_item .product-item
 	{
 		width: 100%;
 		height: auto;
-	}
+	}*/
 	.product_slider_item .product-item:hover::after
 	{
 		box-shadow: none;
 	}
-	.product_slider_item .product-item .product
+	/*.product_slider_item .product-item .product
 	{
 		height: auto;
 	}
 	.product_slider_item .product-item .product_info
 	{
 		padding-bottom: 30px;
-	}
+	}*/
 	.blog_title
 	{
 		font-size: 16px;

@@ -24,7 +24,7 @@ import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 public class ProductController {
-    private static final int PRODUCT_PER_PAGE = 2;
+    private static final int PRODUCT_PER_PAGE = 6;
     private final ProductService productService;
     private final EvaluateService evaluateService;
     private final BrandService brandService;
@@ -53,11 +53,12 @@ public class ProductController {
 
         Page<Product> listProduct ;
         String breadcrumb = "";
+        String slugCategory = SlugGenerator.generateSlug(categoryShow);
         if(!categoryShow.equals("")){
-            String slug = SlugGenerator.generateSlug(categoryShow);
-            listProduct = productService.getListProductsByCategory(slug, pageable);
+           ;
+            listProduct = productService.getListProductsByCategory(slugCategory, pageable);
 
-            String categoryName = categoryService.findBySlug(slug).get().getName();
+            String categoryName = categoryService.findBySlug(slugCategory).get().getName();
             breadcrumb = categoryName;
         }else if(!keyword.equals("")){
             listProduct = productService.findByKeywordAndActive(keyword, pageable);
@@ -70,6 +71,7 @@ public class ProductController {
         model.addAttribute("totalPages", listProduct.getTotalPages());
         model.addAttribute("dataBrands", brandService.getAll());
         model.addAttribute("keyword", keyword);
+        model.addAttribute("slugCategory", slugCategory);
         model.addAttribute("dataSort", sortBy + "-" + orderBy);
         model.addAttribute("breadcrumb", breadcrumb);
 

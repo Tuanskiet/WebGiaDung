@@ -85,8 +85,8 @@
 }
 .product_sorting li .sorting_type
 {
-    background: #FFFFFF;
-    box-shadow: 0 15px 25px rgba(63, 78, 100, 0.15);
+    background: #ebfcff;
+    box-shadow: 0px 3px 3px 0px rgb(122 164 187 / 64%);
     -webkit-transition: opacity 0.3s ease;
     -moz-transition: opacity 0.3s ease;
     -ms-transition: opacity 0.3s ease;
@@ -99,6 +99,7 @@
     border: solid 1px #ecedee;
     padding-left: 20px;
     padding-right: 20px;
+    font-size: 15px;
 }
 .product_sorting > li:hover ul
 {
@@ -147,24 +148,27 @@
 }
 .page_current
 {
-	display: inline-block;
-	position: relative;
-	width: 40px;
-	height: 40px;
-	line-height: 40px;
-	cursor: pointer;
-	text-align: center;
-	border: solid 1px #ecedee;
-	margin-right: 16px;
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    cursor: pointer;
+    text-align: center;
+    border: solid 1px #ecedee;
+    margin-right: 16px;
+    background: #ebfcff;
+    box-shadow: 1px 1px 1px 0px rgb(122 164 187 / 64%);
 }
 .product_sorting_container_bottom .pages .page_current
 {
 	background: #fe4c50;
 	border: none;
 }
-.page_current span
-{
-	color: #51545f;
+
+.page_current span {
+    color: black;
+    font-weight: 600;
 }
 .product_sorting_container_bottom .pages .page_current span
 {
@@ -300,7 +304,6 @@
 {
 	float: left;
 	width: 200px;
-	padding-right: 17px;
 }
 .sidebar_section
 {
@@ -310,8 +313,10 @@
 }
 .sidebar_title h5
 {
-	font-size: 18px;
-	margin-bottom: 10px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 .sidebar_brands{
     padding : 0;
@@ -319,6 +324,7 @@
 .sidebar_brands li.active a
 {
 	color: #fe4c50;
+    font-weight: 700;
 }
 .sidebar_brands li.active:hover a
 {
@@ -326,7 +332,7 @@
 }
 .sidebar_brands li a
 {
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 40px;
 	color: #51545f;
 }

@@ -48,7 +48,7 @@
 
 @media only screen and (max-width: 1199px){
     .category__slider {
- 		max-width: 700px;
+        max-width: calc(100vw - 90px);
  	}
  	.navbar_menu li a {
  	    padding: 20px 10px;
@@ -81,6 +81,9 @@
 	#newsletter_email {
 	    width: 250px;
 	}
+	.main_slider{
+	    display: none;
+    }
 }
 
 
