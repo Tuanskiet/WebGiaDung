@@ -20,6 +20,7 @@
                 <div class="breadcrumbs d-flex flex-row align-items-center">
                     <ul>
                         <li><a th:href="@{/}">Trang chủ</a></li>
+                        <li><a th:href="@{/list-product}"><i class="fa fa-angle-right" aria-hidden="true"></i>Sản phẩm</a></li>
                         <li class="active"><a th:href="@{/}"><i class="fa fa-angle-right" aria-hidden="true"></i>[[${breadcrumb}]]</a></li>
                     </ul>
                 </div>
@@ -154,6 +155,17 @@
                                                         <i th:each="star_item : ${#numbers.sequence(1, product.avgStar)}" class="fas fa-star"></i>
                                                         <span>([[${product.evaluates.size()}]] đánh giá)</span>
                                                     </div>
+                                                    <button th:onclick="'toggleCompareItem(this, __${product.id}__, event);'" th:data-product-id="${product.id}"  class="compare__item">
+                                                        <div class="compare__icon checked__status">
+                                                            <i class="fas fa-check-circle checked__icon"></i>
+                                                            <span class="title__compare">Đã thêm so sánh</span>
+                                                        </div>
+                                                        <div class="compare__icon add__status">
+                                                            <i class="fas fa-plus-circle add__icon"></i>
+                                                            <span class="title__compare">So sánh</span>
+                                                        </div>
+
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -203,10 +215,73 @@
         </div>
     </div>
 </div>
+<div class="stick-compare">
+    <div class="list-compare">
+        <div class="col l-3 wrapper__item-compare">
+            <div class="item__plus-compare">
+                <div class="icon__plus-compare">
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="title__add-compare">Thêm sản phẩm</div>
+            </div>
+        </div>
+        <div class="col l-3 wrapper__item-compare">
+            <div class="item__plus-compare">
+                <div class="icon__plus-compare">
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="title__add-compare">Thêm sản phẩm</div>
+            </div>
+        </div>
+        <div class="col l-3 wrapper__item-compare">
+            <div class="item__plus-compare">
+                <div class="icon__plus-compare">
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="title__add-compare">Thêm sản phẩm</div>
+            </div>
+        </div>
+        <div class="col l-3">
+            <div class="wrapper__btn_compare">
+                <button id="btnCompareProduct" class="btn btn-compare"
+                        data-toggle="modal" data-target="#modalCompare">
+                    So sánh ngay
+                </button>
+                <div class="txtremoveall">Xóa tất cả <span class="part_res">sản phẩm</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="collapse__list-compare">
+        <span>Thu gọn</span>
+        <i class="fas fa-angle-down"></i>
+    </div>
+</div>
+<div class="popup__compare">
+    <i class="fas fa-exchange-alt"></i>
+    <div class="popup__compare-title">So sánh</div>
+    <div>(<span class="total__item-compare">0</span>)</div>
+</div>
+
+<div class="modal fade" id="modalCompare" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="modalLabelCompare" aria-hidden="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title modal__compare-title" id="modalLabelCompare">So sánh sản phẩm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="main__tbl-compare"></div>
+            </div>
+        </div>
+    </div>
+</div>
 <footer th:replace="user/fragments :: footer"></footer>
 <div th:replace="user/fragments :: modal_form"></div>
 <th:block th:replace="user/fragments :: js_file"></th:block>
 <script th:src="@{/js/list_product_custom.js}"></script>
+<script th:src="@{/js/list_product_compare.js}"></script>
 <script th:src="@{/js/cart.js}"></script>
 
 

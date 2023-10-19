@@ -91,13 +91,7 @@ public class initData implements CommandLineRunner {
         brandService.create(brandApp9);
         brandService.create(brandApp10);
 
-        //product info
-        ProductInfo productInfo1 = new ProductInfo("Xuất xứ", "Thương hiệu: Nhật - Sản xuất tại: Việt Nam");
-        ProductInfo productInfo2 = new ProductInfo("Loại Gas lạnh ", "R32");
-        ProductInfo productInfo3 = new ProductInfo("Loại máy ", "Inverter - loại 1 chiều (chỉ làm lạnh)");
-        productInfoService.insert(productInfo1);
-        productInfoService.insert(productInfo2);
-        productInfoService.insert(productInfo3);
+
 
         //product
         Product product1 = new Product("Máy lạnh Daikin Inverter", BigDecimal.valueOf(999), 9d, "https://bizweb.dktcdn.net/100/488/001/products/maylanhdaikininverter25hp.jpg?v=1686045426487", category1, brandApp1);
@@ -121,6 +115,20 @@ public class initData implements CommandLineRunner {
         productService.create(product8);
         productService.create(product9);
         productService.create(product10);
+
+        //product info
+        ProductInfo productInfo1 = new ProductInfo("Xuất xứ", "Thương hiệu: Nhật - Sản xuất tại: Việt Nam");
+        ProductInfo productInfo2 = new ProductInfo("Loại Gas lạnh ", "R32");
+        ProductInfo productInfo3 = new ProductInfo("Loại máy ", "Inverter - loại 1 chiều (chỉ làm lạnh)");
+        ProductInfo productInfo4 = new ProductInfo("Loại máy ", "Inverter - loại 2 chiều (chỉ làm lạnh)");
+        productInfo1.setProduct(product1);
+        productInfo2.setProduct(product1);
+        productInfo3.setProduct(product2);
+        productInfo3.setProduct(product3);
+        productInfoService.insert(productInfo1);
+        productInfoService.insert(productInfo2);
+        productInfoService.insert(productInfo3);
+        productInfoService.insert(productInfo4);
 
         CartDto cartDto1 = new CartDto(1, 1 );
         CartDto cartDto2 = new CartDto(1, 2);

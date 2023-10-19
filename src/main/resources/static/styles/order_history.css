@@ -26,6 +26,7 @@
     border-radius: 4px;
     background: #f7f7f7;
     transition: all .5s;
+    box-shadow: 1px 1px 6px 0px #818181;
 }
 
 .tab__filter-order .item__filter-order{

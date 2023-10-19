@@ -79,6 +79,17 @@
 	.brand_filter{
 	    display : none;
 	}
+    .list-compare .item__data-compare {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .item__data-compare .img__item-compare{
+        width: 50%;
+    }
+    .item__data-compare .name__item-compare {
+        width: 100%;
+        margin-top: 10px;
+    }
 }
 
 /************
@@ -258,6 +269,15 @@
         border-radius: 2px;
         font-size: 16px;
         font-weight: 300;
+    }
+    .item__data-compare .img__item-compare{
+        width: 100%;
+    }
+    .item__data-compare .name__item-compare {
+        font-size: 14px;
+    }
+    .wrapper__item-compare{
+        padding: 0;
     }
 }
 
@@ -479,6 +499,17 @@
 		margin-top: 5px;
 		margin-bottom: 30px;
 	}
+	/*compare*/
+	.txtremoveall{
+	    font-size: 14px;
+	}
+    .wrapper__btn_compare .btn-compare{
+         padding: 4px 6px;
+         margin-left: 0px;
+    }
+    .part_res{
+        display :none;
+    }
 }
 
 /************

@@ -174,4 +174,7 @@
         .form-control {
             height: 28px;
         }
+        .nav-fix{
+            margin: 0;
+        }
 }

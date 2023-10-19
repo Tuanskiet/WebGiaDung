@@ -256,7 +256,7 @@ section
 .blue_button{
     background: var(--main-cl);
     font-weight: 600;
-    color: white;
+    color: var(--sub-color-1);
     cursor: pointer;
 }
 .red_button a {
@@ -950,6 +950,7 @@ section
 }
 .logo_name{
     color: var(--sub-color-1);
+    font-weight: 800;
 }
 
 /*********************************
