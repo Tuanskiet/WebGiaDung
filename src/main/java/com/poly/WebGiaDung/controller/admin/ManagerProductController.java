@@ -1,9 +1,6 @@
 package com.poly.WebGiaDung.controller.admin;
 
-
-import com.poly.WebGiaDung.dto.ProductRequest;
 import com.poly.WebGiaDung.entity.Product;
-import com.poly.WebGiaDung.service.BrandService;
 import com.poly.WebGiaDung.service.MyCategoryService;
 import com.poly.WebGiaDung.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -17,17 +14,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
 public class ManagerProductController {
-    private static final int PRODUCT_PER_PAGE = 5;
+    private final int PRODUCT_PER_PAGE = 5;
 
     private final ProductService productService;
     private final MyCategoryService categoryService;
-    private final BrandService brandService;
 
     @GetMapping("/admin/manager-product")
     public String viewListProductPage(
@@ -55,7 +50,6 @@ public class ManagerProductController {
     @GetMapping("/admin/manager-product/add")
     public String  viewAddProductPage(Model model){
         model.addAttribute("listCategories", categoryService.getAllCategory());
-        model.addAttribute("listBrands", brandService.getAll());
         return "admin/add_product";
     }
 
@@ -66,7 +60,6 @@ public class ManagerProductController {
             return "redirect:/admin/manager-product";
         }
         model.addAttribute("listCategories", categoryService.getAllCategory());
-        model.addAttribute("listBrands", brandService.getAll());
         model.addAttribute("productEdit", product.get());
         return "admin/edit_product";
     }

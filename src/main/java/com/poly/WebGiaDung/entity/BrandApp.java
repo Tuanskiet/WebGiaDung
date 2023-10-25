@@ -12,8 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
-@Table(name="brands_app")
+/*@Entity
+@Table(name="brands_app")*/
 public class BrandApp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

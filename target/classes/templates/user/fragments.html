@@ -4,9 +4,10 @@
 <head th:fragment="main_header(condition)" th:remove="${condition}">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Colo Shop Template">
+  <meta name="description" content="Kết Nối Tiêu Dùng Việt">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" th:href="@{/styles/bootstrap4/bootstrap.min.css}">
+  <link rel="icon" type="image/x-icon"  class="favicon-icon" th:href="@{/images/favicon.png}">
+  <link rel="stylesheet" type="text/css"  th:href="@{/styles/bootstrap4/bootstrap.min.css}">
 
   <!-- Font Quicksand -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -69,7 +70,6 @@
                       <button type="submit" class="header__search-icon" >
                         <i class="fa fa-search" aria-hidden="true"></i>
                       </button>
-
                     </form>
                   </div>
                 </li>
@@ -189,7 +189,26 @@
           </a>
           <i class="fa fa-chevron-right" aria-hidden="true"></i>
         </li>
+
+        <li th:each="item, iStar : ${session.dataCategory}" class="menu_item" th:data-id="${item.id}">
+          <a th:href="@{'/list-product?category=' +${item.slug}}">
+            [[${item.name}]]
+          </a>
+          <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        </li>
       </ul>
+
+     <div class="menu_phone">
+       <a href="#">
+         <i class="fas fa-phone"></i>
+         096 5030 581 (Mr. Đông)
+       </a>
+
+       <a href="#">
+         <i class="fas fa-phone"></i>
+         094 6324 094 (Ms. Thảo)
+       </a>
+     </div>
     </div>
   </div>
 </th:block>
@@ -304,11 +323,9 @@
       <div class="col-lg-4 col-md-6 col-sm-12 footer-item">
         <h5 class="footer_header">Đăng ký để nhận được được thông tin ưu đãi mới nhất từ chúng tôi.</h5>
         <div class="d-flex w-100 gap-2">
-          <div >
-            <div class="newsletter_form d-flex flex-row align-items-center  justify-content-center">
-              <input id="newsletter_email" type="email" placeholder="Nhập Email ..." required="required" data-error="Valid email is required.">
-              <button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">Đăng kí</button>
-            </div>
+          <div class="newsletter_form d-flex flex-row align-items-center  justify-content-center">
+            <input id="newsletter_email" type="email" placeholder="Nhập Email ..." required="required" data-error="Valid email is required.">
+            <button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">Đăng kí</button>
           </div>
         </div>
       </div>

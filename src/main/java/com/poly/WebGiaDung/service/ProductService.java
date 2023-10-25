@@ -20,7 +20,7 @@ public interface ProductService {
     Page<Product> findByKeywordAndActive(String keyword, Pageable pageable);
     Page<Product> getAllAndActiveTrue(Pageable pageable);
 
-    Page<Product> getByBrandIdAndActive(Integer brandId, Pageable pageable);
+//    Page<Product> getByBrandIdAndActive(Integer brandId, Pageable pageable);
 
     Page<Product> findByKeyword(String keyword, Pageable pageable);
 

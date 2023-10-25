@@ -10,6 +10,9 @@
         --bgCount: #ffe645;
         --textCount: #000000;*/
 }
+.favicon-icon{
+    border-radius : 50%;
+}
 /***********
 1. Fonts
 ***********/
@@ -781,7 +784,7 @@ section
 .hamburger_menu_content
 {
 	width: 100%;
-	height: 100%;
+	height: calc(100% - 90px);
     background: #dffaff;
     overflow-y: scroll;
 }
@@ -845,6 +848,7 @@ section
     height: 50px;
     line-height: 50px;
     font-size: 16px;
+    flex-grow: 1;
 }
 /*.menu_item > a:hover
 {
@@ -913,6 +917,16 @@ section
 .group-star__prod i{
     color: #ffbf2e;
 }
+.menu_phone{
+    padding: 10px 20px;
+    margin-bottom: 30px;
+}
+.menu_phone > a {
+    display: block;
+    color: var(--sub-color-1);
+    font-weight: 600;
+}
+
 /*********************************
 3.6 Logo
 *********************************/
@@ -1095,9 +1109,10 @@ section
 .newsletter_form
 {
 	height: 120px;
+	width: 100%;
 }
 #newsletter_email {
-    width: 300px;
+    width: 70%;
     height: 46px;
     background: #FFFFFF;
     border: none;
@@ -1147,7 +1162,7 @@ section
 }
 .newsletter_submit_btn
 {
-    width: 160px;
+    width: 30%;
     height: 46px;
     border: none;
     background: #741b47;

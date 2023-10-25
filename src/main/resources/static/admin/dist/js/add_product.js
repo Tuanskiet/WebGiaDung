@@ -41,7 +41,7 @@ $('#btnAddProduct').on('click', ()=>{
     var price = $('#price').val();
     var percentDiscount = $('#percent_discount').val();
     var categoryId = $('#category').val();
-    var brandId = $('#brand').val();
+    var brandApp = $('#brand').val();
     var description = $('#description').val();
     var image = $('#main_img').val();
     var subImages = [];
@@ -83,7 +83,7 @@ $('#btnAddProduct').on('click', ()=>{
         price           : price,
         percentDiscount : percentDiscount,
         categoryId      : categoryId,
-        brandAppId      : brandId,
+        brandApp        : brandApp,
         description     : description,
         image           : image,
         subImages       : subImages,

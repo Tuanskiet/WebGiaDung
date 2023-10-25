@@ -13,13 +13,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-//@Component
+@Component
 @RequiredArgsConstructor
 public class initData implements CommandLineRunner {
     private final RoleService roleService;
     private final MyUserService userService;
     private final MyCategoryService categoryService;
-    private final BrandService brandService;
     private final ProductService productService;
     private final ProductInfoService productInfoService;
     private final CartItemService cartItemService;
@@ -80,7 +79,7 @@ public class initData implements CommandLineRunner {
         BrandApp brandApp9 = new BrandApp(null, "Retech", "https://bizweb.dktcdn.net/100/488/001/themes/910675/assets/thuonghieu_9.jpg?1696088382489");
         BrandApp brandApp10 = new BrandApp(null, "Sharp", "https://bizweb.dktcdn.net/100/488/001/themes/910675/assets/thuonghieu_11.jpg?1696088382489");
 
-        brandService.create(brandApp1);
+/*        brandService.create(brandApp1);
         brandService.create(brandApp2);
         brandService.create(brandApp3);
         brandService.create(brandApp4);
@@ -89,7 +88,7 @@ public class initData implements CommandLineRunner {
         brandService.create(brandApp7);
         brandService.create(brandApp8);
         brandService.create(brandApp9);
-        brandService.create(brandApp10);
+        brandService.create(brandApp10);*/
 
 
 

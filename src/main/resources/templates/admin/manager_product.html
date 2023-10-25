@@ -72,7 +72,7 @@
                                                     <tr th:each="item, iStat  : ${listProducts}">
                                                         <td th:text="${1 + iStat.index + (currentPage -1)*5}"></td>
                                                         <td th:text="${item.category.name}"></td>
-                                                        <td th:text="${item.brandApp.name}"></td>
+                                                        <td th:text="${item.brandApp}"></td>
                                                         <td class="truncate_td" th:text="${item.name}"></td>
                                                         <td th:text="${#numbers.formatDecimal(item.price, 3,'POINT', 0,'COMMA')}"></td>
                                                         <td th:text="${item.percentDiscount}"></td>
@@ -90,9 +90,15 @@
                                                                     <i class="nav-icon fas fa-edit"></i>
                                                                 </a>
                                                             </button>
+                                                            <button class="btn btn-success  me-2 ">
+                                                                <a th:href="@{'/admin/manager-comment?productId='+${item.id}}" class="text-white">
+                                                                    <i class="far fa-comments"></i>
+                                                                </a>
+                                                            </button>
                                                             <button th:onclick="deleteWithAjax([[${item.id}]])" class="btn btn-danger btnDelAccount">
                                                                 <i class="far fa-trash-alt"></i>
                                                             </button>
+
                                                         </td>
                                                     </tr>
                                                 </tbody>

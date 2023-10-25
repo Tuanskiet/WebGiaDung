@@ -41,12 +41,12 @@ jQuery(document).ready(function($)
 	$(window).on('resize', function()
 	{
 		initFixProductBorder();
-		setHeader();
+//		setHeader();
 	});
 
 	$(document).on('scroll', function()
 	{
-		setHeader();
+//		setHeader();
 	});
 
 	initMenu();

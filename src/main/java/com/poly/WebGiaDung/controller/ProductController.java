@@ -27,7 +27,6 @@ public class ProductController {
     private static final int PRODUCT_PER_PAGE = 6;
     private final ProductService productService;
     private final EvaluateService evaluateService;
-    private final BrandService brandService;
     private final MyCategoryService categoryService;
     private final CartItemService cartItemService;
 
@@ -69,7 +68,6 @@ public class ProductController {
         model.addAttribute("listProducts", listProduct.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", listProduct.getTotalPages());
-        model.addAttribute("dataBrands", brandService.getAll());
         model.addAttribute("keyword", keyword);
         model.addAttribute("slugCategory", slugCategory);
         model.addAttribute("dataSort", sortBy + "-" + orderBy);
@@ -81,24 +79,22 @@ public class ProductController {
         return "user/list_product";
     }
 
-    @GetMapping("/list-product/brand")
-    public String getProductByBrand(
-            @RequestParam(name="page", defaultValue = "1", required = false)  int page,
-            @RequestParam(name="sortBy",defaultValue = "id", required = false) String sortBy,
-            @RequestParam(name="orderBy", defaultValue = "asc",  required = false) String orderBy,
-            @RequestParam(name="id", defaultValue = "",  required = false) Integer brandId,
-            Model model, HttpServletRequest request){
-        Pageable pageable = PageRequest.of(page - 1, PRODUCT_PER_PAGE)
-                .withSort(Sort.by(Sort.Direction.fromString(orderBy), sortBy));
-
-        Page<Product> listProduct = productService.getByBrandIdAndActive(brandId, pageable);
-        model.addAttribute("listProducts", listProduct.getContent());
-        model.addAttribute("currentPage", page);
-        model.addAttribute("brandId", brandId);
-        model.addAttribute("totalPages", listProduct.getTotalPages());
-        model.addAttribute("dataBrands", brandService.getAll());
-        model.addAttribute("dataSort", sortBy + "-" + orderBy);
-        model.addAttribute("breadcrumb", brandService.findById(brandId).get().getName());
-        return "user/list_product.html";
-    }
+//    @GetMapping("/list-product/brand")
+//    public String getProductByBrand(
+//            @RequestParam(name="page", defaultValue = "1", required = false)  int page,
+//            @RequestParam(name="sortBy",defaultValue = "id", required = false) String sortBy,
+//            @RequestParam(name="orderBy", defaultValue = "asc",  required = false) String orderBy,
+//            @RequestParam(name="id", defaultValue = "",  required = false) Integer brandId,
+//            Model model, HttpServletRequest request){
+//        Pageable pageable = PageRequest.of(page - 1, PRODUCT_PER_PAGE)
+//                .withSort(Sort.by(Sort.Direction.fromString(orderBy), sortBy));
+//
+//        Page<Product> listProduct = productService.getByBrandIdAndActive(brandId, pageable);
+//        model.addAttribute("listProducts", listProduct.getContent());
+//        model.addAttribute("currentPage", page);
+//        model.addAttribute("brandId", brandId);
+//        model.addAttribute("totalPages", listProduct.getTotalPages());
+//        model.addAttribute("dataSort", sortBy + "-" + orderBy);
+//        return "user/list_product.html";
+//    }
 }

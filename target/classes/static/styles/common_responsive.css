@@ -78,11 +78,13 @@
 	.main-menu-header li{
 		padding: 0 4px;
 	}
-	#newsletter_email {
-	    width: 250px;
-	}
+
+
 	.main_slider{
 	    display: none;
+    }
+    .category_list {
+        margin-top: 90px;
     }
 }
 
@@ -127,7 +129,6 @@
     	.hamburger_menu_content
     	{
     		padding-right: 15px;
-    		padding-top: 70px;
     	}
     	.menu_item
     	{
@@ -158,9 +159,7 @@
             font-size: 10px;
             left: 25px;
     	}
-    	#newsletter_email {
-            width: 220px;
-        }
+
         .authen-modal{
             width: 90%;
         }

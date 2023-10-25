@@ -4,10 +4,6 @@ import com.poly.WebGiaDung.dto.ProductRequest;
 import com.poly.WebGiaDung.entity.BrandApp;
 import com.poly.WebGiaDung.entity.MyCategory;
 import com.poly.WebGiaDung.entity.Product;
-import com.poly.WebGiaDung.entity.ProductImage;
-import com.poly.WebGiaDung.repo.MyCategoryRepo;
-import com.poly.WebGiaDung.repo.ProductImageRepo;
-import com.poly.WebGiaDung.repo.ProductInfoRepo;
 import com.poly.WebGiaDung.repo.ProductRepo;
 import com.poly.WebGiaDung.service.*;
 import com.poly.WebGiaDung.utils.SlugGenerator;
@@ -18,7 +14,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +27,6 @@ public class ProductServiceImpl implements ProductService {
     private final ProductImageService productImageService;
     private final ProductInfoService productInfoService;
     private final MyCategoryService categoryService;
-    private final BrandService brandService;
     @Override
     public List<Product> getTopDiscount() {
         Page<Product> pageProducts = productRepo.getTopDiscount( PageRequest.of(0,PRODUCT_PER_TAB));
@@ -49,8 +43,8 @@ public class ProductServiceImpl implements ProductService {
 
         Product product = new Product();
 
-        Optional<BrandApp> brandApp = brandService.findById(productRequest.getBrandAppId());
-        if(brandApp.isEmpty()) throw new RuntimeException("Brand doesn't exist!");
+      /*  Optional<BrandApp> brandApp = brandService.findById(productRequest.getBrandAppId());
+        if(brandApp.isEmpty()) throw new RuntimeException("Brand doesn't exist!");*/
 
         Optional<MyCategory> category = categoryService.findById(productRequest.getCategoryId());
         if(category.isEmpty()) throw new RuntimeException("Category doesn't exist!");
@@ -62,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(productRequest.getDescription());
         product.setImage(productRequest.getImage());
         product.setCategory(category.get());
-        product.setBrandApp(brandApp.get());
+        product.setBrandApp(productRequest.getBrandApp());
         product.setProductImages(productRequest.getSubImages());
         product.setProductInfo(productRequest.getListProductInfo());
 
@@ -113,12 +107,12 @@ public class ProductServiceImpl implements ProductService {
         return productRepo.findByActiveTrue(pageable);
     }
 
-    @Override
+  /*  @Override
     public Page<Product> getByBrandIdAndActive(Integer brandId, Pageable pageable) {
         Optional<BrandApp> brandApp = brandService.findById(brandId);
         if (brandApp.isEmpty()) throw new IllegalArgumentException("Brand does not exist!");
         return productRepo.findByBrandAndActive(brandId, pageable);
-    }
+    }*/
 
     @Override
     public Page<Product> findByKeyword(String keyword, Pageable pageable) {

@@ -104,8 +104,12 @@
 }
 .product_details_title
 {
-	font-weight: 500px;
-	line-height: 30px;
+    line-height: 30px;
+}
+.product_details_title h2{
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--sub-color-1);
 }
 .product_details_title p
 {

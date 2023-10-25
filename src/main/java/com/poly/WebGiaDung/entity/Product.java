@@ -57,10 +57,11 @@ public class Product implements Serializable {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private MyCategory category;
 
-    @JsonIgnore
+  /*  @JsonIgnore
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "brand_id", referencedColumnName = "id")
-    private BrandApp brandApp;
+    private BrandApp brandApp;*/
+    private String brandApp;
 
     @JsonIgnore
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
@@ -82,7 +83,6 @@ public class Product implements Serializable {
         this.percentDiscount = percentDiscount;
         this.image = image;
         this.category = category;
-        this.brandApp = brandApp;
     }
 
     @Transient

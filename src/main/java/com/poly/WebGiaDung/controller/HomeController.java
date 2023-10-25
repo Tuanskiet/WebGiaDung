@@ -3,7 +3,6 @@ package com.poly.WebGiaDung.controller;
 import com.poly.WebGiaDung.dto.CartDto;
 import com.poly.WebGiaDung.entity.MyCategory;
 import com.poly.WebGiaDung.security.MyUserDetails;
-import com.poly.WebGiaDung.service.BrandService;
 import com.poly.WebGiaDung.service.CartItemService;
 import com.poly.WebGiaDung.service.MyCategoryService;
 import com.poly.WebGiaDung.service.ProductService;
@@ -19,7 +18,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HomeController {
     private final MyCategoryService myCategoryService;
-    private final BrandService brandService;
     private final ProductService productService;
     private final CartItemService cartItemService;
 
@@ -28,7 +26,6 @@ public class HomeController {
                             @AuthenticationPrincipal MyUserDetails myUserDetails){
         List<MyCategory> myCategoryList = myCategoryService.getAllCategoryActive();
         httpSession.setAttribute("dataCategory", myCategoryList);
-        model.addAttribute("dataBrands", brandService.getAll());
         model.addAttribute("listTopDiscount", productService.getTopDiscount());
         int sizeCart = 0;
         if(myUserDetails != null) sizeCart = cartItemService.getSize(myUserDetails.getUserApp());

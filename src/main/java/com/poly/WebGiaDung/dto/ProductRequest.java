@@ -34,7 +34,7 @@ public class ProductRequest {
 
     private Integer categoryId;
 
-    private Integer brandAppId;
+    private String brandApp;
 
     private List<ProductImage> subImages;
 
