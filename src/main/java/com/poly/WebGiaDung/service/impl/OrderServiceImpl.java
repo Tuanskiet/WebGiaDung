@@ -57,15 +57,15 @@ public class OrderServiceImpl implements OrderService {
 
         orderItemRepo.deleteAllByOrder(newOrder);
 
-        Set<OrderItem> listOrderItem = new HashSet<>();
+//        Set<OrderItem> listOrderItem = new HashSet<>();
 
         for (CartDto item : orderDtoList.getCartDtoList() ) {
             Product product = productService.findById(item.getProductId()).get();
-            OrderItem orderItem = new OrderItem(item.getQuantity(),
-                    product.getName(), product.getPrice());
-            orderItem.setImageProduct(product.getImage());
-            orderItem.setProductSlug(product.getSlug());
-            listOrderItem.add(orderItem);
+            OrderItem orderItem = new OrderItem();
+            orderItem.setOldPrice(product.getPriceDiscount());
+            orderItem.setProduct(product);
+            orderItem.setQuantity(item.getQuantity());
+//            listOrderItem.add(orderItem);
             orderItem.setOrder(newOrder);
             orderItemRepo.save(orderItem);
         }

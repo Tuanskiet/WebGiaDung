@@ -19,4 +19,6 @@ public interface MyCategoryRepo extends JpaRepository<MyCategory, Integer> {
     List<MyCategory> findByIsActiveTrue();
 
     Optional<MyCategory> findBySlug(String slug);
+
+    List<MyCategory> findTop5ByTypeAndIsActiveTrue(String type);
 }

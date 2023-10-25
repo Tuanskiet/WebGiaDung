@@ -66,11 +66,11 @@ public class SendEmailService {
             BigDecimal itemTotal = product.get().getPrice()
                     .multiply(BigDecimal.valueOf(cartDto.getQuantity()));
             totalPayment = totalPayment.add(itemTotal); // Update totalPayment correctly
-            orderList.add(new OrderItem(
-                    cartDto.getQuantity(),
-                    product.get().getName(),
-                    product.get().getPrice()
-            ));
+
+            OrderItem orderItem = new OrderItem();
+            orderItem.setProduct(product.get());
+            orderItem.setQuantity(cartDto.getQuantity());
+            orderList.add(orderItem);
         }
 
 

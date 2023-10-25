@@ -1,6 +1,7 @@
 package com.poly.WebGiaDung.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.poly.WebGiaDung.enums.CategoryType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,11 @@ public class MyCategory implements Serializable {
     private Integer id;
     private String name;
 
+    @Column(columnDefinition = "TEXT")
+    private String policy;
+
+    private String type; //Product | Service
+
     @Column(name="image",length = 1024)
     private String image;
 
@@ -36,8 +42,11 @@ public class MyCategory implements Serializable {
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Product> products = new ArrayList<>();
 
-    public MyCategory(String name, String image) {
+    public MyCategory(String name,  String type, String image) {
         this.name = name;
         this.image = image;
+        this.type = type;
     }
+
+
 }

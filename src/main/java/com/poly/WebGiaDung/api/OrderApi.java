@@ -12,6 +12,7 @@ import com.poly.WebGiaDung.service.ProductService;
 import com.poly.WebGiaDung.service.SendEmailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
@@ -61,11 +62,26 @@ public class OrderApi {
                         myUserDetails.getUserApp().getEmail(),orderDtoList);
                 log.info("sent email for : {}", myUserDetails.getUserApp().getEmail());
                 session.setAttribute("sizeCart", updateSizeCart(myUserDetails));
-            } catch (MessagingException e) {
+            } catch (Exception e) {
                 log.info("Email have problem! - {}", e.getMessage());
             }
         }
         return ResponseEntity.status(200).body("OK");
+    }
+
+    /*admin*/
+    @GetMapping(value = "/admin/manager-order/find-by-category", produces = MediaType.APPLICATION_JSON_VALUE )
+    public List<Product> findListProdToOrderCategory(
+            @RequestParam(name = "id") Integer id,
+            Model model){
+        return productService.getListProductsByCategoryId(id);
+    }
+
+    @GetMapping(value = "/admin/manager-order/find-by-keyword", produces = MediaType.APPLICATION_JSON_VALUE )
+    public List<Product> findListProdToOrderByKeyword(
+            @RequestParam(name = "keyword") String keyword,
+            Model model){
+        return productService.findByKeyword(keyword);
     }
 
     public int updateSizeCart(MyUserDetails myUserDetails){

@@ -24,4 +24,6 @@ public interface MyCategoryService {
     List<MyCategory> getAllCategoryActive();
 
     Optional<MyCategory> findBySlug(String slug);
+
+    List<MyCategory> getTop5ByType(String product);
 }

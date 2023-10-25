@@ -54,12 +54,12 @@
                 <div th:each="orderItem, itrStat : ${order.listOrderItem}" class="order__item" >
                   <div class="col l-8 ">
                     <div class="wrapper__info-product">
-                      <img th:src="${orderItem.imageProduct}" alt="error">
+                      <img th:src="${orderItem.product.image}" alt="error">
                       <div class="info_product">
-                        <a href="#" class="main__product-name">[[${orderItem.name}]]</a>
+                        <a href="#" class="main__product-name">[[${orderItem.product.name}]]</a>
                         <div class="main__product-amount">
                           <div class="main__product-price">
-                            [[${#numbers.formatDecimal(orderItem.price, 3,'POINT', 0,'COMMA')}]] đ
+                            [[${#numbers.formatDecimal(orderItem.oldPrice, 3,'POINT', 0,'COMMA')}]] đ
                           </div>
                           <span>x</span>
                           <div>[[${orderItem.quantity}]]</div>
@@ -70,7 +70,7 @@
 
                   <div class="col l-2 s-3">
                     <div class="main__product-price">
-                      [[${#numbers.formatDecimal((orderItem.price * orderItem.quantity), 3,'POINT', 0,'COMMA')}]] đ
+                      [[${#numbers.formatDecimal((orderItem.oldPrice * orderItem.quantity), 3,'POINT', 0,'COMMA')}]] đ
                     </div>
                   </div>
                 </div>

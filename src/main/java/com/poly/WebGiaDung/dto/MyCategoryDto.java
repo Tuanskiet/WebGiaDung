@@ -19,8 +19,11 @@ public class MyCategoryDto {
     @Column(unique = true)
     private String slug;
 
+    private String policy;
+
+    private String type;
+
     @Column(name = "is_active")
     private Boolean isActive = false;
 
-    private Integer groupCategory;
 }

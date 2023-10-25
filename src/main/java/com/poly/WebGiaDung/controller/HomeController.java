@@ -26,11 +26,19 @@ public class HomeController {
                             @AuthenticationPrincipal MyUserDetails myUserDetails){
         List<MyCategory> myCategoryList = myCategoryService.getAllCategoryActive();
         httpSession.setAttribute("dataCategory", myCategoryList);
+
+        httpSession.setAttribute("categoryService", myCategoryService.getTop5ByType("service"));
+        httpSession.setAttribute("categoryProduct", myCategoryService.getTop5ByType("product"));
         model.addAttribute("listTopDiscount", productService.getTopDiscount());
         int sizeCart = 0;
         if(myUserDetails != null) sizeCart = cartItemService.getSize(myUserDetails.getUserApp());
         httpSession.setAttribute("sizeCart", sizeCart);
         return "user/index";
+    }
+
+    @GetMapping("/policy")
+    public String viewPolicyPage(){
+        return "user/policy";
     }
 
 

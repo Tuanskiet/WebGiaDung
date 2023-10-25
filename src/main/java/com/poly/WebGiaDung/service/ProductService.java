@@ -32,4 +32,8 @@ public interface ProductService {
     void updateStatus(Integer id, Boolean statusChanged);
 
     void deleteById(Integer id);
+
+    List<Product> getListProductsByCategoryId(Integer id);
+
+    List<Product> findByKeyword(String keyword);
 }

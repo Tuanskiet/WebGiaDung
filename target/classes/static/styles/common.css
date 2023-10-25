@@ -657,7 +657,7 @@ section
     background: transparent;
 }
 .nav-fix{
-    margin: 0 -13px;
+    margin-left: -15px;
 }
 /*********************************
 3.5 Hamburger Menu
@@ -1267,12 +1267,12 @@ section
     font-weight: 800;
     margin-top: 12px;
     margin-bottom: 12px;
-    font-size: 20px;
+    font-size: 18px;
     color : var(--sub-color-1);
     text-align: left;
 }
 .text-footer{
-    font-size: 16px;
+    font-size: 15px;
     color: #726f79;
 }
 .text-footer:hover{

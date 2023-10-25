@@ -179,6 +179,17 @@ public class ProductServiceImpl implements ProductService {
     }
     @Override
     public void deleteById(Integer id) {
-        productRepo.deleteById(id);
+            productRepo.deleteById(id);
+    }
+
+    @Override
+    public List<Product> getListProductsByCategoryId(Integer id) {
+        Optional<MyCategory> category = categoryService.findById(id);
+        return productRepo.findByCategory(category.orElse(null));
+    }
+
+    @Override
+    public List<Product> findByKeyword(String keyword) {
+        return productRepo.findByKeyword(keyword);
     }
 }

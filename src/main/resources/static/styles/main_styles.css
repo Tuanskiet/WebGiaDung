@@ -867,11 +867,11 @@ img.img-fluid.lazyloaded {
 }
 .benefit_content h6
 {
-	text-transform: uppercase;
-	line-height: 18px;
-	font-weight: 700;
-	margin-bottom: 0px;
-	font-size: 17px;
+    text-transform: uppercase;
+    line-height: 16px;
+    font-weight: 700;
+    margin-bottom: 0px;
+    font-size: 16px;
 
 }
 .benefit_content p

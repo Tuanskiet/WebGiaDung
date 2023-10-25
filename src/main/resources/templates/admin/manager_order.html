@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="admin/_layout :: view(~{:: .content-wrapper}, 'Quản lí đơn hàng')">
+<body>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Quản lí đơn hàng</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Trang chủ </a></li>
+                            <li class="breadcrumb-item active">Quản lí đơn hàng</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- Small boxes (Stat box) -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card ">
+                            <div class="card-header ">
+                                <div class="row justify-content-between">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="w-50">
+                                            <button id="btnAddAccount" type="button" class="btn btn-block btn-success">
+                                                <a th:href="@{/admin/manager-order/add}" class="text-white">Thêm đơn hàng</a>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="input-group" >
+                                            <input class="form-control form-control-sidebar" type="search" placeholder="Tìm kiếm ..." aria-label="Search">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-sidebar">
+                                                    <i class="fas fa-search fa-fw"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row"><div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
+                                    <thead>
+                                    <tr>
+                                        <th class="sorting">#</th>
+                                        <th class="sorting">Ngày tạo</th>
+                                        <th class="sorting">Họ tên</th>
+                                        <th class="sorting">Email</th>
+                                        <th class="sorting">SDT</th>
+                                        <th class="sorting">Tổng tiền </th>
+                                        <th class="sorting">Trạng thái </th>
+                                        <th class="sorting">Action </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="item, iStat  : ${listOrders}">
+                                            <td th:text="${1 + iStat.index + (currentPage -1)*5}"></td>
+                                            <td th:text="${#dates.format(item.createAt, 'yyyy-MM-dd')}"></td>
+                                            <td th:text="${item.name}"></td>
+                                            <td th:text="${item.email}"></td>
+                                            <td th:text="${item.phoneNumber}"></td>
+                                            <td th:text="${#numbers.formatDecimal(item.totalPayment, 3,'POINT', 0,'COMMA')}"></td>
+                                            <td th:text="${item.status}"></td>
+                                            <td class="d-flex">
+                                                <button class="btn btn-primary me-2 ">
+                                                    <a th:href="@{'/admin/manager-order/edit?id='+${item.id}}" class="text-white">
+                                                        <i class="nav-icon fas fa-edit"></i>
+                                                    </a>
+                                                </button>
+                                                <button th:onclick="deleteWithAjax([[${item.id}]])" class="btn btn-danger btnDelAccount">
+                                                    <i class="far fa-trash-alt"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                                </div>
+                                    <th:block th:replace="admin/fragments :: pagination('manager-order')"></th:block>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+</body>
+</html>

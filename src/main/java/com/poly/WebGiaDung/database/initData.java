@@ -43,17 +43,17 @@ public class initData implements CommandLineRunner {
         userService.create(userApp1);
         userService.create(userApp2);
 
-        MyCategory category1 = new MyCategory(  "Thang nhôm", "https://cdn.tgdd.vn/Products/Images/1942/309559/android-tivi-aqua-32-inch-le32aqt6600g-8-550x340.jpg" );
-        MyCategory category2 = new MyCategory(  "Máy lọc nước", "https://cdn.tgdd.vn/Products/Images/1943/220325/samsung-rt22m4032by-sv-300x300.jpg");
-        MyCategory category3 = new MyCategory(  "Linh kiện máy lọc nước","https://cdn.tgdd.vn/Products/Images/1944/242732/aqua-88-kg-aqw-fr88gtbk-300x300.jpg" );
-        MyCategory category4 = new MyCategory("Máy lọc không khí", "https://cdn.tgdd.vn/Products/Images/2202/272143/may-say-thong-hoi-electrolux-75-kg-edv754h3wb-170223-031343-600x600.jpg");
-        MyCategory category5 = new MyCategory( "Dây thoát hiểm", "https://cdn.tgdd.vn/Products/Images/3385/309367/may-loc-nuoc-ro-hoa-phat-hws1b-1022-10-loi-230623-025945-600x600.jpg");
-        MyCategory category6 = new MyCategory(  "Rèm cửa","https://cdn.tgdd.vn/Products/Images/1982/236629/bep-tu-doi-hafele-hc-i2712a-10-600x600.jpg" );
-        MyCategory category7 = new MyCategory("Máy lạnh", "https://cdn.tgdd.vn/Products/Images/10139/264374/samsung-vr05r5050wk-sv-100423-014048-600x600.jpg");
-        MyCategory category8 = new MyCategory( "Máy hút ẩm", "https://cdn.tgdd.vn/Products/Images/2162/306932/loa-keo-karaoke-dalton-ts-12g350n-100523-094658-600x600.jpg");
-        MyCategory category9 = new MyCategory( "Thi công công trình", "https://cdn.tgdd.vn/Products/Images/2162/306932/loa-keo-karaoke-dalton-ts-12g350n-100523-094658-600x600.jpg");
-        MyCategory category10 = new MyCategory( "Sửa chữa - lắp đặt", "https://cdn.tgdd.vn/Products/Images/2162/306932/loa-keo-karaoke-dalton-ts-12g350n-100523-094658-600x600.jpg");
-        MyCategory category11 = new MyCategory( "Vệ sinh - bảo dưỡng", "https://cdn.tgdd.vn/Products/Images/2162/306932/loa-keo-karaoke-dalton-ts-12g350n-100523-094658-600x600.jpg");
+        MyCategory category1 = new MyCategory(  "Thang nhôm", "product", "https://cdn.tgdd.vn/Products/Images/1942/309559/android-tivi-aqua-32-inch-le32aqt6600g-8-550x340.jpg" );
+        MyCategory category2 = new MyCategory(  "Máy lọc nước","product",  "https://cdn.tgdd.vn/Products/Images/1943/220325/samsung-rt22m4032by-sv-300x300.jpg");
+        MyCategory category3 = new MyCategory(  "Linh kiện máy lọc nước","product", "https://cdn.tgdd.vn/Products/Images/1944/242732/aqua-88-kg-aqw-fr88gtbk-300x300.jpg" );
+        MyCategory category4 = new MyCategory("Máy lọc không khí", "product", "https://cdn.tgdd.vn/Products/Images/2202/272143/may-say-thong-hoi-electrolux-75-kg-edv754h3wb-170223-031343-600x600.jpg");
+        MyCategory category5 = new MyCategory( "Dây thoát hiểm", "product", "https://cdn.tgdd.vn/Products/Images/3385/309367/may-loc-nuoc-ro-hoa-phat-hws1b-1022-10-loi-230623-025945-600x600.jpg");
+        MyCategory category6 = new MyCategory(  "Rèm cửa","product", "https://cdn.tgdd.vn/Products/Images/1982/236629/bep-tu-doi-hafele-hc-i2712a-10-600x600.jpg" );
+        MyCategory category7 = new MyCategory("Máy lạnh", "product", "https://cdn.tgdd.vn/Products/Images/10139/264374/samsung-vr05r5050wk-sv-100423-014048-600x600.jpg");
+        MyCategory category8 = new MyCategory( "Máy hút ẩm", "product", "https://cdn.tgdd.vn/Products/Images/2162/306932/loa-keo-karaoke-dalton-ts-12g350n-100523-094658-600x600.jpg");
+        MyCategory category9 = new MyCategory( "Thi công công trình", "service", "https://cdn.tgdd.vn/Products/Images/2162/306932/loa-keo-karaoke-dalton-ts-12g350n-100523-094658-600x600.jpg");
+        MyCategory category10 = new MyCategory( "Sửa chữa - lắp đặt", "service", "https://cdn.tgdd.vn/Products/Images/2162/306932/loa-keo-karaoke-dalton-ts-12g350n-100523-094658-600x600.jpg");
+        MyCategory category11 = new MyCategory( "Vệ sinh - bảo dưỡng", "service", "https://cdn.tgdd.vn/Products/Images/2162/306932/loa-keo-karaoke-dalton-ts-12g350n-100523-094658-600x600.jpg");
 
         categoryService.create(category1);
         categoryService.create(category2);

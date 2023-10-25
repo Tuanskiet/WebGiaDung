@@ -72,6 +72,11 @@ public class MyCategoryServiceImpl implements MyCategoryService {
         return categoryRepo.findBySlug(slug);
     }
 
+    @Override
+    public List<MyCategory> getTop5ByType(String type) {
+        return categoryRepo.findTop5ByTypeAndIsActiveTrue(type);
+    }
+
 
     private MyCategory findCategoryBySlug(String slug){
         return categoryRepo.findMyCategoryBySlug(slug);

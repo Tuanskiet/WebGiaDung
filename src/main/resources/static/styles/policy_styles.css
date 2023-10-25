@@ -1,0 +1,68 @@
+/*Breadcrumbs*/
+.breadcrumbs
+{
+	width: 100%;
+	height: 60px;
+	border-bottom: solid 1px #ebebeb;
+	font-size: 16px;
+}
+.breadcrumbs ul li
+{
+	display: inline-block;
+	margin-right: 17px;
+}
+.breadcrumbs ul li.active a
+{
+	color: #b9b4c7;
+}
+.breadcrumbs ul li i
+{
+	margin-right: 17px;
+}
+.breadcrumbs ul li a
+{
+	color: #51545f;
+}
+
+/*policy section*/
+.policy_section_container{
+    margin-top: 140px;
+}
+.list_policy{
+    margin: 20px 0px;
+}
+.list_policy .policy_title_group{
+        margin: 0 30px;
+}
+.policy_title a{
+    font-size: 15px;
+}
+.policy_item-title {
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.policy_data{
+    margin-left: 30px;
+    margin-bottom: 10px;
+}
+
+/*responsive*/
+@media only screen and (max-width: 479px){
+    .policy_section_container {
+        margin-top: 120px;
+    }
+    .breadcrumbs ul li {
+        margin-right: 4px;
+    }
+    .breadcrumbs ul li i {
+        margin-right: 6px;
+    }
+    .breadcrumbs ul li a {
+        font-size: 15px;
+    }
+    .policy_item-title {
+        font-size: 16px;
+    }
+}

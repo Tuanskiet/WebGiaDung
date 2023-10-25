@@ -43,7 +43,7 @@ function callAjax(url, method, data) {
            window.location.reload();
        }
        updateDataField(response);
-       console.log("response" + response)
+//       console.log("response" + response)
     }).fail(function(error) {
        myToastr('error',  error.responseText);
     });
@@ -61,7 +61,14 @@ function updateDataField(data){
     for (var field in data) {
       if (data.hasOwnProperty(field)) {
         var value = data[field];
-        $('[data-field="' + field + '"]').val(value);
+        // Check if the element is a Summernote editor by checking its ID
+        if (field === "policy") {
+            // Update the Summernote editor with the new content
+            $('#policy').summernote('code', value);
+        } else {
+            // For other elements, you can use .val() to set their values
+            $('[data-field="' + field + '"]').val(value);
+        }
       }
     }
 }
@@ -81,12 +88,6 @@ function callAjaxPromise(url, method, data) {
 }
 
 // change data list select when change
-$('#name_gr_category').on('change',async function(){
-       let data = { id : $('#name_gr_category').val() }
-       let listCateGroupItems = await callAjaxPromise(urlChangeGC, 'GET', data) || [];
-       updateCategoriesSelect(listCateGroupItems);
-});
-
 function updateCategoriesSelect(listCateGroupItems){
     $('#name_category').html('')
     listCateGroupItems.forEach( item => {
@@ -104,12 +105,6 @@ async function searchProduct(){
     updateHtmlListProdSearch(listProds);
 }
 
-async function filterByGroupCategory(){
-    let id = $('#name_gr_category').val();
-    let data = {id : id}
-    let listProds = await callAjaxPromise(urlFindByGroup, 'GET', data) || [];
-    updateHtmlListProdSearch(listProds);
-}
 async function filterByCategory(){
     let id = $('#name_category').val();
     let data = {id : id}
@@ -117,17 +112,17 @@ async function filterByCategory(){
     updateHtmlListProdSearch(listProds);
 }
 
-
-function addProductToOrder(name, price){
+function addProductToOrder(productId, name, price){
     let item = {
         quantity : 1,
+        productId : productId,
         name : name,
         price : price,
     }
     let listProductSelected = localStorage.getItem('listProductSelected') || [];
     if(listProductSelected.length > 0){ // have data in localStorage
         listProductSelected = JSON.parse(listProductSelected);
-        let foundItem = listProductSelected.find( iz => iz.name === name);
+        let foundItem = listProductSelected.find( iz => parseInt(iz.productId) === parseInt(productId));
         if (foundItem !== undefined ) { // !== undefined )
             foundItem.quantity += 1;
         }else{
@@ -139,10 +134,10 @@ function addProductToOrder(name, price){
     localStorage.setItem('listProductSelected', JSON.stringify(listProductSelected));
     updateHtmlListProdSelected(listProductSelected);
 }
-function deleteProdInListSelected(name){
+function deleteProdInListSelected(productId){
      let listProductSelected = localStorage.getItem('listProductSelected');
      listProductSelected = JSON.parse(listProductSelected);
-     const newArray = listProductSelected.filter(item => item.name !== name);
+     const newArray = listProductSelected.filter(item => parseInt(item.productId) !== parseInt(productId));
      localStorage.setItem('listProductSelected', JSON.stringify(newArray));
      updateHtmlListProdSelected(newArray);
 }
@@ -154,13 +149,21 @@ function resetInfoOrder(){
 
 <!--    send order -->
 $('#sendOrder').on('click', function sendOrder(){
-    var dataOrder = localStorage.getItem('listProductSelected');
-    if(dataOrder == null || dataOrder.length < 2){ // []
+    var listProductSelected = JSON.parse(localStorage.getItem('listProductSelected'));
+    if(listProductSelected == null || listProductSelected.length <= 0){ // []
         alert('Vui lòng chọn sản phẩm!');
         return;
     }
 
     const urlParams = new URLSearchParams(window.location.href);
+    var dataOrder = [];
+    listProductSelected.map(product =>{
+        let item = {
+            productId : product.productId,
+            quantity : product.quantity
+        }
+        dataOrder.push(item);
+    });
 
     var dataToSend = {
             name:       $('#name_order').val(),
@@ -170,9 +173,9 @@ $('#sendOrder').on('click', function sendOrder(){
             note:       $('#note_order').val(),
             status:     $('#status_order').val(),
             idOrder :   $('#id_order_edit').val(),
-            cartDtoList : JSON.parse(dataOrder)
+            cartDtoList : dataOrder
     }
-    if(dataOrder !== null && dataOrder.length > 2){
+    if(dataOrder !== null && dataOrder.length > 0){
         $.ajax({
             url : urlAddOrder,
             method : 'POST',
@@ -203,10 +206,9 @@ function updateHtmlListProdSearch(listProds){
         `
             <tr>
                 <td>${item.name}</td>
-                <td>${item.quantityLeft}</td>
                 <td>${formatDecimal(item.price)}</td>
                 <td>
-                    <button onclick="addProductToOrder('${nameProd}', '${item.price}')"
+                    <button onclick="addProductToOrder('${item.id}', '${nameProd}', '${item.price}')"
                     class="btn btn-primary btnSelectProd" type="button">Thêm</button>
                 </td>
             </tr>
@@ -222,7 +224,6 @@ function updateHtmlListProdSelected(listProds){
     if(listProds != null){
         $('#list_prod_selected_to_order').html('');
             listProds.forEach( (item, index) =>{
-                let nameProd = item.name.replace("'", "\\'");
                 $('#list_prod_selected_to_order').append(
                 `
                     <tr>
@@ -233,7 +234,7 @@ function updateHtmlListProdSelected(listProds){
                         </td>
                         <td>${formatDecimal(item.price)}</td>
                         <td>
-                            <button onclick="deleteProdInListSelected('${nameProd}')"
+                            <button onclick="deleteProdInListSelected('${item.productId}')"
                             class="btn btn-danger" type="button">Xóa</button>
                         </td>
                     </tr>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <head th:replace="user/fragments :: main_header('tag')"></head>
+    <title>Chính sách bảo hành</title>
+    <!-- product single -->
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/policy_styles.css}">
+</head>
+<body>
+<div class="super_container">
+    <th:block th:replace="user/fragments :: header_nav"></th:block>
+    <div class="container policy_section_container">
+        <div class="row">
+            <div class="col">
+                <!-- Breadcrumbs -->
+                <div class="breadcrumbs d-flex flex-row align-items-center">
+                    <ul>
+                        <li><a th:href="@{/}">Trang chủ</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Chính sách bảo hành - đổi trả</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="list_policy">
+            <span>Xem nhanh</span>
+            <ul class="policy_title_group">
+                <li th:each="item, iter : ${session.dataCategory}" class="policy_title" th:if="${item.type == 'product'}">
+                    <a th:href="'#'+${item.id}">[[${iter.index +1}]]. Chính sách đổi trả nhóm [[${item.name}]]</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="policy_detail_list">
+            <div th:each="item, iter : ${session.dataCategory}" th:id="${item.id}" class="policy_item">
+                <h4 class="policy_item-title">[[${iter.index +1}]]. Chính sách đổi trả nhóm [[${item.name}]]</h4>
+                <div class="policy_data" th:utext="${item.policy}"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="user/fragments :: footer"></footer>
+<th:block th:replace="user/fragments :: js_file"></th:block>
+<script th:src="@{/js/pay_script.js}"></script>
+
+</body>
+</html>

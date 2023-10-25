@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="admin/_layout :: view(~{:: .content-wrapper}, 'Thêm đơn hàng')">
+<body>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0"  th:text="${mode == 'edit' ? 'Cập nhật đơn hàng' : 'Thêm đơn hàng'}"></h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Trang chủ </a></li>
+                            <li class="breadcrumb-item active"  th:text="${mode == 'edit' ? 'Cập nhật đơn hàng' : 'Thêm đơn hàng'}"></li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- Small boxes (Stat box) -->
+                <div class="card card-primary card-outline">
+                    <div class="card-body">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Thông tin khách hàng</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Danh sách sản phẩm</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <label for="name_order">Họ và Tên : </label>
+                                            <input  type="text" class="form-control" id="name_order"  data-field="name" placeholder="Enter fullname ...">
+                                        </div>
+                                        <div class="col">
+                                            <label for="email_order">Email :</label>
+                                            <input  type="email" class="form-control" id="email_order"  data-field="email" placeholder="Enter email">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <label for="address_order">Địa chỉ :</label>
+                                            <input  type="text" class="form-control" id="address_order"  data-field="address" placeholder="Address ...">
+                                        </div>
+                                        <div class="col">
+                                            <label for="phone_number">Số điện thoại :</label>
+                                            <input  type="text" class="form-control" id="phone_number"  data-field="phoneNumber" placeholder="Phone number ...">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <label for="note_order">Ghi chú :</label>
+                                            <input  type="text" class="form-control" id="note_order" data-field="note" placeholder="Note ...">
+                                        </div>
+                                        <!--<div class="col">
+                                            <label for="status_order">Trạng thái :</label>
+                                            <input type="text" class="form-control" id="status_order" data-field="status" placeholder="Status ...">
+                                        </div>-->
+                                        <div class="col">
+                                            <label for="status_order">Trạng thái :</label>
+                                            <select required id="status_order" data-field="status"  class="form-control select2 select2-hidden-accessible" style="width: 100%;" >
+                                                <option value="Đang xử lí" >Đang xử lí</option>
+                                                <option value="Hoàn thành" >Hoàn thành</option>
+                                                <option value="Đã hủy" >Đã hủy</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card ">
+                                            <div class="card-body">
+                                                <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                                    <button type="reset" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalAddOrder">
+                                                        <i class="fas fa-plus"></i>
+                                                        Thêm sản phẩm
+                                                    </button>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <!--  tbl  product selected to order  -->
+                                                            <table  class="table table-bordered table-hover dataTable dtr-inline" >
+                                                                <thead>
+                                                                <tr>
+                                                                    <th class="sorting">#</th>
+                                                                    <th class="sorting">Tên sản phẩm</th>
+                                                                    <th class="sorting">Số lượng</th>
+                                                                    <th class="sorting">Đơn giá</th>
+                                                                    <th class="sorting">Action</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody id="list_prod_selected_to_order">
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.card-body -->
+                                        </div>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal add order-->
+                        <div class="modal fade" id="modalAddOrder" tabindex="-1"  aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5">Tìm kiếm sản phẩm </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row justify-content-between mb-3">
+                                            <div class="col">
+                                                <div class="form-group" >
+                                                    <select onchange="filterByCategory()" id="name_category" class="form-control select2 select2-hidden-accessible" style="width: 100%;" >
+                                                        <option th:each="item : ${categories}"
+                                                                th:value="${item.id}"
+                                                                th:text="${item.name}"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="input-group" >
+                                                    <input name="keyword" id="inputSearchProd" class="form-control form-control-sidebar"  placeholder="Tìm kiếm ss..." >
+                                                    <div class="input-group-append">
+                                                        <button type="button"  onclick="searchProduct()"  class="btn btn-sidebar">
+                                                            <i class="fas fa-search fa-fw"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                         <!--  tbl find product to order  -->
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="sorting">Tên sản phẩm</th>
+                                                        <th class="sorting">Đơn giá</th>
+                                                        <th class="sorting">Action</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="list_prod_order">
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- modal add order-->
+                        <div class="tab-custom-content">
+                            <input id="id_order_edit" type="hidden" th:value="${mode == 'edit' ? editOrder.id : -1}">
+                            <button id="sendOrder" class="btn btn-success" th:text="${mode == 'edit' ? 'Cập nhật' : 'Thêm đơn hàng'}"></button>
+                            <button onclick="resetInfoOrder()" type="reset" class="btn btn-secondary" >Nhập lại</button>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+
+        <script th:inline="javascript">
+        $(document).ready(function(){
+            localStorage.removeItem('listProductSelected');
+            var mode = /*[[${mode}]]*/{};
+            if(mode == 'edit'){
+                let dataEdit = /*[[${editOrder}]]*/{};
+                updateDataField(dataEdit);
+                localStorage.setItem('listProductSelected', JSON.stringify(dataEdit.orderItems));
+                updateHtmlListProdSelected(dataEdit.orderItems);
+            }
+        });
+    </script>
+    </div>
+    <!-- /.content-wrapper -->
+</body>
+</html>

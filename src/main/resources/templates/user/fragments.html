@@ -282,21 +282,16 @@
         <h5 class="footer_header">Sản Phẩm, Dịch vụ & Ưu Đãi</h5>
         <h6 class="sub_text-footer">* Sản Phẩm</h6>
         <ul class="nav flex-column">
-          <li th:each="item, iStar : ${session.dataCategory}" class="nav-item mb-2" th:if="${iStar.index < 4}">
+          <li th:each="item, iStar : ${session.categoryProduct}" class="nav-item mb-2">
             <a  th:href="@{'/list-product?category=' +${item.slug}}"
                class="nav-link p-0 text-footer">[[${item.name}]]</a>
           </li>
         </ul>
         <h6 class="sub_text-footer">* Dịch Vụ</h6>
         <ul class="nav flex-column">
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-footer">Thi công công trình</a>
-          </li>
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-footer">Sửa chữa - lắp đặt</a>
-          </li>
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-footer">Vệ sinh - bảo dưỡng</a>
+          <li th:each="item, iStar : ${session.categoryService}" class="nav-item mb-2">
+            <a  th:href="@{'/list-product?category=' +${item.slug}}"
+                class="nav-link p-0 text-footer">[[${item.name}]]</a>
           </li>
         </ul>
         <h6 class="sub_text-footer">* Ưu Đãi</h6>
@@ -314,7 +309,7 @@
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-footer">Giải đáp thắc mắc</a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-footer">Chính sách mua hàng</a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-footer">Chính sách đổi trả</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-footer">Chính sách bảo hành</a></li>
+          <li class="nav-item mb-2"><a th:href="@{/policy}" class="nav-link p-0 text-footer">Chính sách bảo hành</a></li>
         </ul>
       </div>
 

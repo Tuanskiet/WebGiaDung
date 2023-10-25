@@ -103,12 +103,12 @@
 
 @media only screen and (max-width: 479px){
 	.logo_container{
-		display: none;
+		/*display: none;*/
 	}
 	.navbar{
 	    height: 70px;
-        margin-right: 26px;
-	    float: none;
+/*        margin-right: 26px;*/
+/*	    float: none;*/
 	}
 	.search_form {
         width: 200px;
@@ -172,8 +172,5 @@
         }
         .form-control {
             height: 28px;
-        }
-        .nav-fix{
-            margin: 0;
         }
 }
