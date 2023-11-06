@@ -22,7 +22,7 @@ public class BrandApp {
     @Column(unique = true)
     private String name;
 
-    @Column(length = 1024)
+    @Column(columnDefinition = "TEXT")
     private String image;
 
     @JsonIgnore

@@ -3,6 +3,7 @@ package com.poly.WebGiaDung.api;
 import com.poly.WebGiaDung.dto.CartDto;
 import com.poly.WebGiaDung.dto.OrderDto;
 import com.poly.WebGiaDung.dto.OrderItemResponse;
+import com.poly.WebGiaDung.dto.ProductResponse;
 import com.poly.WebGiaDung.entity.Product;
 import com.poly.WebGiaDung.entity.UserApp;
 import com.poly.WebGiaDung.security.MyUserDetails;
@@ -44,7 +45,7 @@ public class OrderApi {
                     orderItemResponse.setProductId(cartDto.getProductId());
                     orderItemResponse.setQuantity(cartDto.getQuantity());
                     orderItemResponse.setName(product.getName());
-                    orderItemResponse.setPrice(product.getPrice());
+                    orderItemResponse.setPrice(product.getPriceDiscount());
                     return orderItemResponse;
                 }).collect(Collectors.toList());
         return listCartItemOrder;
@@ -59,7 +60,7 @@ public class OrderApi {
             orderService.create(orderDtoList, myUserDetails.getUserApp());
             try {
                 sendEmail.sendMailOrder(
-                        myUserDetails.getUserApp().getEmail(),orderDtoList);
+                        myUserDetails.getUserApp().getEmail(), orderDtoList);
                 log.info("sent email for : {}", myUserDetails.getUserApp().getEmail());
                 session.setAttribute("sizeCart", updateSizeCart(myUserDetails));
             } catch (Exception e) {
@@ -71,17 +72,31 @@ public class OrderApi {
 
     /*admin*/
     @GetMapping(value = "/admin/manager-order/find-by-category", produces = MediaType.APPLICATION_JSON_VALUE )
-    public List<Product> findListProdToOrderCategory(
+    public List<ProductResponse> findListProdToOrderCategory(
             @RequestParam(name = "id") Integer id,
             Model model){
-        return productService.getListProductsByCategoryId(id);
+        List<ProductResponse> productResponseList = productService.getListProductsByCategoryId(id)
+                .stream().map(product ->  new ProductResponse(
+                                product.getId(),
+                                product.getName(),
+                                product.getPriceDiscount()
+                        )
+                ).collect(Collectors.toList());
+        return productResponseList;
     }
 
     @GetMapping(value = "/admin/manager-order/find-by-keyword", produces = MediaType.APPLICATION_JSON_VALUE )
-    public List<Product> findListProdToOrderByKeyword(
+    public List<ProductResponse> findListProdToOrderByKeyword(
             @RequestParam(name = "keyword") String keyword,
             Model model){
-        return productService.findByKeyword(keyword);
+        List<ProductResponse> productResponseList = productService.findByKeyword(keyword)
+                .stream().map(product ->  new ProductResponse(
+                            product.getId(),
+                            product.getName(),
+                            product.getPriceDiscount()
+                    )
+                ).collect(Collectors.toList());
+        return productResponseList;
     }
 
     public int updateSizeCart(MyUserDetails myUserDetails){

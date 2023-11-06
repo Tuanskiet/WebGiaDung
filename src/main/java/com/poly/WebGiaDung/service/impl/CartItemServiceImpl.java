@@ -27,7 +27,7 @@ public class CartItemServiceImpl implements CartItemService {
         // cart is exist | + 1
         CartItem oldCart = getExistCartItem(userApp, product);
         if(oldCart != null){
-            Integer newQuantity = oldCart.getQuantity() + 1;
+            Integer newQuantity = oldCart.getQuantity() + cartDto.getQuantity();
             oldCart.setQuantity(newQuantity);
             cartItemRepo.save(oldCart);
         }else{ // new cart item

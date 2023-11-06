@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <head th:replace="user/fragments :: main_header('tag')"></head>
-    <title>Thanh toán</title>
+    <title>Mua sắm trực tuyến - Kết Nối Tiêu Dùng Việt - Sản phẩm gia dụng chính hãng, giá rẻ.</title>
     <!-- product single -->
     <link rel="stylesheet" type="text/css" th:href="@{/styles/pay_styles.css}">
 </head>
@@ -24,7 +24,9 @@
                                 </div>
                                 <div class="form-item">
                                     <label for="email_order" class="form-label">Email *</label>
-                                    <input id="email_order" name="account" type="email" class="form-control" required>
+                                    <input
+                                            th:value="${#authentication.principal.username}"
+                                            id="email_order" name="account" type="email" class="form-control" disabled>
                                     <!--                                <span class="form-message"></span>-->
                                 </div>
                             </div>

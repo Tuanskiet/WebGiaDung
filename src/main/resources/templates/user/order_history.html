@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <head th:replace="user/fragments :: main_header('tag')"></head>
-  <title>Lịch sử đơn hàng</title>
+  <title>Tra cứu đơn hàng - Kết Nối Tiêu Dùng Việt - Sản phẩm gia dụng chính hãng, giá rẻ.</title>
   <link rel="stylesheet" type="text/css"  th:href="@{/styles/order_history.css}">
 </head>
 
@@ -99,7 +99,7 @@
     </div>
     <div th:if="${#authorization.expression('isAnonymous()')}" class="not_authen-wrapper">
       <h3>Vui lòng đăng nhập!</h3>
-      <a class="main_button" href="#my-Login">Đăng nhập</a>
+      <a class="btn blue_button" href="#my-Login">Đăng nhập</a>
     </div>
   </div>
 </div>

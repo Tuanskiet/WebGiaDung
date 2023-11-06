@@ -262,6 +262,9 @@ section
     color: var(--sub-color-1);
     cursor: pointer;
 }
+.blue_button:hover{
+    color: #982e2e;
+}
 .red_button a {
     display: block;
     color: #FFFFFF;
@@ -925,6 +928,7 @@ section
     display: block;
     color: var(--sub-color-1);
     font-weight: 600;
+    font-size: 16px;
 }
 
 /*********************************
@@ -1407,6 +1411,7 @@ textarea.form-control {
     cursor: pointer;
     text-align: center;
     color: #1da1f2;
+    text-decoration: underline !important;
 }
 
 .authen__link:hover {
@@ -1432,6 +1437,9 @@ textarea.form-control {
     text-align: center;
     height: max-content;
     background-color: #cbcbcb;
+}
+.btn__sendcode:hover{
+    opacity: .7;
 }
 /* ====List KeyFrames==== */
 @keyframes shake {

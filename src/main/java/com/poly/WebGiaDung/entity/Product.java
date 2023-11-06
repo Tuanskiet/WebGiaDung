@@ -46,7 +46,7 @@ public class Product implements Serializable {
     @Column(name="full_description", columnDefinition = "TEXT")
     private String description;
 
-    @Column(name="main_image",length = 1024)
+    @Column(columnDefinition = "TEXT")
     private String image;
 
     @Column(name = "is_active")

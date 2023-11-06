@@ -20,7 +20,7 @@ public class Evaluate implements Serializable {
 
     private Integer numStar;
 
-    @Column(length = 1024)
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     private String nameUser;

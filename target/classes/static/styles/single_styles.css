@@ -37,19 +37,19 @@
 
 .single_product_container
 {
-	margin-top: 190px;
-	padding-bottom: 80px;
+    margin-top: 150px;
+     padding-bottom: 20px;
 	border-bottom: solid 1px #ebebeb;
 }
-.single_product_thumbnails
+/*.single_product_thumbnails
 {
 	height: 527px;
-}
+}*/
 .single_product_thumbnails ul li
 {
 	position: relative;
-	height: 136px;
-	margin-bottom: 30px;
+	height: auto;
+	margin-bottom: 10px;
 	cursor: pointer;
 }
 .single_product_thumbnails ul li::after
@@ -165,7 +165,6 @@
 .star_rating li
 {
 	display: inline-block;
-	margin-right: -2px;
 	cursor: pointer;
 }
 .star_rating li i
@@ -232,9 +231,12 @@
 }
 .add_to_cart_button
 {
-	width: 160px;
-	font-size: 16px !important;
-	cursor: pointer;
+    width: 160px;
+    font-size: 16px !important;
+    cursor: pointer;
+}
+.group_btn-cart > button:hover{
+    opacity: .8;
 }
 .add_to_cart_button a{
     color: white;
@@ -272,6 +274,7 @@
     font-size: 24px;
     display: flex;
     align-items: baseline;
+    margin-bottom: 8px;
 }
 .inventory_quantity{
     display: flex;
@@ -283,8 +286,17 @@
     display: flex;
     gap: 10px;
 }
-.group_btn-cart .add_to_cart_button{
-    flex : 50%;
+.group_btn-cart > *{
+    flex: 50%;
+    font-size: 16px !important;
+    cursor: pointer;
+    text-transform: uppercase;
+    padding: 26px 0;
+    font-weight: 800;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
 }
 /*********************************
 7. Tabs
@@ -427,13 +439,10 @@
 /*	margin-left: 5px;
 	margin-top: 13px;*/
 }
-.user_rating .star_rating li
-{
-	margin-right: -3px;
-}
+
 .user_rating .star_rating li i
 {
-	font-size: 12px;
+	font-size: 14px;
 }
 .review
 {
@@ -580,8 +589,10 @@
 	color: #FFFFFF;
 	text-transform: uppercase;
 	font-size: 14px;
-	font-weight: 500;
+	font-weight: 700;
 	cursor: pointer;
+    flex-direction: row;
+    gap: 6px;
 }
 .rate_title{
    display: flex;

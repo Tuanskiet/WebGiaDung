@@ -63,28 +63,7 @@ jQuery(document).ready(function($)
 
 	function setHeader()
 	{
-		if(window.innerWidth < 992)
-		{
-			if($(window).scrollTop() > 100)
-			{
-				header.css({'top':"0"});
-			}
-			else
-			{
-				header.css({'top':"0"});
-			}
-		}
-		else
-		{
-			if($(window).scrollTop() > 100)
-			{
-				header.css({'top':"-50px"});
-			}
-			else
-			{
-				header.css({'top':"0"});
-			}
-		}
+
 		if(window.innerWidth > 991 && menuActive)
 		{
 			closeMenu();
@@ -362,9 +341,9 @@ jQuery(document).ready(function($)
           starHTML += '<li><i class="fa fa-star" aria-hidden="true"></i></li>';
         }
         let html = `
-            <div class="user_review_container d-flex flex-column flex-sm-row">
+            <div class="user_review_container d-flex ">
                 <div class="user">
-                    <div class="user_pic"></div>
+                    <div class="user_pic" style="background: url(/images/default_user.png) center/cover;"></div>
                 </div>
                 <div class="review">
                     <div class="user_rating_header">

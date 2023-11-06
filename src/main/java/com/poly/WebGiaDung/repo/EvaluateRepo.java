@@ -15,7 +15,7 @@ import java.util.List;
 public interface EvaluateRepo extends JpaRepository<Evaluate, Integer> {
     List<Evaluate> findAllByProduct(Product product);
 
-    @Query(value = "SELECT o FROM Evaluate o WHERE CONCAT(o.nameUser, '', o.product.name) LIKE %?1% AND o.product = ?2")
+    @Query(value = "SELECT o FROM Evaluate o WHERE CONCAT(o.nameUser, '', o.content) LIKE %?1% AND o.product = ?2")
     Page<Evaluate> findByKeyword(String keyword, Product product, Pageable pageable);
 
 //    @Query(value = "SELECT o FROM Evaluate o WHERE o.product = :product")

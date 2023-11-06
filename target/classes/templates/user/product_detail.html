@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <head th:replace="user/fragments :: main_header('tag')"></head>
-    <title>Chi tiết sản phẩm</title>
+    <title>[[${productDetail.name}]] - Kết Nối Tiêu Dùng Việt - Sản phẩm gia dụng chính hãng, giá rẻ.</title>
     <!-- product single -->
     <link rel="stylesheet" type="text/css"  th:href="@{/styles/single_styles.css}">
     <link rel="stylesheet" type="text/css"  th:href="@{/styles/single_responsive.css}">
@@ -38,14 +38,11 @@
                         <div class="col-lg-3 thumbnails_col order-lg-1 order-2">
                             <div class="single_product_thumbnails">
                                 <ul>
-                                    <li>
+                                    <li class="active">
                                         <img th:src="${productDetail.image}" alt="" th:data-image="${productDetail.image}">
                                     </li>
-                                    <li>
-                                        <img th:src="${productDetail.image}" alt="" th:data-image="${productDetail.image}">
-                                    </li>
-                                    <li>
-                                        <img th:src="${productDetail.image}" alt="" th:data-image="${productDetail.image}">
+                                    <li th:each="item : ${productDetail.productImages}" th:if="${item.url != null}">
+                                        <img th:src="${item.url}" alt="" th:data-image="${item.url}">
                                     </li>
                                    <!-- <li class="active"><img src="images/single_2_thumb.jpg" alt="" data-image="images/single_2.jpg"></li>-->
                                 </ul>
@@ -155,18 +152,16 @@
                     </div>
 
                     <div class="group_btn-cart">
-                        <div class="main_button add_to_cart_button">
-                            <a th:onclick="addToCartWithQuantity([[${productDetail.id}]])">
-                                <i class="fas fa-cart-plus"></i>
-                                Thêm vào giỏ hàng
-                            </a>
-                        </div>
-                        <div class="main_button add_to_cart_button">
-                            <a th:onclick="buyNow([[${productDetail.id}]])">
-                                <i class="far fa-money-bill-alt"></i>
-                                Mua ngay
-                            </a>
-                        </div>
+                        <button class="main_button add_to_cart_button"
+                                th:onclick="addToCartWithQuantity([[${productDetail.id}]])">
+                            <i class="fas fa-cart-plus"></i>
+                            Thêm vào giỏ hàng
+                        </button>
+                        <button class="main_button blue_button"
+                                th:onclick="buyNow([[${productDetail.id}]])">
+                            <i class="far fa-money-bill-alt"></i>
+                            Mua ngay
+                        </button>
                     </div>
                 </div>
             </div>
@@ -200,7 +195,7 @@
                                     <h4>Mô tả chi tiết</h4>
                                 </div>
                                 <div class="tab_text_block">
-                                    <p>[[${productDetail.description}]]</p>
+                                    <p th:utext="${productDetail.description}"></p>
                                 </div>
                             </div>
                         </div>
@@ -242,9 +237,9 @@
 
                                 <!-- User Review -->
 
-                                <div th:each="rate_item : ${evaluateList}" class="user_review_container d-flex flex-column flex-sm-row">
+                                <div th:each="rate_item : ${evaluateList}" class="user_review_container d-flex">
                                     <div class="user">
-                                        <div class="user_pic"></div>
+                                        <div class="user_pic" style="background: url(/images/default_user.png) center/cover;"></div>
                                     </div>
                                     <div class="review">
                                         <div class="user_rating_header">
@@ -306,7 +301,10 @@
                                             <div class="msg__rare-warning">* Vui lòng nhập mô tả!</div>
                                         </div>
                                         <div class="text-left text-sm-right">
-                                            <button id="review_submit"  class="main_button review_submit_btn trans_300" >Gửi đánh giá</button>
+                                            <button id="review_submit"  class="main_button review_submit_btn trans_300" >
+                                                <i class="fas fa-paper-plane"></i>
+                                                Gửi đánh giá
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

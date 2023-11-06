@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <head th:replace="user/fragments :: main_header('tag')"></head>
-    <title>Chính sách bảo hành</title>
+    <title>Chính sách bảo hành - Kết Nối Tiêu Dùng Việt - Sản phẩm gia dụng chính hãng, giá rẻ.</title>
     <!-- product single -->
     <link rel="stylesheet" type="text/css" th:href="@{/styles/policy_styles.css}">
 </head>
@@ -32,7 +32,7 @@
         </div>
 
         <div class="policy_detail_list">
-            <div th:each="item, iter : ${session.dataCategory}" th:id="${item.id}" class="policy_item">
+            <div th:each="item, iter : ${session.dataCategory}" th:id="${item.id}" th:if="${item.type == 'product'}" class="policy_item">
                 <h4 class="policy_item-title">[[${iter.index +1}]]. Chính sách đổi trả nhóm [[${item.name}]]</h4>
                 <div class="policy_data" th:utext="${item.policy}"></div>
             </div>

@@ -53,7 +53,7 @@ $.fn.changeStatus = function(id){
             id : id,
             statusChanged : $(this).prop("checked")
         }
-    callAjax(urlChangeStatus, 'POST', data);
+    callAjax(urlChangeStatus, 'GET', data);
     myToastr('success',  'Cập nhật thành công!');
 }
 

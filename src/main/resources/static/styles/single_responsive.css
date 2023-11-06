@@ -131,7 +131,10 @@
 	}
 	.product_details
 	{
-		margin-top: 71px;
+        margin-top: 30px;
+	}
+	.tabs_container{
+	   margin-top: 24px;
 	}
 	.reviews_col
 	{
@@ -260,8 +263,8 @@
 	}
 	.single_product_thumbnails ul li
 	{
-		width: 80px;
-		height: 80px;
+		width: 70px;
+		height: 70px;
 	}
 	.single_product_thumbnails ul li img
 	{
@@ -271,10 +274,6 @@
 	.breadcrumbs ul li
 	{
 		margin-right: 10px;
-	}
-	.breadcrumbs ul li a
-	{
-		font-size: 15px;
 	}
 	.breadcrumbs ul li i
 	{
@@ -315,7 +314,7 @@
 	}
 	.review
 	{
-		padding-left: 0px;
+		padding-left: 10px;
 	}
 	.review_date
 	{
@@ -360,11 +359,10 @@
         flex-direction: column;
     }
     .review_submit_btn, .add_to_cart_button{
-		font-size: 12px;
 		width: 100%;
 		height: 36px;
     }
-    .group_btn-cart .add_to_cart_button {
+    .group_btn-cart > * {
         flex: none;
     }
     .inventory_quantity{
@@ -434,18 +432,6 @@
 	.navbar
 	{
 		height: 70px;
-	}
-	.navbar_user li a
-	{
-		width: 30px;
-		height: 30px;
-		font-size: 12px;
-	}
-	.checkout_items
-	{
-		width: 15px;
-		height: 15px;
-		font-size: 10px;		
 	}
 	.add_to_cart_button
 	{

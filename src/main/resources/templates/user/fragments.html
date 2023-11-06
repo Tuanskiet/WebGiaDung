@@ -4,10 +4,18 @@
 <head th:fragment="main_header(condition)" th:remove="${condition}">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Kết Nối Tiêu Dùng Việt">
+  <meta name="keywords" content="Kết nối tiêu dùng việt, điện máy, điện tử, điện lạnh, gia dụng, đồ dùng nhà bếp, thi công công trình, sửa chũa lắp đặt, bảo dưỡng, yasuki" />
+  <meta name="description" content="Kết Nối Tiêu Dùng Việt mua sắm các thiết bị gia dụng, điện tử, điện lạnh, rèm cửa, dây thoát hiểm,... Mua online tại ketnoitieudungviet.com giá tốt phục vụ chuyên nghiệp tận tâm.">
+  <meta name="copyright" content="Công ty Kết Nối Tiêu Dùng Việt" />
+  <meta name="author" content="Công ty Kết Nối Tiêu Dùng Việt" />
+  <meta name="GENERATOR" content="Công ty Kết Nối Tiêu Dùng Việt" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:site_name" content="ketnoitieudungviet.com"/>
+  <meta property="og:type" content="product" />
+  <meta property="og:locale" content="vi_VN" />
+
   <link rel="icon" type="image/x-icon"  class="favicon-icon" th:href="@{/images/favicon.png}">
-  <link rel="stylesheet" type="text/css"  th:href="@{/styles/bootstrap4/bootstrap.min.css}">
+  <link rel="stylesheet" type="text/css"  th:href="@{/plugins/bootstrap4/bootstrap.min.css}">
 
   <!-- Font Quicksand -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,12 +26,16 @@
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
   <!-- Format number   -->
-  <script src="https://cdn.jsdelivr.net/npm/numbro@2.3.6/dist/numbro.min.js"></script>
+<!--  <script src="https://cdn.jsdelivr.net/npm/numbro@2.3.6/dist/numbro.min.js"></script>-->
+  <script th:src="@{/plugins/numbro@2.3.6/numbro.min.js}"></script>
 
   <!--sweetalert2-->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.min.css" rel="stylesheet">
+<!--  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.min.css" rel="stylesheet">-->
+  <link rel="stylesheet" type="text/css"  th:href="@{/plugins/sweetalert2/sweetalert2.min.css}">
+  <script th:src="@{/plugins/sweetalert2/sweetalert2.all.min.js}"></script>
 
+<!--  <link rel="stylesheet" type="text/css"  th:href="@{/plugins/fontawesome5.10.0/css/all.css}">-->
   <link rel="stylesheet" type="text/css"  th:href="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.css}">
   <link rel="stylesheet" type="text/css"  th:href="@{/plugins/OwlCarousel2-2.2.1/owl.theme.default.css}">
   <link rel="stylesheet" type="text/css"  th:href="@{/plugins/OwlCarousel2-2.2.1/animate.css}">
@@ -89,7 +101,7 @@
                     <i class="fas fa-phone-alt" ></i>
                     <div class="hotline">
                       <span>Hotline</span>
-                      <span class="phone_number">0123456789</span>
+                      <span class="phone_number">094 6324 094</span>
                     </div>
                   </a>
                 </li>
@@ -114,6 +126,12 @@
                     </li>
                   </ul>
                   <ul th:unless="${#authorization.expression('isAnonymous()')}" class="account_selection">
+                    <li>
+                      <a sec:authorize="hasAuthority('admin')" th:href="@{/admin}" >
+                        <i class="fas fa-user-shield"></i>
+                        Quản lí Admin
+                      </a>
+                    </li>
                     <li>
                       <a th:href="@{/order/history}">
                         <i class="fas fa-history"></i>
@@ -249,7 +267,7 @@
           <li class="nav-item mb-2">
             <a href="#" class="nav-link p-0 text-footer">
               <i class="fas fa-envelope"></i>
-              yasuki.shop@gmail.com
+              ketnoitieudungviet@gmail.com
             </a>
           </li>
           <li class="nav-item mb-2">
@@ -421,9 +439,9 @@
 
 <th:block th:fragment="js_file">
   <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
-  <script th:src="@{/styles/bootstrap4/popper.js}"></script>
-  <script th:src="@{/styles/bootstrap4/bootstrap.min.js}"></script>
-  <script th:src="@{/plugins/Isotope/isotope.pkgd.min.js}"></script>
+  <script th:src="@{/plugins/bootstrap4/popper.js}"></script>
+  <script th:src="@{/plugins/bootstrap4/bootstrap.min.js}"></script>
+  <script th:src="@{/plugins/Isotope/isotope.min.js}"></script>
   <script th:src="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.js}"></script>
   <script th:src="@{/plugins/easing/easing.js}"></script>
   <script th:src="@{/js/custom.js}"></script>

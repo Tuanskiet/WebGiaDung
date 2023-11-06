@@ -46,7 +46,10 @@
                                         </div>
                                         <div class="col">
                                             <label for="email_order">Email :</label>
-                                            <input  type="email" class="form-control" id="email_order"  data-field="email" placeholder="Enter email">
+                                            <input  type="email" class="form-control" id="email_order"
+                                                    th:if="${mode == 'edit' ? 'disabled' : ''}"
+                                                    data-field="email"
+                                                    placeholder="Enter email">
                                         </div>
                                     </div>
                                     <div class="row mb-3">

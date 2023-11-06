@@ -47,7 +47,7 @@
                                       font-family: 'Helvetica Neue', Helvetica,
                                         Roboto, Arial, sans-serif;
                                       font-size: 14px;line-height: 150%; text-align: left;">
-                                                        <p style="margin: 0 0 16px">Xin chào ,[[${orderDto.name}]]</p>
+                                                        <p style="margin: 0 0 16px">Xin chào, [[${orderDto.name}]]</p>
                                                         <p style="margin: 0 0 16px">
                                                             Đơn hàng của bạn đã được xác nhận.
                                                         </p>
@@ -151,7 +151,7 @@
                                                   sans-serif;
                                               "
                                                                     >
-                                                                        <span>[[${#numbers.formatDecimal(item.product.price, 3,'POINT', 0,'COMMA')}]]<span>₫</span></span>
+                                                                        <span>[[${#numbers.formatDecimal(item.product.priceDiscount * item.quantity, 3,'POINT', 0,'COMMA')}]]<span>₫</span></span>
                                                                     </td>
                                                                 </tr>
                                                                 </tbody>

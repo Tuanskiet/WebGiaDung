@@ -17,6 +17,7 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -34,7 +35,8 @@ public class SendEmailService {
 
     @Value("${spring.mail.username}")
     String FORM_EMAIL;
-    final String SUBJECT = "Yasuki - Đơn hàng của bạn đã được xác nhận!";
+    final String SUBJECT = "Đơn hàng của bạn đã được xác nhận!";
+    final String MAIL_NAME = "Kết Nối Tiêu Dùng Việt!";
     public static final String BODY_HTML = "ss";
     final String BODY_TEXT = "";
 
@@ -48,22 +50,23 @@ public class SendEmailService {
         javaMailSender.send(mimeMessage);
     }
 
-    public void sendMail(String subject, String toEmail, String body) throws MessagingException {
+    public void sendMail(String subject, String toEmail, String body) throws MessagingException, UnsupportedEncodingException {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
         mimeMessageHelper.setTo(toEmail);
         mimeMessageHelper.setSubject(subject);
         mimeMessageHelper.setText(body);
+        mimeMessageHelper.setFrom(FORM_EMAIL, MAIL_NAME);
         javaMailSender.send(mimeMessage);
     }
 
-    public void sendMailOrder(final String recipientEmail,final OrderDto orderDto)
-            throws MessagingException {
+    public void sendMailOrder(final String recipientEmail, final OrderDto orderDto)
+            throws MessagingException, UnsupportedEncodingException {
         BigDecimal totalPayment = BigDecimal.ZERO;
         List<OrderItem> orderList = new ArrayList<>();
         for (CartDto cartDto: orderDto.getCartDtoList()) {
             Optional<Product> product = productService.findById(cartDto.getProductId());
-            BigDecimal itemTotal = product.get().getPrice()
+            BigDecimal itemTotal = product.get().getPriceDiscount()
                     .multiply(BigDecimal.valueOf(cartDto.getQuantity()));
             totalPayment = totalPayment.add(itemTotal); // Update totalPayment correctly
 
@@ -88,7 +91,7 @@ public class SendEmailService {
         final MimeMessageHelper message =
                 new MimeMessageHelper(mimeMessage, false, "UTF-8"); // true = multipart
         message.setSubject(SUBJECT);
-        message.setFrom(FORM_EMAIL);
+        message.setFrom(FORM_EMAIL, MAIL_NAME);
         message.setTo(recipientEmail);
 
         // Create the HTML body using Thymeleaf

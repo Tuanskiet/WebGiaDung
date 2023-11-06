@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <head th:replace="user/fragments :: main_header('tag')"></head>
-  <title>Giỏ hàng</title>
+  <title>Mua sắm trực tuyến - Kết Nối Tiêu Dùng Việt - Sản phẩm gia dụng chính hãng, giá rẻ.</title>
   <!-- index -->
   <link rel="stylesheet" type="text/css"  th:href="@{/styles/cart_styles.css}">
 </head>
@@ -30,7 +30,7 @@
               <div class=" l-1 col-m-1 s-1">
                 <input name="chkCartItem" type="checkbox"
                        th:data-product-id="${cartItem.product.id}"
-                       th:data-product-price="${cartItem.product.price}">
+                       th:data-product-price="${cartItem.product.priceDiscount}">
               </div>
               <div class=" l-4 col-m-4 s-8">
                 <div class="main__cart-product">
@@ -39,7 +39,7 @@
                 </div>
               </div>
               <div class=" l-2 col-m-2 s-0">
-                <div class="main__cart-price">[[${#numbers.formatDecimal(cartItem.product.price, 3,'POINT', 0,'COMMA')}]] đ</div>
+                <div class="main__cart-price">[[${#numbers.formatDecimal(cartItem.product.priceDiscount, 3,'POINT', 0,'COMMA')}]] đ</div>
               </div>
               <div class=" l-2 col-m-2 s-0">
                 <div class="buttons_added">
@@ -53,7 +53,7 @@
               </div>
               <div class=" l-2 col-m-2 s-3">
                 <div class="main__cart-price">
-                  [[${#numbers.formatDecimal((cartItem.product.price * cartItem.quantity), 3,'POINT', 0,'COMMA')}]] đ
+                  [[${#numbers.formatDecimal((cartItem.product.priceDiscount * cartItem.quantity), 3,'POINT', 0,'COMMA')}]] đ
                 </div>
               </div>
               <div th:onclick="deleteCart([[${cartItem.product.id}]])" class="col l-1 col-m-1 s-0">

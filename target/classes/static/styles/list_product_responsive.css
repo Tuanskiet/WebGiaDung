@@ -297,6 +297,9 @@
 		width: 50%;
 		height: 420px;
 	}
+	.product_sorting li .sorting_type{
+	    width: 80%;
+	}
 	.product
 	{
 		height: 380px;

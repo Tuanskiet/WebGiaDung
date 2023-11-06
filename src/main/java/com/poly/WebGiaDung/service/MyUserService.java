@@ -22,4 +22,5 @@ public interface MyUserService extends UserDetailsService {
     public Boolean doLogin(String username, String password);
 
     void updatePassword(UserApp userApp, String newPassword);
+
 }

@@ -6,15 +6,14 @@ var urlDeleteCart = "/cart/delete";
 $(window).on('load', function() {
    /* let currentItemSelected = JSON.parse(localStorage.getItem('listCartItemSelected')) || [];
     if (currentItemSelected.length > 0) {
-        $('input[name=chkCartItem]').each(function(index, item) {
-            let checkExist = currentItemSelected.findIndex(cartItem => cartItem.productId === $(item).data('product-id'));
-            if (checkExist !== -1) {
-                $(item).prop('checked', true);
-            }
-        });
+
     }
     let totalPay = parseInt(JSON.parse(localStorage.getItem('totalPay'))) || 0;
     $('.totalCart').html(formatDecimal(totalPay));*/
+
+    $('input[name=chkCartItem]').each(function(index, item) {
+        $(item).prop('checked', false);
+    });
     localStorage.removeItem('listCartItemSelected');
     localStorage.removeItem('totalPay');
 });
@@ -47,7 +46,7 @@ $('input[name=chkCartItem]').on('click', function() {
     // Lưu danh sách cập nhật vào localStorage
     localStorage.setItem('listCartItemSelected', JSON.stringify(currentItemSelected));
     localStorage.setItem('totalPay', JSON.stringify(totalPay));
-    $('.totalCart').html(formatDecimal(totalPay));
+    $('.totalCart').html(formatDecimal(totalPay > 0 ? totalPay : 0));
 });
 
 });
@@ -135,7 +134,7 @@ function updateTotalPay(action, productId) {
             }else {
                 totalPay += parseInt(priceProduct);
             }
-            $('.totalCart').html(formatDecimal(totalPay));
+                $('.totalCart').html(formatDecimal(totalPay > 0 ? totalPay : 0));
             localStorage.setItem('totalPay', JSON.stringify(totalPay));
         }
     });

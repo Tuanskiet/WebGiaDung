@@ -15,6 +15,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -27,9 +28,9 @@ public class ManagerCommentController {
     private final ProductService productService;
     private final EvaluateService evaluateService;
 
-    @GetMapping("/admin/manager-comment")
+    @GetMapping("/admin/manager-comment/{productId}")
     public String viewListCommentPage(
-            @RequestParam(name = "productId") Integer productId,
+            @PathVariable(name = "productId") Integer productId,
             @RequestParam(name="page", defaultValue = "1", required = false)  int page,
             @RequestParam(name="keyword",  required = false) String keyword,
                                       Model model ){
@@ -41,7 +42,7 @@ public class ManagerCommentController {
         }else{
             evaluateList = evaluateService.getCommentsWithPagination(productId, pageable);
         }
-
+        model.addAttribute("productId", productId);
         if(evaluateList != null){
             model.addAttribute("listComments", evaluateList.getContent());
             model.addAttribute("currentPage", page);

@@ -9,6 +9,7 @@ import com.poly.WebGiaDung.service.MyUserService;
 import com.poly.WebGiaDung.service.RoleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -53,22 +54,29 @@ public class MyUserServiceImpl implements MyUserService {
     @Transactional
     @Override
     public UserApp create(UserApp user) {
-        UserApp  userApp =  findByEmail(user.getEmail());
-        if(userApp != null){
-            throw new RuntimeException("User already exist!");
+        UserApp  checkUser =  findByEmail(user.getEmail());
+        if(checkUser != null){
+            String oldPass = checkUser.getPassword();
+            BeanUtils.copyProperties(user, checkUser);
+            if(!user.getPassword().trim().equals("")){
+                String pEncode = passwordEncoder.encode(user.getPassword());
+                checkUser.setPassword(pEncode);
+            }else{
+                checkUser.setPassword(oldPass);
+            }
+            return userRepo.save(checkUser);
+        }else{
+            if(user.getRoles().size() == 0){
+                RoleApp roleApp = roleService.findRole(RoleName.ROLE_USER);
+                Set<RoleApp> roles = new HashSet<>();
+                roles.add(roleApp);
+                user.setRoles(roles);
+            }
+            String pEncode = passwordEncoder.encode(user.getPassword());
+            user.setPassword(pEncode);
+            return userRepo.save(user);
         }
-        if(user.getRoles().size() == 0){
-            RoleApp roleApp = roleService.findRole(RoleName.ROLE_USER);
-            Set<RoleApp> roles = new HashSet<>();
-            roles.add(roleApp);
-            user.setRoles(roles);
-        }
-
-        String pEncode = passwordEncoder.encode(user.getPassword());
-        user.setPassword(pEncode);
-        return userRepo.save(user);
     }
-
     @Override
     public UserApp findByEmail(String email) {
         return userRepo.getUserByEmail(email);
@@ -105,4 +113,6 @@ public class MyUserServiceImpl implements MyUserService {
         userApp.setPassword(passwordEncoder.encode(newPassword));
         userRepo.save(userApp);
     }
+
+
 }

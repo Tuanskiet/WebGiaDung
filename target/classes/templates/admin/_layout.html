@@ -5,6 +5,7 @@
   <head >
     <meta charset="UTF-8">
     <title>[[${titlePage}]]</title>
+    <link rel="icon" type="image/x-icon"  class="favicon-icon" th:href="@{/images/favicon.png}">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" type="text/css">
     <!-- Icon fontanwesome -->
@@ -124,8 +125,11 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a th:href="@{/admin/manager-user}" class="brand-link">
-      <img th:src="@{/admin/dist/img/AdminLTELogo.png}" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">YASUKI</span>
+      <img th:src="@{/images/favicon.png}" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <div class="logo_info">
+        <div class="logo_name"> <span>Kết Nối</span></div>
+        <div class="logo_text">Tiêu Dùng Việt</div>
+      </div>
     </a>
 
     <!-- Sidebar -->
@@ -136,7 +140,7 @@
           <img th:src="@{/admin/dist/img/user2-160x160.jpg}" class="img-circle elevation-2" alt="Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Luc Tuan Kiet</a>
+          <a href="#" class="d-block">[[${#authentication.principal.fullName}]]</a>
         </div>
       </div>
 
@@ -169,7 +173,7 @@
           </li>
           <li class="nav-item">
             <a th:href="@{/admin/manager-order}" class="nav-link">
-              <i class="nav-icon far fa-list-alt"></i>
+              <i class="fas fa-cart-arrow-down"></i>
               <p>
                 Quản lí đơn hàng
               </p>

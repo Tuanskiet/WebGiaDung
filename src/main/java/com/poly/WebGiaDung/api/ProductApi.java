@@ -38,7 +38,7 @@ public class ProductApi {
     }
 
 
-    @PostMapping("/admin/manager-product/change-status")
+    @GetMapping("/admin/manager-product/change-status")
     public ResponseEntity<?> changeStatusProduct(
             @RequestParam(name = "id") Integer id,
             @RequestParam(name = "statusChanged") Boolean statusChanged){

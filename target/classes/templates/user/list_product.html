@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <head th:replace="user/fragments :: main_header('tag')"></head>
-    <title>List Product</title>
+    <title>[[${breadcrumb}]] [[${breadcrumb != "" ? "-" : ""}]] Kết Nối Tiêu Dùng Việt - Sản phẩm chính hãng, giá rẻ.</title>
     <!-- product single -->
     <link rel="stylesheet" type="text/css" th:href="@{/styles/list_product_styles.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/styles/list_product_responsive.css}">
@@ -21,7 +21,7 @@
                     <ul>
                         <li><a th:href="@{/}">Trang chủ</a></li>
                         <li><a th:href="@{/list-product}"><i class="fa fa-angle-right" aria-hidden="true"></i>Sản phẩm</a></li>
-                        <li class="active"><a th:href="@{/}"><i class="fa fa-angle-right" aria-hidden="true"></i>[[${breadcrumb}]]</a></li>
+                        <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>[[${breadcrumb}]]</a></li>
                     </ul>
                 </div>
 

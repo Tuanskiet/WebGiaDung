@@ -62,14 +62,6 @@ jQuery(document).ready(function($)
 	{
 		setHeader();
 	});
-//	$('.menu_item').on('click', function()
-//	{
-//		subMenu.addClass('active');
-//		fillListProductByCategory($(this).data('id'));
-//	});
-//	$('.sub_hamburger_close').on('click', function(){
-//		subMenu.removeClass('active');
-//	});
 
 	initMenu();
 	initTimer();
@@ -99,8 +91,6 @@ jQuery(document).ready(function($)
 //        let urlGetByCategoryId = "/category";
 //        return callAjaxPromise(urlGetByCategoryId, "GET", {id : id})
 //    }
-
-
 
 
     //login
@@ -229,28 +219,7 @@ jQuery(document).ready(function($)
 
 	function setHeader()
 	{
-		if(window.innerWidth < 992)
-		{
-			if($(window).scrollTop() > 100)
-			{
-				header.css({'top':"0"});
-			}
-			else
-			{
-				header.css({'top':"0"});
-			}
-		}
-		else
-		{
-			if($(window).scrollTop() > 100)
-			{
-				/*header.css({'top':"-50px"});*/
-			}
-			else
-			{
-				header.css({'top':"0"});
-			}
-		}
+
 		if(window.innerWidth > 991 && menuActive)
 		{
 			closeMenu();

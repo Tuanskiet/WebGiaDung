@@ -29,7 +29,7 @@ public class MyCategory implements Serializable {
 
     private String type; //Product | Service
 
-    @Column(name="image",length = 1024)
+    @Column(columnDefinition = "TEXT")
     private String image;
 
     @Column(unique = true)

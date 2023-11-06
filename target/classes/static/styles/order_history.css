@@ -14,10 +14,9 @@
     margin: 20px 0;
 }
 .not_authen-wrapper a{
-    padding: 0 10px;
+    padding: 6px 14px;
 }
 .not_authen-wrapper a:hover{
-    color: white;
     opacity: .8;
 }
 .main__order_history{
@@ -179,6 +178,7 @@
     font-size: 16px;
 }
 
+/*media*/
 @media(max-width: 1023px) {
     .main__order-history{
        margin-top: 90px;
@@ -199,5 +199,11 @@
         margin-bottom: 10px;
         font-size: 15px;
         padding: 4px 14px;
+    }
+    .wrapper__empty-order .icon__empty-cart{
+        font-size: 4rem;
+    }
+    .wrapper__empty-order .info {
+        font-size: 20px;
     }
 }

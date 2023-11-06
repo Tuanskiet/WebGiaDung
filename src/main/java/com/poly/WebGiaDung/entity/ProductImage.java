@@ -17,7 +17,7 @@ public class ProductImage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name="url",length = 1024)
+    @Column(columnDefinition = "TEXT")
     private String url;
 
     @JsonIgnore

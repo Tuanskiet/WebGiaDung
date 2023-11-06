@@ -48,7 +48,7 @@ public class CategoryApi {
         return categoryDto;
     }
 
-    @PostMapping("/admin/manager-category/change-status")
+    @GetMapping("/admin/manager-category/change-status")
     public ResponseEntity<?> changeStatusCategories(
             @RequestParam(name = "id") Integer id,
             @RequestParam(name = "statusChanged") Boolean statusChanged){
