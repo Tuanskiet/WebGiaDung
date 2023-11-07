@@ -56,7 +56,7 @@
                             <h5>Các danh mục khác</h5>
                         </div>
                         <ul class="sidebar_brands">
-                            <li th:each="item, iStar : ${session.dataCategory}" th:classappend="${item.slug == slugCategory ?'active': ''}">
+                            <li th:each="item, iStar : ${session.dataCategory}" th:classappend="${item.slug == slugCategory ?'active': ''}" th:if="${iStar.index < 20}">
                                 <a th:href="@{'/list-product?category='+${item.slug}}">
                                     <span th:if="${item.slug == slugCategory}">
                                         <i class="fa fa-angle-double-right" aria-hidden="true"></i>

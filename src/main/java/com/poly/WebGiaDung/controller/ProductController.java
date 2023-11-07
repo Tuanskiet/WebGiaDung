@@ -24,7 +24,7 @@ import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 public class ProductController {
-    private static final int PRODUCT_PER_PAGE = 6;
+    private static final int PRODUCT_PER_PAGE = 12;
     private final ProductService productService;
     private final EvaluateService evaluateService;
     private final MyCategoryService categoryService;

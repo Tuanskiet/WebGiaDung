@@ -41,9 +41,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         // set global category in session
         List<MyCategory> myCategoryList = myCategoryService.getAllCategoryActive();
         request.getSession().setAttribute("dataCategory", myCategoryList);
-
-        // set global brand in session
-
     }
 
     public void redirectAfterLogin(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException{

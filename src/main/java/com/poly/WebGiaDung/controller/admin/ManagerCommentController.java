@@ -23,7 +23,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class ManagerCommentController {
-    private final int PRODUCT_PER_PAGE = 5;
+    private final int PRODUCT_PER_PAGE = 10;
 
     private final ProductService productService;
     private final EvaluateService evaluateService;

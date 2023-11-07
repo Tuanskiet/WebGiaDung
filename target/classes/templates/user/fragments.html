@@ -207,13 +207,6 @@
           </a>
           <i class="fa fa-chevron-right" aria-hidden="true"></i>
         </li>
-
-        <li th:each="item, iStar : ${session.dataCategory}" class="menu_item" th:data-id="${item.id}">
-          <a th:href="@{'/list-product?category=' +${item.slug}}">
-            [[${item.name}]]
-          </a>
-          <i class="fa fa-chevron-right" aria-hidden="true"></i>
-        </li>
       </ul>
 
      <div class="menu_phone">
@@ -271,7 +264,7 @@
             </a>
           </li>
           <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-footer d-flex align-items-center fw-700">
+            <a href="https://yasuki.shop" class="nav-link p-0 text-footer d-flex align-items-center fw-700">
 
               WEBSITE CÙNG CÔNG TY
               <div class="brand__group">

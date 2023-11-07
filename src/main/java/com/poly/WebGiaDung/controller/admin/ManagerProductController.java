@@ -19,7 +19,7 @@ import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 public class ManagerProductController {
-    private final int PRODUCT_PER_PAGE = 5;
+    private final int PRODUCT_PER_PAGE = 10;
 
     private final ProductService productService;
     private final MyCategoryService categoryService;

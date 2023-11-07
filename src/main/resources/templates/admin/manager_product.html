@@ -70,7 +70,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr th:each="item, iStat  : ${listProducts}">
-                                                        <td th:text="${1 + iStat.index + (currentPage -1)*5}"></td>
+                                                        <td th:text="${1 + iStat.index + (currentPage -1)*10}"></td>
                                                         <td th:text="${item.category.name}"></td>
                                                         <td th:text="${item.brandApp}"></td>
                                                         <td class="truncate_td" th:text="${item.name}"></td>

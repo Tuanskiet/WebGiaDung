@@ -207,13 +207,6 @@
           </a>
           <i class="fa fa-chevron-right" aria-hidden="true"></i>
         </li>
-
-        <li th:each="item, iStar : ${session.dataCategory}" class="menu_item" th:data-id="${item.id}">
-          <a th:href="@{'/list-product?category=' +${item.slug}}">
-            [[${item.name}]]
-          </a>
-          <i class="fa fa-chevron-right" aria-hidden="true"></i>
-        </li>
       </ul>
 
      <div class="menu_phone">

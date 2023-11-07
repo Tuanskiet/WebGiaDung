@@ -34,7 +34,7 @@ public class ManagerOrderController {
     private final OrderService orderService;
     private final MyCategoryService categoryService;
     private final CartItemService cartItemService;
-    private static final int PRODUCT_PER_PAGE = 5;
+    private static final int PRODUCT_PER_PAGE = 10;
 
     @GetMapping("/admin/manager-order")
     public String  viewManagerOrderPage(

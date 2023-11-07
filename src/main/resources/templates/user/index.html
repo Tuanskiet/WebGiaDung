@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div class="index-categories-list row">
-                    <div th:each="category : ${session.dataCategory}" class="index-category">
+                    <div th:each="category,iStar : ${session.dataCategory}" class="index-category" th:if="${iStar.index < 18}">
                         <a th:href="@{'/list-product?category=' +${category.slug}}">
                             <span class="index-category-img">
                                 <img class="img-fluid lazyloaded" alt="category" th:src="${category.image}">
@@ -74,9 +74,8 @@
             </div>
         </div>
 
-
         <!-- List product by category -->
-        <th:block th:each="category :  ${session.dataCategory}" th:if="${category.products.size() > 0 }" >
+        <th:block th:each="category, iStar :  ${session.dataCategory}" th:if="${category.products.size() >= 0 && iStar.index < 10}" >
             <div class="list__product">
                 <div class="row">
                     <div class="col heading__list-item text-left">
