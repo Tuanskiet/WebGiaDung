@@ -165,20 +165,31 @@ function formatDecimal(num){
 
 /*alert*/
 function SwalAlertWarning(message){
-    Swal.fire({
+    alertify.dialog('alert').set({
+        transition:'zoom',
+        title:'Thông báo',
+        message: message
+    }).show();
+/*    Swal.fire({
         title: message,
         icon: 'warning',
         confirmButtonText: 'Đóng',
         timer: 2000,
-    });
+    });*/
 }
 function SwalAlertSuccess(message){
-    Swal.fire({
+    alertify.dialog('alert').set({
+        transition:'zoom',
+        title:'Thông báo',
+        message: message
+    }).show();
+
+    /*Swal.fire({
         title: message,
         icon: "success",
         showConfirmButton: false,
         timer : 2000
-    });
+    });*/
 
 }
 //call ajax
