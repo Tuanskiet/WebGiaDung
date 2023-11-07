@@ -77,7 +77,7 @@ public class Product implements Serializable {
     private List<ProductInfo> productInfo = new ArrayList<>();
 
 
-    public Product(String name, BigDecimal price, Double percentDiscount, String image, MyCategory category, BrandApp brandApp) {
+    public Product(String name, BigDecimal price, Double percentDiscount, String image, MyCategory category) {
         this.name = name;
         this.price = price;
         this.percentDiscount = percentDiscount;

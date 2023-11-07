@@ -1,7 +1,7 @@
 version: '3.0'
 services:
-  mysqldb:
-    container_name: yasuki-mysqldb
+  giadung-mysqldb:
+    container_name: giadung-mysqldb
     image: mysql:8.0
     restart: on-failure
     environment:
@@ -19,19 +19,19 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: yasuki-spring
+    container_name: giadung-spring
     ports:
       - "8080:8080"
     restart: on-failure
     environment:
-      DATABASE_HOST: mysqldb
+      DATABASE_HOST: giadung-mysqldb
       DATABASE_PORT: 3306
-      DATABASE_NAME: db_yasuki
+      DATABASE_NAME: db_giadung
       DATABASE_USER: root
       DATABASE_PASSWORD: root
       SPRING_PROFILES_ACTIVE: dev
     depends_on:
-      - mysqldb
+      - giadung-mysqldb
     networks:
       springboot-mysql-net:
 

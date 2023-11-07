@@ -117,7 +117,7 @@ public class ManagerOrderController {
                     product.getId(),
                     orderItem.getQuantity(),
                     product.getName(),
-                    product.getPrice()
+                    orderItem.getOldPrice()
             ));
         }
         orderResponse.setOrderItems(orderItemResponseList);

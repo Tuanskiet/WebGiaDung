@@ -166,3 +166,10 @@ input:checked + .slider:before {
     font-weight: 800;
     line-height: 22px;
 }
+.note_pass{
+    margin-top: 6px;
+    display: block;
+    color: red;
+    font-size: 14px;
+    display : none;
+}
