@@ -75,7 +75,7 @@
         </div>
 
         <!-- List product by category -->
-        <th:block th:each="category, iStar :  ${session.dataCategory}" th:if="${category.products.size() >= 0 && iStar.index < 10}" >
+        <th:block th:each="category, iStar :  ${session.dataCategory}" th:if="${category.products.size() > 0 && iStar.index < 10}" >
             <div class="list__product">
                 <div class="row">
                     <div class="col heading__list-item text-left">

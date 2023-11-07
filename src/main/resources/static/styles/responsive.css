@@ -358,8 +358,8 @@
 @media only screen and (max-width: 575px)
 {
     .heading__list-item .view__all{
-        padding: 4px 6px 4px 10px;
-        font-size: 15px;
+        padding: 8px 6px 8px 10px;
+        font-size: 16px;
     }
     .heading_list {
         font-size: 18px;
