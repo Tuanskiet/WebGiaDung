@@ -89,7 +89,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void deleteById(Integer id) {
+//        Optional<Order> order = orderRepo.findById(id);
         orderRepo.deleteById(id);
+        /*for(OrderItem item : order.get().getListOrderItem()){
+            orderItemRepo.deleteById(item.getId());
+        }*/
     }
 
     @Override

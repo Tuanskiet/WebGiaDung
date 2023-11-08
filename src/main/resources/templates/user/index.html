@@ -99,7 +99,9 @@
                                     <div class="product_image">
                                         <img th:src="${product.image}" alt="img">
                                     </div>
-                                    <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-[[${product.percentDiscount}]]%</span></div>
+                                    <div th:if="${product.percentDiscount > 0}" class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
+                                        <span>-[[${product.percentDiscount}]]%</span>
+                                    </div>
                                     <div class="product_info">
                                         <h6 class="product_name"><a th:href="@{'/product?id='+${product.id}}">[[${product.name}]]</a></h6>
                                         <div class="product_price">[[${#numbers.formatDecimal(product.priceDiscount, 3,'POINT', 0,'COMMA')}]]đ
@@ -146,7 +148,9 @@
                                             <div class="product_image">
                                                 <img th:src="${product.image}" alt="img">
                                             </div>
-                                            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-[[${product.percentDiscount}]]%</span></div>
+                                            <div  th:if="${product.percentDiscount > 0}" class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
+                                                <span th:if="${product.percentDiscount > 0}">-[[${product.percentDiscount}]]%</span>
+                                            </div>
                                             <div class="product_info">
                                                 <h6 class="product_name"><a th:href="@{'/product?id='+${product.id}}">[[${product.name}]]</a></h6>
                                                 <div class="product_price">[[${#numbers.formatDecimal(product.priceDiscount, 3,'POINT', 0,'COMMA')}]]đ

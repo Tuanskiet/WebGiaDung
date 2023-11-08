@@ -38,10 +38,10 @@
                         <div class="col-lg-3 thumbnails_col order-lg-1 order-2">
                             <div class="single_product_thumbnails">
                                 <ul>
-                                    <li class="active">
+                                    <li class="active" th:if="${productDetail.image != ''}">
                                         <img th:src="${productDetail.image}" alt="" th:data-image="${productDetail.image}">
                                     </li>
-                                    <li th:each="item : ${productDetail.productImages}" th:if="${item.url != null}">
+                                    <li th:each="item : ${productDetail.productImages}" th:if="${item.url != ''}">
                                         <img th:src="${item.url}" alt="" th:data-image="${item.url}">
                                     </li>
                                    <!-- <li class="active"><img src="images/single_2_thumb.jpg" alt="" data-image="images/single_2.jpg"></li>-->

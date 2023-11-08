@@ -83,9 +83,9 @@ public class ManagerOrderController {
                                      Model model){
         try{
             orderService.insert(order);
-            model.addAttribute("success", MessageUtils.Product.ADD_SUCCESS);
+            model.addAttribute("success", MessageUtils.Product.ADD_SUCCESS.getVal());
         }catch(Exception ex){
-            model.addAttribute("error", MessageUtils.Product.ADD_FAILED);
+            model.addAttribute("error", MessageUtils.Product.ADD_FAILED.getVal());
             return "/admin/add_order";
         }
         return "redirect:/admin/manager-order";
@@ -97,7 +97,8 @@ public class ManagerOrderController {
         try{
             orderService.deleteById(id);
         }catch(Exception e){
-            return ResponseEntity.status(500).body(MessageUtils.Product.ERROR_FOREIGN_KEY);
+//            e.printStackTrace();
+            return ResponseEntity.status(500).body(MessageUtils.Product.ERROR_FOREIGN_KEY.getVal());
         }
         return ResponseEntity.status(204).body("DELETED");
     }

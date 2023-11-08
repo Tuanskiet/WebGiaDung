@@ -34,7 +34,7 @@ public class EvaluateApi {
         try{
             evaluateService.deleteById(id);
         }catch(Exception e){
-            return ResponseEntity.status(500).body(MessageUtils.Product.ERROR_FOREIGN_KEY);
+            return ResponseEntity.status(500).body(MessageUtils.Product.ERROR_FOREIGN_KEY.getVal());
         }
         return ResponseEntity.status(204).body("DELETED");
     }

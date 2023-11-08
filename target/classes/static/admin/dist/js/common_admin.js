@@ -246,7 +246,7 @@ function updateHtmlListProdSelected(listProds){
 
 //toastr
 function myToastr(type, message){
-     var delay = alertify.get('notifier', 'delay', 0.5);
+     var delay = alertify.get('notifier', 'delay', 1);
      alertify.set('notifier','position', 'top-right');
      if(type == 'error'){
         alertify.error(message);
