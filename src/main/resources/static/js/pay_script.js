@@ -98,7 +98,14 @@ $('.totalOrder').html(formatDecimal(total));
     }
 
     function SwalAlertOrderSuccess(message){
-        Swal.fire({
+    alertify.alert('Thông báo', message).setting({
+        'transition': 'zoom',
+        'label': 'Tiếp tục mua hàng!',
+        'onok': function() {
+            window.location.href = urlListProduct;
+        }
+    }).show();
+/*        Swal.fire({
             title: message,
             icon: "success",
             confirmButtonText: "Tiếp tục mua hàng!"
@@ -106,6 +113,6 @@ $('.totalOrder').html(formatDecimal(total));
             if (result.isConfirmed) {
                  window.location.href = urlListProduct;
             }
-        });
+        });*/
     }
 });

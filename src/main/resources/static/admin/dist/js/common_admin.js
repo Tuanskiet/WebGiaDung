@@ -246,7 +246,16 @@ function updateHtmlListProdSelected(listProds){
 
 //toastr
 function myToastr(type, message){
-    Command: toastr[type](message)
+     var delay = alertify.get('notifier', 'delay', 1);
+     alertify.set('notifier','position', 'top-right');
+     if(type == 'error'){
+        alertify.error(message);
+     }else{
+        alertify.success(message);
+     }
+     alertify.set('notifier','delay', delay);
+
+    /*Command: toastr[type](message)
     toastr.options = {
       "closeButton": true,
       "debug": true,
@@ -263,7 +272,7 @@ function myToastr(type, message){
       "hideEasing": "linear",
       "showMethod": "fadeIn",
       "hideMethod": "fadeOut"
-    }
+    }*/
 }
 
 function formatDecimal(num){
