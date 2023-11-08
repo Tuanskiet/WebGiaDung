@@ -154,7 +154,7 @@
                 <li class="checkout">
                   <a th:href="@{${#authorization.expression('isAnonymous()')? '#my-Login' : '/cart'}}">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    <span id="checkout_items" class="checkout_items">[[${session.sizeCart}]]</span>
+                    <span id="checkout_items" class="checkout_items">[[${session.sizeCart != null ? session.sizeCart : '0'}]]</span>
                   </a>
                 </li>
               </ul>

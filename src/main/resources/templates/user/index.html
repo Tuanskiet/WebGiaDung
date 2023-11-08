@@ -65,7 +65,7 @@
                     <div th:each="category,iStar : ${session.dataCategory}" class="index-category" th:if="${iStar.index < 18}">
                         <a th:href="@{'/list-product?category=' +${category.slug}}">
                             <span class="index-category-img">
-                                <img class="img-fluid lazyloaded" alt="category" th:src="${category.image}">
+                                <img class="img-fluid lazyloaded" alt="img" th:src="${category.image}">
                             </span>
                             <span class="index-category-title">[[${category.name}]]</span>
                         </a>
