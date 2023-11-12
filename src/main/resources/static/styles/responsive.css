@@ -411,6 +411,9 @@
         max-width: 70px;
         max-height: 70px;
     }
+    .discount .product_info .product_price {
+        font-size: 13px;
+    }
 }
 
 

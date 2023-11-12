@@ -330,6 +330,9 @@
     .product_section_container{
         margin-top: 110px;
     }
+    .discount .product_info .product_price {
+        font-size: 13px;
+    }
 }
 
 /************

@@ -464,10 +464,13 @@ img.img-fluid.lazyloaded {
 {
 	width: 100%;
 	min-height: 160px;
+	height: 160px;
 }
 .product_image-top img{
     min-height: 200px;
+    height: 200px;
 }
+
 .product_info
 {
 	text-align: center;
