@@ -1,9 +1,45 @@
 var infoItemIndex = 0;
 var urlManagerProduct   = "/admin/manager-product";
 var urlAddProduct       = "/admin/manager-product/add";
+var urlGetKeys       = "/admin/manager-category/get-key"; // key for product info
 
 var productInfoList = $("#info_product-list .info_product-item");
 var infoItemIndex = productInfoList.length -1 || 0;
+
+
+async function getListInfoByCategory(){
+    let id = $('#category').val();
+    let data = {id : id}
+    let listKeys = await callAjaxPromise(urlGetKeys, 'GET', data) || [];
+    updateHtmlListKeys(listKeys);
+}
+
+function updateHtmlListKeys(data){
+    $('#info_product-list').empty();
+    data.forEach( (item,infoItemIndex)  => {
+        var html = `
+            <div class="row align-items-end mb-3 info_product-item" data-index="${infoItemIndex}">
+                <div class="col">
+                    <label>Thông số</label>
+                    <input
+                        value="${item}"
+                        name="productInfo[${infoItemIndex}].key" type="text"
+                        class="form-control keyInfo" placeholder="Nhập thông số ..." />
+                </div>
+                <div class="col">
+                    <label>Giá trị</label>
+                    <input name="productInfo[${infoItemIndex}].value" type="text"class="form-control valueInfo" placeholder="Nhập giá trị ..." />
+                </div>
+                <div class="col">
+                    <button type="button" onclick="deleteInfoItem(${infoItemIndex})" class="btn btn-danger delete_product_info">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+        $('#info_product-list').append(html);
+    })
+}
 
 $('.addInfo').on('click', (event)=>{
     event.preventDefault();
@@ -106,3 +142,7 @@ $('#btnAddProduct').on('click', ()=>{
     })
 
 });
+
+$('.btnReset').on('click', () =>{
+    window.location.reload();
+})

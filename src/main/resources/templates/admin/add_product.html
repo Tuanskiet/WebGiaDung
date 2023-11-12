@@ -66,7 +66,9 @@
                                     <div class="col">
                                         <div class="form-group" >
                                             <label for="category">Tên danh mục : </label>
-                                            <select id="category" required class="form-control select2 select2-hidden-accessible" style="width: 100%;" >
+                                            <select
+                                                    onchange="getListInfoByCategory()"
+                                                    id="category" required class="form-control select2 select2-hidden-accessible" style="width: 100%;" >
                                                 <option th:each="item : ${listCategories}"
                                                         th:value="${item.id}"
                                                         th:text="${item.name}"></option>
@@ -124,21 +126,26 @@
                         </div>
                         <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
                             <div id="info_product-list">
-                                <div class="row align-items-end mb-3 mt-2 info_product-item" data-index="0">
-                                    <div class="col">
-                                        <label>Thông số</label>
-                                        <input type="text"  class="form-control keyInfo" placeholder="Nhập thông số ...">
+                                <th:block th:if="${firstListKey.size > 0}" th:each="item, itemStat : ${firstListKey}">
+                                    <div class="row align-items-end mb-3 mt-2 info_product-item" data-index="0">
+                                        <div class="col">
+                                            <label>Thông số</label>
+                                            <input type="text"
+                                                   th:value="${item}"
+                                                   class="form-control keyInfo" placeholder="Nhập thông số ...">
+                                        </div>
+                                        <div class="col">
+                                            <label >Giá trị</label>
+                                            <input type="text" class="form-control valueInfo" placeholder="Nhập giá trị ...">
+                                        </div>
+                                        <div class="col">
+                                            <button onclick="deleteInfoItem(0)" class="btn btn-danger delete_product_info">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <label >Giá trị</label>
-                                        <input type="text"  class="form-control valueInfo" placeholder="Nhập giá trị ...">
-                                    </div>
-                                    <div class="col">
-                                        <button onclick="deleteInfoItem(0)" class="btn btn-danger delete_product_info">
-                                            <i class="far fa-trash-alt"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                                </th:block>
+
                             </div>
                             <button class="btn btn-warning addInfo mt-2">Thêm thông số</button>
                         </div>
@@ -146,7 +153,7 @@
 
                     <div class="tab-custom-content">
                         <button type="submit" id="btnAddProduct" class="btn btn-success">Thêm sản phẩm</button>
-                        <button type="reset" class="btn btn-secondary">Nhập lại</button>
+                        <button type="reset" class="btn btn-secondary btnReset">Nhập lại</button>
                     </div>
                 </div>
                 <!-- /.card -->

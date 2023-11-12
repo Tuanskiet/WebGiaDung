@@ -77,6 +77,10 @@ public class MyCategoryServiceImpl implements MyCategoryService {
         return categoryRepo.findTop5ByTypeAndIsActiveTrue(type);
     }
 
+    @Override
+    public MyCategory findFirst() {
+        return categoryRepo.findTop1ByOrderById();
+    }
 
     private MyCategory findCategoryBySlug(String slug){
         return categoryRepo.findMyCategoryBySlug(slug);

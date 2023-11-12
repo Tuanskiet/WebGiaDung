@@ -80,7 +80,7 @@ public class ProductApi {
             listProductNames.add(foundProduct.getName());
 
             for (ProductInfo productInfo : foundProduct.getProductInfo()) {
-                listCompare.computeIfAbsent(productInfo.getKey(), key -> new ArrayList<>())
+                listCompare.computeIfAbsent(productInfo.getKey().trim(), key -> new ArrayList<>())
                         .add(productInfo.getValue());
             }
         }

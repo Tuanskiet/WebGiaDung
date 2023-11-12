@@ -21,4 +21,5 @@ public interface MyCategoryRepo extends JpaRepository<MyCategory, Integer> {
     Optional<MyCategory> findBySlug(String slug);
 
     List<MyCategory> findTop5ByTypeAndIsActiveTrue(String type);
+    MyCategory findTop1ByOrderById();
 }

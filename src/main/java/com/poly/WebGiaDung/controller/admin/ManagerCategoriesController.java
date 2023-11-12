@@ -15,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class ManagerCategoriesController {
@@ -43,16 +45,34 @@ public class ManagerCategoriesController {
         model.addAttribute("newCategory", new MyCategory());
         return "admin/manager_category";
     }
+    @GetMapping("/admin/manager-category/add")
+    public String viewPageAddCategories(Model model){
+        model.addAttribute("newCategory", new MyCategory());
+        return "admin/add_category";
+    }
+
+
     @PostMapping("/admin/manager-category/add")
-    public String doCreateNewCategories(@ModelAttribute(name = "newCategory") MyCategory myCategory,
+    public String doCreateNewCategories(
+            @ModelAttribute(name = "newCategory") MyCategory myCategory,
                                   Model model){
         try{
             categoryService.create(myCategory);
-            model.addAttribute("success", MessageUtils.Product.ADD_SUCCESS.getVal());
         }catch(Exception ex){
             model.addAttribute("error", MessageUtils.Product.ADD_FAILED.getVal());
+            return "admin/add_category";
         }
         return "redirect:/admin/manager-category";
+    }
+
+    @GetMapping("/admin/manager-category/edit/{id}")
+    public String editCategories(
+            @PathVariable(name = "id") Integer id,
+            Model model){
+        model.addAttribute("mode", "edit");
+        MyCategory myCategory = categoryService.findById(id).get();
+        model.addAttribute("newCategory", myCategory);
+        return "admin/add_category";
     }
 
 

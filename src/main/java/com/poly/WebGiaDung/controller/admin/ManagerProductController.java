@@ -50,6 +50,7 @@ public class ManagerProductController {
     @GetMapping("/admin/manager-product/add")
     public String  viewAddProductPage(Model model){
         model.addAttribute("listCategories", categoryService.getAllCategory());
+        model.addAttribute("firstListKey", categoryService.findFirst().getListKeys());
         return "admin/add_product";
     }
 
@@ -60,6 +61,7 @@ public class ManagerProductController {
             return "redirect:/admin/manager-product";
         }
         model.addAttribute("listCategories", categoryService.getAllCategory());
+        model.addAttribute("listKeysInfo", product.get().getCategory().getListKeys());
         model.addAttribute("productEdit", product.get());
         return "admin/edit_product";
     }

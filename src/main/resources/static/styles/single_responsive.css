@@ -123,7 +123,7 @@
 		display: inline-block;
 		width: 110px;
 		margin-bottom: 0px;
-		margin-right: 10px;
+		margin-right: 4px;
 	}
 	.single_product_thumbnails ul li img
 	{
@@ -169,6 +169,14 @@
 		height: auto;
 		margin-top: 20px;
 		margin-bottom: 65px;
+	}
+	.star_rating{
+        margin-left: 10px;
+        font-size: 18px;
+	}
+	.price_safe{
+        font-weight: 600;
+        color: #fe4c50;
 	}
 }
 
@@ -275,6 +283,11 @@
 	{
 		margin-right: 10px;
 	}
+	.breadcrumbs ul li.active
+    	{
+    		margin-right: 10px;
+    		line-height: 16px;
+    	}
 	.breadcrumbs ul li i
 	{
 		margin-right: 12px;

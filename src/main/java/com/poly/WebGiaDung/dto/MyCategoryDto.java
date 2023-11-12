@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -22,6 +23,8 @@ public class MyCategoryDto {
     private String policy;
 
     private String type;
+
+    private List<String> listKeys;
 
     @Column(name = "is_active")
     private Boolean isActive = false;

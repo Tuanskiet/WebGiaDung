@@ -463,6 +463,10 @@ img.img-fluid.lazyloaded {
 .product_image img
 {
 	width: 100%;
+	min-height: 160px;
+}
+.product_image-top img{
+    min-height: 200px;
 }
 .product_info
 {

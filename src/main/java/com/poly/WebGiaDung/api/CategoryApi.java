@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -38,21 +39,21 @@ public class CategoryApi {
         return ResponseEntity.status(204).body("DELETED");
     }
 
-    @GetMapping("/admin/manager-category/edit")
-    public MyCategoryDto editCategories(@RequestParam(name = "id") Integer id,
-                                        Model model){
-        model.addAttribute("mode", "edit");
-        MyCategoryDto categoryDto = new MyCategoryDto();
-        MyCategory myCategory = categoryService.findById(id).get();
-        BeanUtils.copyProperties(myCategory, categoryDto);
-        return categoryDto;
-    }
-
     @GetMapping("/admin/manager-category/change-status")
     public ResponseEntity<?> changeStatusCategories(
             @RequestParam(name = "id") Integer id,
             @RequestParam(name = "statusChanged") Boolean statusChanged){
         categoryService.updateStatus(id, statusChanged);
         return ResponseEntity.status(200).body("UPDATED");
+    }
+
+    @GetMapping("/admin/manager-category/get-key")
+    public ResponseEntity<?> getListInfoByCategory(
+            @RequestParam(name = "id") Integer id){
+        Optional<MyCategory> category = categoryService.findById(id);
+        if(category.isPresent()){
+            return ResponseEntity.status(200).body(category.get().getListKeys());
+        }
+        return ResponseEntity.status(500).body("NOT FOUND");
     }
 }

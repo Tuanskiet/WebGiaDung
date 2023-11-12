@@ -195,7 +195,11 @@ $('#sendOrder').on('click', function sendOrder(){
     localStorage.removeItem('listProductSelected');
 });
 
-
+/*add product to order*/
+$('.btnAddProductToOrder').on('click', ()=>{
+    event.preventDefault();
+    filterByCategory();
+})
 
 //update html list product search to order
 function updateHtmlListProdSearch(listProds){
@@ -216,7 +220,6 @@ function updateHtmlListProdSearch(listProds){
         );
     })
 }
-
 
 
 //update html list product selected to order

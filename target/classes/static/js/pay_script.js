@@ -98,11 +98,11 @@ $('.totalOrder').html(formatDecimal(total));
     }
 
     function SwalAlertOrderSuccess(message){
-    alertify.alert('Thông báo', message).setting({
-        'transition': 'zoom',
-        'label': 'Tiếp tục mua hàng!',
-        'onok': function() {
-            window.location.href = urlListProduct;
+        alertify.alert('Thông báo', message).setting({
+            'transition': 'zoom',
+            'label': 'Tiếp tục mua hàng!',
+            'onok': function() {
+                window.location.href = urlListProduct;
         }
     }).show();
 /*        Swal.fire({

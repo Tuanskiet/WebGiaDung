@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="admin/_layout :: view(~{:: .content-wrapper}, 'Cài đặt chung')">
+<body>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0" >Cài đặt chung</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Trang chủ </a></li>
+                            <li class="breadcrumb-item active">Cài đặt chung</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- Small boxes (Stat box) -->
+                <div class="card card-primary card-outline">
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div th:if="${error != null}" class="alert alert-danger add_product-error" >
+                                    Thay đổi thất bại
+                                </div>
+                                <div th:if="${success != null}" class="alert alert-success add_product-error" >
+                                    Thay đổi thành công
+                                </div>
+                                <form th:action="@{/admin/set-banner}" method="post" enctype="multipart/form-data">
+                                    <label for="banner_file">Chọn ảnh Banner : </label>
+                                    <input type="file"
+                                           id="banner_file"
+                                           name="banner_file"
+                                           th:value="${multipartFile}"
+                                           accept="image/*"
+                                           class="form-control mb-2" required>
+                                    <button type="submit" class="btn btn-primary">Thay đổi</button>
+                                </form>
+                            </div>
+                            <div class="col">
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+
+        <script th:inline="javascript">
+        $(document).ready(function(){
+            localStorage.removeItem('listProductSelected');
+            var mode = /*[[${mode}]]*/{};
+            if(mode == 'edit'){
+                let dataEdit = /*[[${editOrder}]]*/{};
+                updateDataField(dataEdit);
+                localStorage.setItem('listProductSelected', JSON.stringify(dataEdit.orderItems));
+                updateHtmlListProdSelected(dataEdit.orderItems);
+            }
+        });
+    </script>
+    </div>
+    <!-- /.content-wrapper -->
+</body>
+</html>

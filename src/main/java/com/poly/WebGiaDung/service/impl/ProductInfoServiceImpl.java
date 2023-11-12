@@ -19,6 +19,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
     @Override
     public ProductInfo insert(ProductInfo productInfo) {
+        productInfo.setKey(productInfo.getKey().trim());
         return productInfoRepo.save(productInfo);
     }
 

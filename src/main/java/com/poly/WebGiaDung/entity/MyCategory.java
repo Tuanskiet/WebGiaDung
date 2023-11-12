@@ -39,7 +39,12 @@ public class MyCategory implements Serializable {
     private Boolean isActive = true;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ElementCollection
+    @Column(name = "list_keys")
+    private List<String> listKeys = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "category", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private List<Product> products = new ArrayList<>();
 
     public MyCategory(String name,  String type, String image) {

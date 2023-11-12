@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="admin/_layout :: view(~{:: .content-wrapper}, 'Quản lí danh mục')">
+<body>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Dashboard</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <div class="card card-primary card-outline">
+                <div th:if="${error != null}" class="alert alert-danger add_product-error" >
+                    [[${error}]]
+                </div>
+                <form th:action="@{/admin/manager-category/add}" th:object="${newCategory}" method="post" id="formAddProduct"  class="card-body">
+                    <input type="hidden" name="id" th:field="*{id}" th:value="${newCategory.id}">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Thông tin danh mục</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Thông số SP</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label for="name_category">Tên danh mục : </label>
+                                            <input name="name" th:field="*{name}" th:value="${newCategory.name}" data-field="name"
+                                                   type="text" class="form-control" id="name_category" placeholder="Enter category ...">
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="category_type">Loại danh mục : </label>
+                                            <select
+                                                    th:field="*{type}"
+                                                    th:value="${newCategory.type}" data-field="type"
+                                                    id="category_type"  name="type" required class="form-control select2 select2-hidden-accessible" style="width: 100%;">
+                                                <option value="product">Sản phẩm</option>
+                                                <option value="service">Dịch vụ</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="img_category">Link ảnh : </label>
+                                    <input name="image" th:field="*{image}" th:value="${newCategory.image}" data-field="image"
+                                           type="text" class="form-control" id="img_category" placeholder="Enter image ...">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="policy">Chính sách : </label>
+                                    <textarea
+                                            name="policy"
+                                            th:field="*{policy}"
+                                            th:value="${newCategory.policy}"
+                                            data-field="policy"
+                                            id="policy" ></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                            <div id="info_product-list">
+                                <th:block th:if="${newCategory.listKeys.size > 0}" th:each="item, itemStat : ${newCategory.listKeys}">
+                                    <div class="row align-items-end mb-3 mt-2 info_product-item" th:data-index="${itemStat.index}" >
+                                        <div class="col">
+                                            <label>Thông số</label>
+                                            <input type="text"
+                                                   name="listKeys"
+                                                   th:value="${item}"
+                                                   class="form-control keyInfo" placeholder="Nhập thông số ...">
+                                        </div>
+                                        <div class="col">
+                                            <button th:onclick="deleteInfoItem([[${itemStat.index}]])" class="btn btn-danger delete_product_info">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </th:block>
+                                <th:block th:if="${newCategory.listKeys.size == 0}" >
+                                    <div class="row align-items-end mb-3 mt-2 info_product-item" data-index="0" >
+                                        <div class="col">
+                                            <label>Thông số</label>
+                                            <input type="text" name="listKeys"  class="form-control keyInfo" placeholder="Nhập thông số ...">
+                                        </div>
+                                        <div class="col">
+                                            <button onclick="deleteInfoItem(0)" class="btn btn-danger delete_product_info">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </div>
+                            <button class="btn btn-warning addInfo mt-2">Thêm thông số</button>
+                        </div>
+                     </div>
+
+                    <div class="tab-custom-content">
+                        <button type="submit" id="btnAddProduct" class="btn btn-success">[[${mode != 'edit' ? 'Thêm' : 'Cập nhật'}]] danh mục</button>
+                        <button type="reset" class="btn btn-secondary">Nhập lại</button>
+                    </div>
+                </form>
+                <!-- /.card -->
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+    <script  th:inline="javascript">
+        $(document).ready(function() {
+          $('#policy').summernote({
+            placeholder: 'Write some sort description here',
+            tabsize: 2,
+            height: 80,
+            toolbar: [
+              ['style', ['style']],
+              ['font', ['bold', 'underline', 'clear']],
+              ['color', ['color']],
+              ['para', ['ul', 'ol', 'paragraph']],
+              ['table', ['table']],
+              ['insert', ['link', 'picture', 'video']],
+              ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+          });
+
+       });
+    </script>
+    <script th:src="@{/admin/dist/js/manager_category.js}"></script>
+</div>
+<!-- /.content-wrapper -->
+</body>
+</html>
