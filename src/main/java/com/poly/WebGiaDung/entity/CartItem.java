@@ -36,11 +36,6 @@ public class CartItem implements Serializable {
 //        BigDecimal result = BigDecimal.valueOf(quantity).multiply(product.getPrice());
 //        return result;
 //    }
-
-    public CartItem(Product product, UserApp userApp) {
-        this.product = product;
-        this.userApp = userApp;
-    }
     public CartItem(Integer quantity, Product product, UserApp userApp) {
         this.quantity = quantity;
         this.product = product;

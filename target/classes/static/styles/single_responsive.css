@@ -236,10 +236,6 @@
 	{
 		height: 576px;
 	}
-	.benefit_col
-	{
-		margin-bottom: 15px;
-	}
 	.newsletter_form
 	{
 		margin-bottom: 40px;
@@ -381,6 +377,9 @@
     .inventory_quantity{
         gap: 6px;
         flex-direction: column;
+    }
+    .benefit_item{
+        height: 96px;
     }
 }
 

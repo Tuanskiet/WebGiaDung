@@ -171,7 +171,8 @@
               </div>
               <div class="category__slider-wrapper">
                 <ul class="owl-carousel owl-theme category__slider">
-                  <li th:each="item : ${session.dataCategory}">
+                  <li th:each="item : ${session.dataCategory}"
+                      th:if="${item.isActive}" >
                     <a th:href="@{'/list-product?category='+${item.slug}}" th:text="${item.name}"></a>
                   </li>
                 </ul>
@@ -200,7 +201,9 @@
     </div>
     <div class="hamburger_menu_content text-left">
       <ul class="menu_top_nav">
-        <li th:each="item, iStar : ${session.dataCategory}" class="menu_item" th:data-id="${item.id}">
+        <li th:each="item, iStar : ${session.dataCategory}"
+            th:if="${item.isActive}"
+            class="menu_item" th:data-id="${item.id}">
           <a th:href="@{'/list-product?category=' +${item.slug}}">
             [[${item.name}]]
           </a>
@@ -272,27 +275,28 @@
               </div>
             </a>
           </li>
-          <!--<li class="nav-item mb-2">
+          <li class="nav-item mb-2">
             <div class="social-group">
-              <a href="#" class="social-item"><i class="fab fa-facebook-f"></i>
+              <a href="https://www.facebook.com/profile.php?id=61553526003282&mibextid=ZbWKwL" class="social-item">
+                <img th:src="@{/images/facebook_icon.png}" alt="">
               </a>
-              <a href="#" class="social-item"><i class="fab fa-twitter"></i>
+              <a href="https://www.tiktok.com/@ketnoitieudungviet?_t=8hNRziu6POz&_r=1" class="social-item">
+                <img th:src="@{/images/tiktok.png}" alt="">
               </a>
-              <a href="#" class="social-item"><i class="fab fa-pinterest-p"></i>
-              </a>
-              <a href="#" class="social-item"><i class="fab fa-invision"></i>
-              </a>
-              <a href="#" class="social-item"><i class="fab fa-youtube"></i>
+              <a href="https://zaloapp.com/qr/p/1s3pk1d0xso7i?src=qr"
+                 class="social-item">
+                 <img th:src="@{/images/zalo_logo.png}" alt="">
               </a>
             </div>
-          </li>-->
+          </li>
         </ul>
       </div>
       <div class="col-lg-2 col-md-6 col-sm-12 footer-item">
         <h5 class="footer_header">Sản Phẩm, Dịch vụ & Ưu Đãi</h5>
         <h6 class="sub_text-footer">* Sản Phẩm</h6>
         <ul class="nav flex-column">
-          <li th:each="item, iStar : ${session.categoryProduct}" class="nav-item mb-2">
+          <li th:each="item, iStar : ${session.categoryProduct}"
+              class="nav-item mb-2">
             <a  th:href="@{'/list-product?category=' +${item.slug}}"
                class="nav-link p-0 text-footer">[[${item.name}]]</a>
           </li>
@@ -322,8 +326,6 @@
           <li class="nav-item mb-2"><a th:href="@{/policy}" class="nav-link p-0 text-footer">Chính sách bảo hành</a></li>
         </ul>
       </div>
-
-
 
       <div class="col-lg-4 col-md-6 col-sm-12 footer-item">
         <h5 class="footer_header">Đăng ký để nhận được được thông tin ưu đãi mới nhất từ chúng tôi.</h5>

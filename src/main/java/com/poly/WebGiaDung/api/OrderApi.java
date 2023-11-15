@@ -4,6 +4,7 @@ import com.poly.WebGiaDung.dto.CartDto;
 import com.poly.WebGiaDung.dto.OrderDto;
 import com.poly.WebGiaDung.dto.OrderItemResponse;
 import com.poly.WebGiaDung.dto.ProductResponse;
+import com.poly.WebGiaDung.entity.CartItem;
 import com.poly.WebGiaDung.entity.Product;
 import com.poly.WebGiaDung.entity.UserApp;
 import com.poly.WebGiaDung.security.MyUserDetails;
@@ -34,6 +35,15 @@ public class OrderApi {
     private final CartItemService cartItemService;
     private final SendEmailService sendEmail;
 
+    @PostMapping("/admin/manager-order/add") // ?
+    public String doCreateNewOrder(
+            @RequestBody OrderDto orderDtoList,
+            @AuthenticationPrincipal MyUserDetails userDetails,
+            HttpSession session
+    ){
+        orderService.create(orderDtoList, userDetails.getUserApp());
+        return "OK";
+    }
     @PostMapping("/get-data-order")
     public List<OrderItemResponse> getDataOrder(
             @RequestBody List<CartDto> cartDtoList
@@ -52,10 +62,10 @@ public class OrderApi {
     }
 
     @PostMapping("/order")
-    public ResponseEntity<?> doOrder(@RequestBody OrderDto orderDtoList,
-                                  @AuthenticationPrincipal MyUserDetails myUserDetails,
-                                  HttpSession session
-                          ){
+    public ResponseEntity<?> doOrder(
+            @RequestBody OrderDto orderDtoList,
+            @AuthenticationPrincipal MyUserDetails myUserDetails,
+            HttpSession session){
         if(myUserDetails != null){
             orderService.create(orderDtoList, myUserDetails.getUserApp());
             try {

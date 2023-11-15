@@ -9,6 +9,7 @@ import com.poly.WebGiaDung.security.MyUserDetails;
 import com.poly.WebGiaDung.service.CartItemService;
 import com.poly.WebGiaDung.service.MyCategoryService;
 import com.poly.WebGiaDung.service.OrderService;
+import com.poly.WebGiaDung.service.ProductService;
 import com.poly.WebGiaDung.utils.MessageUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -25,15 +26,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
 public class ManagerOrderController {
     private final OrderService orderService;
     private final MyCategoryService categoryService;
-    private final CartItemService cartItemService;
+    private final ProductService productService;
     private static final int PRODUCT_PER_PAGE = 10;
 
     @GetMapping("/admin/manager-order")
@@ -66,17 +69,7 @@ public class ManagerOrderController {
         return "admin/add_order";
     }
 
-    @PostMapping("/admin/manager-order/add")
-    @ResponseBody
-    public String doCreateNewOrder(
-            @RequestBody OrderDto orderDtoList,
-            @AuthenticationPrincipal MyUserDetails userDetails,
-            HttpSession session
-    ){
-        orderService.create(orderDtoList, userDetails.getUserApp());
-        resetListCart(session, userDetails.getUserApp());
-        return "OK";
-    }
+
 
     @PostMapping("/admin/manager-order/update")
     public String doUpdateOrder(@ModelAttribute(name = "newOrder") Order order,
@@ -107,8 +100,34 @@ public class ManagerOrderController {
     public String editOrder(@RequestParam(name = "id") String id,
                               Model model){
         Integer idIn = Integer.parseInt(id);
-        Order order = orderService.findById(idIn).get();
+        OrderResponse orderResponse = mapByOrderResponse(idIn);
+        model.addAttribute("mode", "edit");
+        model.addAttribute("editOrder", orderResponse);
+        model.addAttribute("categories", categoryService.getAllCategory());
+        return "admin/add_order.html";
+    }
 
+    @GetMapping("/admin/manager-order/print")
+    public String printOrder(
+            @RequestParam(name = "id") String id,
+            Model model){
+        Integer idIn = Integer.parseInt(id);
+        OrderResponse orderResponse = mapByOrderResponse(idIn);
+
+        BigDecimal totalPayment = BigDecimal.ZERO;
+        for (OrderItemResponse orderItem: orderResponse.getOrderItems()) {
+            Optional<Product> product = productService.findById(orderItem.getProductId());
+            BigDecimal itemTotal = product.get().getPriceDiscount()
+                    .multiply(BigDecimal.valueOf(orderItem.getQuantity()));
+            totalPayment = totalPayment.add(itemTotal); // Update totalPayment correctly
+        }
+        model.addAttribute("dataOrder", orderResponse);
+        model.addAttribute("totalPayment", totalPayment);
+        return "admin/print_order";
+    }
+
+    private OrderResponse mapByOrderResponse(Integer orderId) {
+        Order order = orderService.findById(orderId).get();
         OrderResponse orderResponse = new OrderResponse();
         List<OrderItemResponse> orderItemResponseList = new ArrayList<>();
         BeanUtils.copyProperties(order, orderResponse);
@@ -122,16 +141,8 @@ public class ManagerOrderController {
             ));
         }
         orderResponse.setOrderItems(orderItemResponseList);
-        model.addAttribute("mode", "edit");
-        model.addAttribute("editOrder", orderResponse);
-        model.addAttribute("categories", categoryService.getAllCategory());
-        return "admin/add_order.html";
+        return orderResponse;
     }
 
-
-    private void resetListCart(HttpSession session, UserApp userApp){
-        List<CartItem> cartDtoList = cartItemService.getCartsByUser(userApp);
-        session.setAttribute("listCart", cartDtoList);
-    }
 
 }

@@ -52,12 +52,8 @@ public class OrderServiceImpl implements OrderService {
         newOrder.setStatus(orderDtoList.getStatus());
         newOrder.setUserApp(currentUser);
         newOrder.setTotalPayment(totalPrice);
-
         orderRepo.save(newOrder);
-
         orderItemRepo.deleteAllByOrder(newOrder);
-
-//        Set<OrderItem> listOrderItem = new HashSet<>();
 
         for (CartDto item : orderDtoList.getCartDtoList() ) {
             Product product = productService.findById(item.getProductId()).get();
@@ -117,8 +113,6 @@ public class OrderServiceImpl implements OrderService {
 
     private void updateAfterOrder(List<CartDto> cartDtoList, UserApp currentUser) {
         cartDtoList.stream().forEach(item -> {
-            // update quantity product after order
-            Product product = productService.findById(item.getProductId()).get();
             // remove cart item  after order
             cartItemService.deleteCartItem(item.getProductId(), currentUser);
         });

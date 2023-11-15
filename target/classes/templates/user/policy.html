@@ -25,7 +25,7 @@
         <div class="list_policy">
             <span>Xem nhanh</span>
             <ul class="policy_title_group">
-                <li th:each="item, iter : ${session.dataCategory}" class="policy_title" th:if="${item.type == 'product'}">
+                <li th:each="item, iter : ${session.dataCategory}" class="policy_title">
                     <a th:href="'#'+${item.id}">[[${iter.index +1}]]. Chính sách đổi trả nhóm [[${item.name}]]</a>
                 </li>
             </ul>

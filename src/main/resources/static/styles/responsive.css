@@ -414,6 +414,9 @@
     .discount .product_info .product_price {
         font-size: 13px;
     }
+    .index-category-title {
+        font-size: 14px;
+    }
 }
 
 
@@ -617,6 +620,9 @@
 	{
 		margin-top: 5px;
 		margin-bottom: 30px;
+	}
+	.category_list{
+	    margin-top: 70px;
 	}
 }
 

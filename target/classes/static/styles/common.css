@@ -1026,7 +1026,8 @@ section
     font-weight: 700;
 }
 .hotline .phone_number{
-    color: #ff3333;
+/*    color: #ff3333;*/
+    color: white;
 }
 /*********************************
 
@@ -1255,12 +1256,15 @@ section
 }
 .social-group .social-item {
     margin-right: 12px;
-    background-color: var(--main-cl);
+/*    background-color: var(--main-cl);*/
     width: 40px;
     height: 40px;
     display: flex;
     margin-top: 12px;
     border-radius: 3px;
+}
+.social-group .social-item img{
+    border-radius: 2px;
 }
 .social-item i {
     font-size: 16px;

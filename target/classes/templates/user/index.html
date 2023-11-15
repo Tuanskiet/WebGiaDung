@@ -13,20 +13,19 @@
         <th:block th:replace="user/fragments :: header_nav"></th:block>
         <!-- Slider -->
 
-        <div class="main_slider" >
+<!--        <div class="main_slider" style="background-image:url(./images/banner.jpg)">
             <div class="container fill_height">
                 <div class="row align-items-center fill_height">
-                    <img src="https://drive.google.com/file/d/1dif27FodkG0DGXIBAsvcUx0KDfWRyjvJ/view?usp=sharing" alt="">
-                    <!-- <div class="col">
+                    &lt;!&ndash; <div class="col">
                         <div class="main_slider_content">
                             <h6>Spring / Summer Collection 2017</h6>
                             <h1>Get up to 30% Off New Arrivals</h1>
                             <div class="red_button shop_now_button"><a href="#">Mua ngay</a></div>
                         </div>
-                    </div> -->
+                    </div> &ndash;&gt;
                 </div>
             </div>
-        </div>
+        </div>-->
 
         <!-- List brand -->
         <!--<div class="container">
@@ -63,7 +62,8 @@
                     </div>
                 </div>
                 <div class="index-categories-list row">
-                    <div th:each="category,iStar : ${session.dataCategory}" class="index-category" th:if="${iStar.index < 18}">
+                    <div th:each="category,iStar : ${session.dataCategory}" class="index-category"
+                         th:if="${iStar.index < 18 && category.isActive}">
                         <a th:href="@{'/list-product?category=' +${category.slug}}">
                             <span class="index-category-img">
                                 <img class="img-fluid lazyloaded" alt="img" th:src="${category.image}">
@@ -76,7 +76,8 @@
         </div>
 
         <!-- List product by category -->
-        <th:block th:each="category, iStar :  ${session.dataCategory}" th:if="${category.products.size() > 0 && iStar.index < 10}" >
+        <th:block th:each="category, iStar : ${session.dataCategory}"
+                  th:if="${category.products.size() > 0 && iStar.index < 6 && category.isActive}" >
             <div class="list__product">
                 <div class="row">
                     <div class="col heading__list-item text-left">
@@ -94,7 +95,7 @@
                 <div class="row">
                     <!-- Product item-->
                     <th:block th:if="${category.products.size() > 0 }">
-                        <div  th:each="product : ${category.products}" th:if="${product.isActive}" class="col-lg-2 col-md-3 col-sm-6 col-6 product-item-wrapper">
+                        <div  th:each="product, state : ${category.products}" th:if="${product.isActive && state.index < 18}" class="col-lg-2 col-md-3 col-sm-6 col-6 product-item-wrapper">
                             <div class="product-item" >
                                 <div class="discount product_filter">
                                     <div class="product_image">

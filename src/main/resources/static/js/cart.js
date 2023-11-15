@@ -47,6 +47,7 @@ $('input[name=chkCartItem]').on('click', function() {
     localStorage.setItem('listCartItemSelected', JSON.stringify(currentItemSelected));
     localStorage.setItem('totalPay', JSON.stringify(totalPay));
     $('.totalCart').html(formatDecimal(totalPay > 0 ? totalPay : 0));
+    $('.type_order').html(totalPay > 2000000 ? 'Giao hàng miễn phí' : 'Người nhận trả phí');
 });
 
 });

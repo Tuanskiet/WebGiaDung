@@ -28,7 +28,7 @@
               <!--                            <input type="hidden" name="nameProd" th:value="${cartDto.nameProduct}">-->
               <!--                            <input type="hidden" name="priceProd" th:value="${cartDto.priceProduct}">-->
               <div class=" l-1 col-m-1 s-1">
-                <input name="chkCartItem" type="checkbox"
+                <input name="chkCartItem" type="checkbox" th:if="${cartItem.product.isActive}"
                        th:data-product-id="${cartItem.product.id}"
                        th:data-product-price="${cartItem.product.priceDiscount}">
               </div>
@@ -78,7 +78,7 @@
               <div class="main__pay-text">
                 Giao hàng
               </div>
-              <div class="main__pay-text">
+              <div class="main__pay-text type_order">
                 Giao hàng miễn phí
               </div>
 
@@ -92,7 +92,7 @@
             </div>
             <div id="order" class="btn main_button">
               <a th:href="@{/order}">
-                Tiến hành thanh toán
+                TIẾN HÀNH ĐẶT HÀNG
               </a>
             </div>
           </div>
@@ -105,6 +105,7 @@
 <!-- Script common -->
 <th:block th:replace="user/fragments :: js_file"></th:block>
 <script th:src="@{/js/cart.js}"></script>
+
 </body>
 
 </html>

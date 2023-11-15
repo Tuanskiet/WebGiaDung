@@ -2,11 +2,11 @@ $(document).ready(function() {
 /*Urls*/
     var urlViewOrder    = "/get-data-order";
     var urlListProduct  = "/list-product";
-/*total order*/
-let total = parseInt(JSON.parse(localStorage.getItem('totalPay'))) || 0;
-$('.totalOrder').html(formatDecimal(total));
+    /*total order*/
+    let total = parseInt(JSON.parse(localStorage.getItem('totalPay'))) || 0;
+    $('.totalOrder').html(formatDecimal(total));
 
-/*show data order*/
+    /*show data order*/
     var dataOrder = JSON.parse(localStorage.getItem('listCartItemSelected')) || [];
     if(dataOrder.length !== 0){
         $.ajax({
@@ -20,27 +20,6 @@ $('.totalOrder').html(formatDecimal(total));
             console.log("error : " + error);
         });
     }
-//    if (dataOrder.length !== 0) {
-//
-//      let html = dataOrder.map((item) => {
-//
-//          return `
-//                <div class="pay-info">
-//                    <div class="main__pay-text"> ${item.nameProduct} </div>
-//                    <div class="main__pay-amount">
-//                        ${item.quantity}
-//                    </div>
-//                    <div class="main__pay-price">
-//                        ${formatDecimal(item.priceProduct * item.quantity)} ₫
-//                    </div>
-//                </div>
-//          `
-//      }).join('');
-//      $('.display-data-order').html(html);
-//      let total = formatDecimal(totalPayment(data));
-//      $('.totalOrder').text(total);
-//    };
-
 <!--    send order -->
     $('#sendOrder').on('click', function(){
         var dataOrder = localStorage.getItem('listCartItemSelected');
