@@ -213,6 +213,27 @@ $('.btnAddProductToOrder').on('click', ()=>{
     filterByCategory();
 })
 
+// show price after discount (just for see)
+$("#price").on("blur", function () {
+    showPriceAfterDiscount();
+});
+$("#percent_discount").on("blur", function () {
+    showPriceAfterDiscount();
+});
+
+function showPriceAfterDiscount() {
+    var price = parseFloat($('#price').val());
+    var percentDiscount = parseFloat($('#percent_discount').val());
+    var discountedPrice = price * (1 - percentDiscount / 100);
+    var roundedValue = roundToNearestThousand(discountedPrice);
+    $('#price_after_discount').val(roundedValue.toString());
+}
+
+function roundToNearestThousand(value) {
+    return Math.round(value / 1000) * 1000;
+}
+
+
 //update html list product search to order
 function updateHtmlListProdSearch(listProds){
     $('#list_prod_order').html('')

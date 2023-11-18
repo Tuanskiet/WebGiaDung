@@ -489,7 +489,7 @@ img.img-fluid.lazyloaded {
     display: block;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 2;
 }
 .product_name:hover a
 {

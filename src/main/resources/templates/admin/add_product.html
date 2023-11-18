@@ -55,11 +55,15 @@
                                 <div class="row mb-3">
                                     <div class="col">
                                         <label for="price">Giá sản phẩm</label>
-                                        <input  type="number" value="0" id="price" required class="form-control" placeholder="Price product ...">
+                                        <input  type="number" value="0" id="price" min="1000" max="2147483646" required class="form-control" placeholder="Price product ...">
                                     </div>
                                     <div class="col">
                                         <label for="percent_discount">Giảm giá (%)</label>
                                         <input type="number" value="0" class="form-control" id="percent_discount" placeholder="Percent discount ...">
+                                    </div>
+                                    <div class="col">
+                                        <label for="price_after_discount">Giá sau giảm :</label>
+                                        <input type="number" class="form-control" id="price_after_discount" placeholder="Price after discount ..." readonly>
                                     </div>
                                 </div>
                                 <div class="row mb-3">

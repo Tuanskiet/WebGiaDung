@@ -86,8 +86,8 @@ public class Product implements Serializable {
 
     @Transient
     public BigDecimal getPriceDiscount(){
-        BigDecimal priceDiscount = price.multiply(BigDecimal.valueOf((100 - percentDiscount)/100));
-        BigDecimal result = priceDiscount.setScale(0, RoundingMode.CEILING);
+        BigDecimal priceDiscount = price.multiply(BigDecimal.valueOf((100 - percentDiscount)/100.0));
+        BigDecimal result = priceDiscount.setScale(-3, RoundingMode.CEILING);
         return result;
     }
 

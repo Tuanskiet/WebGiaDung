@@ -26,14 +26,14 @@
             <span>Xem nhanh</span>
             <ul class="policy_title_group">
                 <li th:each="item, iter : ${session.dataCategory}" class="policy_title">
-                    <a th:href="'#'+${item.id}">[[${iter.index +1}]]. Chính sách đổi trả nhóm [[${item.name}]]</a>
+                    <a th:href="'#'+${item.id}">[[${iter.index +1}]]. Chính sách nhóm [[${item.name}]]</a>
                 </li>
             </ul>
         </div>
 
         <div class="policy_detail_list">
             <div th:each="item, iter : ${session.dataCategory}" th:id="${item.id}" th:if="${item.type == 'product'}" class="policy_item">
-                <h4 class="policy_item-title">[[${iter.index +1}]]. Chính sách đổi trả nhóm [[${item.name}]]</h4>
+                <h4 class="policy_item-title">[[${iter.index +1}]]. Chính sách nhóm [[${item.name}]]</h4>
                 <div class="policy_data" th:utext="${item.policy}"></div>
             </div>
         </div>

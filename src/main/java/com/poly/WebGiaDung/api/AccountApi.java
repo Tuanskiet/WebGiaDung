@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AccountApi {
     private final MyUserService myUserService;
-    private final CartItemService cartItemService;
     private final AuthenticationManager authenticationManager;
     private final BCryptPasswordEncoder passwordEncoder;
     private final SendEmailService sendEmail;

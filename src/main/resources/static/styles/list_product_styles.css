@@ -521,7 +521,9 @@
     display: block;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    white-space: normal;
 }
 .product_name:hover a
 {
