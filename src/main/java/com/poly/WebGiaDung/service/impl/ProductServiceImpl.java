@@ -147,11 +147,7 @@ public class ProductServiceImpl implements ProductService {
     public void update(Product product) {
         Optional<Product> oldProduct = findById(product.getId());
         BeanUtils.copyProperties(product, oldProduct.get());
-
-
         Product productSaved = productRepo.save(oldProduct.get());
-
-
         productImageService.deleteByProduct(productSaved);
         if(product.getProductImages() != null){
             product.getProductImages().forEach(productImage -> {

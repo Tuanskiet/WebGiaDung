@@ -230,7 +230,7 @@ function showPriceAfterDiscount() {
 }
 
 function roundToNearestThousand(value) {
-    return Math.round(value / 1000) * 1000;
+    return Math.ceil(value / 1000) * 1000;
 }
 
 

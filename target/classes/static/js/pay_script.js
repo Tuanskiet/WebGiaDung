@@ -22,15 +22,25 @@ $(document).ready(function() {
     }
 <!--    send order -->
     $('#sendOrder').on('click', function(){
-        var dataOrder = localStorage.getItem('listCartItemSelected');
-        var dataToSend = {
-            name:       $('#name_order').val(),
-            address:    $('#address_order').val(),
-            email:      $('#email_order').val(),
-            phoneNumber:$('#phoneNumber_order').val(),
-            note:       $('#note_order').val(),
-            cartDtoList : JSON.parse(dataOrder)
+        //validate
+        const phonePattern = /^0\d{9,11}$/;
+        let phone = $('#phoneNumber_order').val();
+        if(!phonePattern.test(phone)){
+            $(".error_phone").text('Số điện thoại không hợp lệ!');
+            $(".error_phone").show();
+            return;
         }
+
+        var dataOrder = localStorage.getItem('listCartItemSelected');
+                var dataToSend = {
+                    name:       $('#name_order').val(),
+                    address:    $('#address_order').val(),
+                    email:      $('#email_order').val(),
+                    phoneNumber:phone,
+                    note:       $('#note_order').val(),
+                    cartDtoList : JSON.parse(dataOrder)
+                }
+
         if(dataOrder !== null){
             SwalAlertOrderSuccess('Đặt hàng thành công!');
             $.ajax({
